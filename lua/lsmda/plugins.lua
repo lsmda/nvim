@@ -4,7 +4,7 @@ return {
     name = "catppuccin",
     priority = 1000,
 
-    -- Theme configuration
+    -- theme configuration
     flavour = "macchiato", -- latte, frappe, macchiato, mocha
     background = { -- :h background
         light = "latte",

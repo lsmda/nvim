@@ -13,7 +13,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("lsmda.plugins")
 
-
 -- setup must be called before loading
 vim.cmd.colorscheme "catppuccin"
 
