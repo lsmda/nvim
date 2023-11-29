@@ -104,6 +104,16 @@ require('lazy').setup({
   },
 
   {
+    "ThePrimagen/harpoon",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      vim.cmd.colorscheme 'catppuccin'
+    end,
+  },
+
+  {
     'catppuccin/nvim',
     priority = 1000,
     config = function()
@@ -227,6 +237,17 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+local mark = require("harpoon.mark")
+local ui = require("harpoon.ui")
+
+vim.keymap.set("n", "<leader>a", mark.add_file, { desc = 'Add current file to harpoon'})
+vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu, { desc = 'Toggle harpoon\'s quick menu'})
+
+vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
+vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end)
+vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
+vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -365,15 +386,6 @@ vim.defer_fn(function()
         goto_previous_end = {
           ['[M'] = '@function.outer',
           ['[]'] = '@class.outer',
-        },
-      },
-      swap = {
-        enable = true,
-        swap_next = {
-          ['<leader>a'] = '@parameter.inner',
-        },
-        swap_previous = {
-          ['<leader>A'] = '@parameter.inner',
         },
       },
     },

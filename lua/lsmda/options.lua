@@ -26,6 +26,7 @@ local options = {
 
   backup = false,
   title = true,
+  undodir = os.getenv("HOME") .. "/.vim/undodir",
 }
 
 for option, value in pairs(options) do vim.opt[option] = value end
