@@ -192,18 +192,12 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
 vim.keymap.set("n", "<leader>a", mark.add_file, { desc = 'Add current file to harpoon'})
 vim.keymap.set("n", "<leader>a", mark.add_file, { desc = 'Add current file to harpoon'})
-vim.keymap.set("n", "<A-e>", ui.toggle_quick_menu, { desc = 'Toggle harpoon\'s quick menu'})
+vim.keymap.set("n", "<M-e>", ui.toggle_quick_menu, { desc = 'Toggle harpoon\'s quick menu'})
 
 vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
 vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end)
@@ -299,10 +293,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'lua', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
-
-    -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-    auto_install = false,
+    ensure_installed = { 'lua', 'tsx', 'javascript', 'typescript', 'bash' },
 
     highlight = { enable = true },
     indent = { enable = true },
