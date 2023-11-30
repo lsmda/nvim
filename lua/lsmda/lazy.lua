@@ -104,13 +104,10 @@ require('lazy').setup({
   },
 
   {
-    "ThePrimagen/harpoon",
+    "ThePrimeagen/harpoon",
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    config = function()
-      vim.cmd.colorscheme 'catppuccin'
-    end,
   },
 
   {
