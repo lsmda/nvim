@@ -10,3 +10,6 @@ vim.api.nvim_set_keymap('n', '<M-cs>', ':let @/=""<CR>', { noremap = true, silen
 
 vim.api.nvim_set_keymap('n', '<M-k>', 'yypk', { desc = 'Clone current line above', noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<M-j>', 'yyPj', { desc = 'Clone current line below', noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('v', '<M-k>', 'yp', { desc = 'Clone current line above', noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<M-j>', 'yP', { desc = 'Clone current line below', noremap = true, silent = true })
