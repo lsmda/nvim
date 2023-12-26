@@ -2,6 +2,7 @@ local options = {
   tabstop = 2,
   softtabstop = 2,
   shiftwidth = 2,
+	clipboard = "unnamedplus",
 
   number = true,
   numberwidth = 4,
@@ -26,4 +27,6 @@ local options = {
   undodir = os.getenv("HOME") .. "/.vim/undodir",
 }
 
-for option, value in pairs(options) do vim.opt[option] = value end
+for option, value in pairs(options) do
+	vim.opt[option] = value
+end
