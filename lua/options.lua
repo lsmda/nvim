@@ -10,6 +10,7 @@ local options = {
 	hlsearch = true,
 	ignorecase = true,
 	smartcase = true,
+	relativenumber = true,
 
 	splitbelow = true,
 	splitright = true,
