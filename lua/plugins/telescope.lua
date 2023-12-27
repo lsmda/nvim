@@ -8,9 +8,8 @@ return {
 			vim.keymap.set("n", "<C-p>", builtin.find_files, {})
 			vim.keymap.set("n", "<C-f>", builtin.live_grep, {})
 			vim.keymap.set("n", "<C-g>", builtin.git_files, {})
-
-			vim.keymap.set("n", "<C-r>", builtin.lsp_references, {})
-		end
+			vim.keymap.set("n", "<C-rf>", builtin.lsp_references, {})
+		end,
 	},
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
@@ -18,11 +17,11 @@ return {
 			require("telescope").setup({
 				extensions = {
 					["ui-select"] = {
-						require("telescope.themes").get_dropdown {},
-					}
-				}
+						require("telescope.themes").get_dropdown({}),
+					},
+				},
 			})
 			require("telescope").load_extension("ui-select")
-		end
-	}
+		end,
+	},
 }
