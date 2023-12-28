@@ -13,8 +13,6 @@ return {
 				ensure_installed = {
 					"lua_ls",
 					"tsserver",
-					"dockerls",
-					"graphql",
 					"html",
 					"jsonls",
 					"remark_ls",
@@ -23,7 +21,9 @@ return {
 					"taplo",
 					"mdx_analyzer",
 					"bashls",
-					"astro",
+					-- "astro",
+					-- "dockerls",
+					-- "graphql",
 				},
 			})
 		end,
