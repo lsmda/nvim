@@ -14,8 +14,8 @@ return {
 
 			-- Write to file and format on save
 			vim.keymap.set("n", "<C-s>", function()
-				vim.cmd(":wa")
 				vim.lsp.buf.format()
+				vim.cmd(":wa")
 			end, {})
 		end,
 	},

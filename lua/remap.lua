@@ -2,11 +2,17 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- [[ custom shortcuts ]]
-vim.keymap.set("i", "<M-n>", "<Esc>", { desc = "Enter normal mode", noremap = true, silent = true })
+local opts = { noremap = true, silent = true }
 
-vim.api.nvim_set_keymap("n", "<M-k>", "yypk==", { desc = "Clone current line above", noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<M-j>", "yyPj==", { desc = "Clone current line below", noremap = true, silent = true })
+-- Enter normal mode
+vim.keymap.set("i", "<m-n>", "<esc>", opts)
 
-vim.api.nvim_set_keymap("v", "<M-k>", "ypk==", { desc = "Clone current line above", noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<M-j>", "yPj==", { desc = "Clone current line below", noremap = true, silent = true })
+-- Clone current line above/below
+vim.keymap.set({ "n", "v" }, "<M-k>", "yypk==", opts)
+vim.keymap.set({ "n", "v" }, "<M-j>", "yyPj==", opts)
+
+-- Pane navigation
+vim.keymap.set({ "n", "v" }, "<C-h>", ":TmuxNavigateLeft<CR>", opts)
+vim.keymap.set({ "n", "v" }, "<C-l>", ":TmuxNavigateRight<CR>", opts)
+vim.keymap.set({ "n", "v" }, "<C-j>", ":TmuxNavigateDown<CR>", opts)
+vim.keymap.set({ "n", "v" }, "<C-k>", ":TmuxNavigateUp<CR>", opts)
