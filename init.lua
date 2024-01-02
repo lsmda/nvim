@@ -1,6 +1,5 @@
--- Initialize user preferences before plugins
 require("options")
-require("remap")
+require("remaps")
 
 -- Plugins configuration
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

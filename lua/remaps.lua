@@ -5,7 +5,7 @@ vim.g.maplocalleader = " "
 local opts = { noremap = true, silent = true }
 
 -- Enter normal mode
-vim.keymap.set("i", "<M-n>", "<ESC>")
+vim.keymap.set("i", "<M-n>", "<esc>", opts)
 
 -- Custom motions
 vim.keymap.set("n", "<M-e>", "$") -- Move cursor to end of line
