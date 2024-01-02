@@ -12,10 +12,10 @@ return {
 				},
 			})
 
-			-- Write to file and format on save
+			-- Format current buffer and write to file
 			vim.keymap.set("n", "<C-s>", function()
 				vim.lsp.buf.format()
-				vim.cmd(":wa")
+				vim.cmd(":w")
 			end, {})
 		end,
 	},
