@@ -5,6 +5,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
+			{ "nvim-telescope/telescope-ui-select.nvim", lazy = true },
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
 		},
 		cmd = "Telescope",
@@ -67,7 +68,7 @@ return {
 							prompt_position = "top",
 							width = { padding = 0 },
 							height = { padding = 0 },
-							preview_width = 0.6,
+							preview_width = 0.5,
 						},
 					},
 					vimgrep_arguments = {
@@ -83,6 +84,8 @@ return {
 					},
 					mappings = {
 						n = {
+							-- vim-illuminate removes ability to close picker with remap,
+							-- so we explicitly define a mapping here to fix that behavior
 							["<M-n>"] = actions.close,
 						},
 					},
@@ -117,6 +120,9 @@ return {
 						override_file_sorter = true, -- override the file sorter
 						case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 					},
+					["ui-select"] = {
+						require("telescope.themes").get_dropdown({}),
+					},
 				},
 			})
 
@@ -140,19 +146,6 @@ return {
 
 			-- buffer
 			vim.keymap.set("n", "<leader>bf", builtin.buffers, opts)
-		end,
-	},
-	{
-		"nvim-telescope/telescope-ui-select.nvim",
-		config = function()
-			require("telescope").setup({
-				extensions = {
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown({}),
-					},
-				},
-			})
-			require("telescope").load_extension("ui-select")
 		end,
 	},
 }
