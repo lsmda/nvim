@@ -7,6 +7,11 @@ return {
 			flavour = "macchiato",
 			transparent_background = true,
 			term_colors = false,
+			integrations = {
+				cmp = true,
+				gitsigns = true,
+				treesitter = true,
+			},
 		})
 
 		vim.cmd.colorscheme("catppuccin")
