@@ -17,7 +17,7 @@ local options = {
 
 	termguicolors = true,
 	hidden = true,
-	signcolumn = "no",
+	signcolumn = "yes",
 	showmode = false,
 	wrap = false,
 	cursorline = true,
