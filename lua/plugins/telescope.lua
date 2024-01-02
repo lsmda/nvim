@@ -5,13 +5,13 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
 		},
 		cmd = "Telescope",
 		config = function()
-			local telescope = require("telescope")
 			local actions = require("telescope.actions")
 			local builtin = require("telescope.builtin")
+
 			local icons = require("user.icons")
 
 			-- helper functions for custom path_display function
@@ -50,7 +50,7 @@ return {
 				return string.format("%s ~ %s", filename, stripped_path)
 			end
 
-			telescope.setup({
+			require("telescope").setup({
 				defaults = {
 					prompt_prefix = icons.ui.Telescope .. " ",
 					selection_caret = icons.ui.Forward .. " ",
@@ -81,6 +81,11 @@ return {
 						"--hidden",
 						"--glob=!.git/",
 					},
+					mappings = {
+						n = {
+							["<M-n>"] = actions.close,
+						},
+					},
 				},
 				pickers = {
 					buffers = {
@@ -107,15 +112,13 @@ return {
 				},
 				extensions = {
 					fzf = {
-						fuzzy = true,             -- false will only do exact matching
+						fuzzy = true, -- false will only do exact matching
 						override_generic_sorter = true, -- override the generic sorter
 						override_file_sorter = true, -- override the file sorter
 						case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 					},
 				},
 			})
-
-			telescope.load_extension("fzf")
 
 			local opts = { noremap = true, silent = true }
 
