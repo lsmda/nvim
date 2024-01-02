@@ -1,4 +1,4 @@
 return {
 	"hinell/duplicate.nvim",
-	tag = "1.1.0",
+	tag = "v1.1.0",
 }
