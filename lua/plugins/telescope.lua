@@ -1,6 +1,7 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
+
 		commit = "74ce793a60759e3db0d265174f137fb627430355",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -13,21 +14,63 @@ return {
 			local actions = require("telescope.actions")
 			local builtin = require("telescope.builtin")
 			local icons = require("user.icons")
-			local opts = { noremap = true, silent = true }
+
+			-- helper functions for custom path_display function
+			local function normalize_path(path)
+				return path:gsub("\\", "/")
+			end
+
+			local function normalize_cwd()
+				return normalize_path(vim.loop.cwd()) .. "/"
+			end
+
+			local function is_subdirectory(cwd, path)
+				return string.lower(path:sub(1, #cwd)) == string.lower(cwd)
+			end
+
+			local function split_filepath(path)
+				local normalized_path = normalize_path(path)
+				local normalized_cwd = normalize_cwd()
+				local filename = normalized_path:match("[^/]+$")
+
+				if is_subdirectory(normalized_cwd, normalized_path) then
+					local stripped_path = normalized_path:sub(#normalized_cwd + 1, -(#filename + 1))
+					return stripped_path, filename
+				else
+					local stripped_path = normalized_path:sub(1, -(#filename + 1))
+					return stripped_path, filename
+				end
+			end
+
+			-- custom path rendering function for telescope
+			local function path_display(_, path)
+				local stripped_path, filename = split_filepath(path)
+				if filename == stripped_path or stripped_path == "" then
+					return filename
+				end
+				return string.format("%s ~ %s", filename, stripped_path)
+			end
 
 			telescope.setup({
 				defaults = {
 					prompt_prefix = icons.ui.Telescope .. " ",
 					selection_caret = icons.ui.Forward .. " ",
 					entry_prefix = "   ",
-					initial_mode = "insert",
+					initial_mode = "normal",
 					selection_strategy = "reset",
-					path_display = { "smart" },
+					path_display = path_display,
 					color_devicons = true,
 					set_env = { ["COLORTERM"] = "truecolor" },
-					sorting_strategy = nil,
-					layout_strategy = nil,
-					layout_config = {},
+					sorting_strategy = "ascending",
+					layout_strategy = "horizontal",
+					layout_config = {
+						horizontal = {
+							prompt_position = "top",
+							width = { padding = 0 },
+							height = { padding = 0 },
+							preview_width = 0.6,
+						},
+					},
 					vimgrep_arguments = {
 						"rg",
 						"--color=never",
@@ -41,28 +84,15 @@ return {
 					},
 				},
 				pickers = {
-					live_grep = {
-						theme = "dropdown",
-					},
-
-					grep_string = {
-						-- theme = "cursor",
-					},
-
-					find_files = {
-						theme = "ivy",
-					},
-
 					buffers = {
 						theme = "dropdown",
 						previewer = false,
-						initial_mode = "normal",
 						mappings = {
 							i = {
 								["<C-d>"] = actions.delete_buffer,
 							},
 							n = {
-								["dd"] = actions.delete_buffer,
+								["<C-d>"] = actions.delete_buffer,
 							},
 						},
 					},
@@ -74,26 +104,6 @@ return {
 
 					colorscheme = {
 						enable_preview = true,
-					},
-
-					lsp_references = {
-						theme = "cursor",
-						initial_mode = "normal",
-					},
-
-					lsp_definitions = {
-						theme = "dropdown",
-						initial_mode = "normal",
-					},
-
-					lsp_declarations = {
-						theme = "dropdown",
-						initial_mode = "normal",
-					},
-
-					lsp_implementations = {
-						theme = "dropdown",
-						initial_mode = "normal",
 					},
 				},
 				extensions = {
@@ -108,16 +118,26 @@ return {
 
 			telescope.load_extension("fzf")
 
-			-- Files
+			local opts = { noremap = true, silent = true }
+
+			-- grep
 			vim.keymap.set("n", "<leader><space>", builtin.find_files, opts)
 			vim.keymap.set("n", "<leader>fw", builtin.live_grep, opts)
-			vim.keymap.set("n", "<leader>fc", builtin.grep_string, opts)
+			vim.keymap.set("n", "<leader>fs", builtin.grep_string, opts)
 			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, opts)
+			vim.keymap.set("n", "<leader>fi", builtin.lsp_implementations, opts)
+			-- vim.keymap.set("n", "<leader>fd", builtin.lsp_declarations, opts)
+			vim.keymap.set("n", "<leader>ft", builtin.lsp_type_definitions, opts)
 
 			-- git
 			vim.keymap.set("n", "<leader>gf", builtin.git_files, opts)
 			vim.keymap.set("n", "<leader>gb", builtin.git_branches, opts)
 			vim.keymap.set("n", "<leader>gc", builtin.git_commits, opts)
+			vim.keymap.set("n", "<leader>gs", builtin.git_status, opts)
+			vim.keymap.set("n", "<leader>gx", builtin.git_stash, opts)
+
+			-- buffer
+			vim.keymap.set("n", "<leader>bf", builtin.buffers, opts)
 		end,
 	},
 	{
