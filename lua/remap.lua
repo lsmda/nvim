@@ -5,7 +5,7 @@ vim.g.maplocalleader = " "
 local opts = { noremap = true, silent = true }
 
 -- Enter normal mode
-vim.keymap.set("i", "<M-n>", "<esc>", opts)
+vim.keymap.set({ "i", "x", "n" }, "<M-n>", "<esc>", opts)
 
 -- Move line up/down
 vim.keymap.set("n", "<M-k>", ":m .-2<CR>==", opts)     -- Move current line up
