@@ -13,6 +13,7 @@ return {
 			local actions = require("telescope.actions")
 			local builtin = require("telescope.builtin")
 			local icons = require("user.icons")
+			local opts = { noremap = true, silent = true }
 
 			telescope.setup({
 				defaults = {
@@ -45,12 +46,11 @@ return {
 					},
 
 					grep_string = {
-						theme = "dropdown",
+						-- theme = "cursor",
 					},
 
 					find_files = {
 						theme = "ivy",
-						previewer = true,
 					},
 
 					buffers = {
@@ -98,7 +98,7 @@ return {
 				},
 				extensions = {
 					fzf = {
-						fuzzy = true, -- false will only do exact matching
+						fuzzy = true,             -- false will only do exact matching
 						override_generic_sorter = true, -- override the generic sorter
 						override_file_sorter = true, -- override the file sorter
 						case_mode = "smart_case", -- or "ignore_case" or "respect_case"
@@ -108,11 +108,16 @@ return {
 
 			telescope.load_extension("fzf")
 
-			vim.keymap.set("n", "<leader><space>", builtin.find_files, {})
-			vim.keymap.set("n", "<leader>fw", builtin.live_grep, {})
-			vim.keymap.set("n", "<leader>fg", builtin.git_files, {})
-			vim.keymap.set("n", "<leader>fc", builtin.grep_string, {})
-			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, {})
+			-- Files
+			vim.keymap.set("n", "<leader><space>", builtin.find_files, opts)
+			vim.keymap.set("n", "<leader>fw", builtin.live_grep, opts)
+			vim.keymap.set("n", "<leader>fc", builtin.grep_string, opts)
+			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, opts)
+
+			-- git
+			vim.keymap.set("n", "<leader>gf", builtin.git_files, opts)
+			vim.keymap.set("n", "<leader>gb", builtin.git_branches, opts)
+			vim.keymap.set("n", "<leader>gc", builtin.git_commits, opts)
 		end,
 	},
 	{
