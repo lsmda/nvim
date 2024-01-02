@@ -2,55 +2,24 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
-		commit = "d3a3056204e1a9dbb7c7fe36c114dc43b681768c",
 		dependencies = {
-			{
-				"hrsh7th/cmp-nvim-lsp",
-				event = "InsertEnter",
-				commit = "44b16d11215dce86f253ce0c30949813c0a90765",
-			},
-			{
-				"hrsh7th/cmp-emoji",
-				event = "InsertEnter",
-				commit = "19075c36d5820253d32e2478b6aaf3734aeaafa0",
-			},
-			{
-				"hrsh7th/cmp-buffer",
-				event = "InsertEnter",
-				commit = "3022dbc9166796b644a841a02de8dd1cc1d311fa",
-			},
-			{
-				"hrsh7th/cmp-path",
-				event = "InsertEnter",
-				commit = "91ff86cd9c29299a64f968ebb45846c485725f23",
-			},
-			{
-				"hrsh7th/cmp-cmdline",
-				event = "InsertEnter",
-				commit = "8ee981b4a91f536f52add291594e89fb6645e451",
-			},
-			{
-				"saadparwaiz1/cmp_luasnip",
-				event = "InsertEnter",
-				commit = "05a9ab28b53f71d1aece421ef32fee2cb857a843",
-			},
+			{ "hrsh7th/cmp-nvim-lsp",     event = "InsertEnter" },
+			{ "hrsh7th/cmp-emoji",        event = "InsertEnter" },
+			{ "hrsh7th/cmp-buffer",       event = "InsertEnter" },
+			{ "hrsh7th/cmp-path",         event = "InsertEnter" },
+			{ "hrsh7th/cmp-cmdline",      event = "InsertEnter" },
+			{ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
 			{
 				"L3MON4D3/LuaSnip",
 				event = "InsertEnter",
-				commit = "80a8528f084a97b624ae443a6f50ff8074ba486b",
 				dependencies = {
 					"rafamadriz/friendly-snippets",
 				},
 			},
-			{
-				"hrsh7th/cmp-nvim-lua",
-				commit = "f12408bdb54c39c23e67cab726264c10db33ada8",
-			},
+			{ "hrsh7th/cmp-nvim-lua" },
 			"rafamadriz/friendly-snippets", -- useful snippets
 		},
 		config = function()
-			vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-			vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
 			vim.api.nvim_set_hl(0, "CmpItemKindCrate", { fg = "#F64D00" })
 			vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
 

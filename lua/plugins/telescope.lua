@@ -6,7 +6,6 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	},
-	commit = "74ce793a60759e3db0d265174f137fb627430355",
 	lazy = false,
 	cmd = "Telescope",
 	config = function()
