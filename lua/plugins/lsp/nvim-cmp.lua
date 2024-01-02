@@ -56,6 +56,7 @@ return {
 
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
+
 			require("luasnip.loaders.from_vscode").lazy_load()
 			require("luasnip").filetype_extend("typescriptreact", { "html" })
 
@@ -71,10 +72,6 @@ return {
 					expand = function(args)
 						luasnip.lsp_expand(args.body)
 					end,
-				},
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
@@ -157,7 +154,7 @@ return {
 					end,
 				},
 				sources = {
-					{ name = "copilot" },
+					-- { name = "copilot" },
 					{
 						name = "nvim_lsp",
 						entry_filter = function(entry, ctx)
