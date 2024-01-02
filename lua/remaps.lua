@@ -12,14 +12,14 @@ vim.keymap.set("n", "<M-e>", "$") -- Move cursor to end of line
 vim.keymap.set("n", "<M-q>", "0") -- Move cursor to start of line
 
 -- Move line up/down
-vim.keymap.set("n", "<M-k>", ":m .-2<CR>==", opts)     -- Move current line up
-vim.keymap.set("n", "<M-j>", ":m .+1<CR>==", opts)     -- Move current line down
+vim.keymap.set("n", "<M-k>", ":m .-2<CR>==", opts) -- Move current line up
+vim.keymap.set("n", "<M-j>", ":m .+1<CR>==", opts) -- Move current line down
 vim.keymap.set("v", "<M-k>", ":m '<-2<CR>gv=gv", opts) -- Move current selection up
 vim.keymap.set("v", "<M-j>", ":m '>+1<CR>gv=gv", opts) -- Move current selection down
 
 -- Duplicate line up/down
-vim.keymap.set("n", "<S-M-k>", ":t .-1<CR>==", opts)            -- Duplicate current line up
-vim.keymap.set("n", "<S-M-j>", ":t .<CR>==", opts)              -- Duplicate current line down
+vim.keymap.set("n", "<S-M-k>", ":t .-1<CR>==", opts) -- Duplicate current line up
+vim.keymap.set("n", "<S-M-j>", ":t .<CR>==", opts) -- Duplicate current line down
 vim.keymap.set("v", "<S-M-j>", ":VisualDuplicate +1<CR>", opts) -- Duplicate current selection down
 vim.keymap.set("v", "<S-M-k>", ":VisualDuplicate -1<CR>", opts) -- Duplicate current selection up
 
