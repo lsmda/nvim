@@ -13,7 +13,7 @@ return {
 		local actions = require("telescope.actions")
 		local builtin = require("telescope.builtin")
 
-		local icons = require("user.icons")
+		local icons = require("core.icons")
 
 		-- helper functions for custom path_display function
 		local function normalize_path(path)
@@ -90,11 +90,11 @@ return {
 					},
 				},
 				file_ignore_patterns = {
-					".git",
-					"pnpm-lock.*",
-					"lazy-lock.*",
-					"node_modules",
-					"yarn.lock",
+					"^.git$",
+					"^pnpm-lock.*",
+					"^lazy-lock.*",
+					"^node_modules$",
+					"^yarn.lock",
 					"schema.gql",
 				},
 			},

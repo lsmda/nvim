@@ -1,7 +1,7 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	config = function()
-		local icons = require("user.icons")
+		local icons = require("core.icons")
 
 		local diff = {
 			"diff",

@@ -3,7 +3,7 @@ return {
 	event = "BufEnter",
 	cmd = "Gitsigns",
 	config = function()
-		local icons = require("user.icons")
+		local icons = require("core.icons")
 
 		require("gitsigns").setup({
 			signs = {
@@ -39,7 +39,7 @@ return {
 				},
 			},
 			signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-			numhl = true,   -- Toggle with `:Gitsigns toggle_numhl`
+			numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
 			linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
 			word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
 			watch_gitdir = {
