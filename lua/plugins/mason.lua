@@ -20,7 +20,12 @@ return {
 			},
 		})
 
-		mason_lspconfig.setup({})
+		mason_lspconfig.setup({
+			ensure_installed = {
+				"lua_ls",
+				"tsserver",
+			},
+		})
 
 		mason_tool_installer.setup({
 			ensure_installed = {

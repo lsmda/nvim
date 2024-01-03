@@ -20,5 +20,8 @@ return {
 		})
 
 		vim.cmd.colorscheme("catppuccin")
+
+		-- Change git blame color
+		vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#967c8c" })
 	end,
 }

@@ -43,7 +43,10 @@ return {
 				update_cwd = true,
 			},
 			git = {
-				enable = false,
+				enable = true,
+				timeout = 400,
+				show_on_dirs = false,
+				cygwin_support = true,
 			},
 			diagnostics = {
 				enable = true,
