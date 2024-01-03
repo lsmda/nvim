@@ -22,11 +22,11 @@ return {
 			},
 			sections = {
 				lualine_a = { "mode" },
-				lualine_b = { "branch" },
+				lualine_b = { { "filename", path = 1 } },
 				lualine_c = { diff },
 				lualine_x = { "diagnostics" },
-				lualine_y = { "filetype" },
-				lualine_z = { "progress" },
+				lualine_y = { "progress" },
+				lualine_z = { "filetype" },
 			},
 			extensions = { "quickfix", "man", "fugitive" },
 		})

@@ -1,10 +1,24 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
+	build = ":TSupdate",
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local config = require("nvim-treesitter.configs")
+
 		config.setup({
+			ensure_installed = {
+				"lua",
+				"tsx",
+				"typescript",
+				"javascript",
+				"html",
+				"css",
+				"json",
+				"graphql",
+				"regex",
+				"markdown",
+				"markdown_inline",
+			},
 			auto_install = true,
 			highlight = { enable = true },
 			indent = { enable = true },
@@ -17,6 +31,15 @@ return {
 					node_decremental = "<bs>",
 				},
 			},
+			autotag = {
+				enable = true,
+			},
 		})
+
+		local opt = vim.opt
+
+		opt.foldmethod = "expr"
+		opt.foldexpr = "nvim_treesitter#foldexpr()"
+		opt.foldenable = false
 	end,
 }

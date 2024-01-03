@@ -1,7 +1,7 @@
 return {
 	"nvim-telescope/telescope.nvim",
+	tag = "0.1.4",
 	dependencies = {
-		"BurntSushi/ripgrep",
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -89,7 +89,16 @@ return {
 						["<M-n>"] = actions.close,
 					},
 				},
+				file_ignore_patterns = {
+					".git",
+					"pnpm-lock.*",
+					"lazy-lock.*",
+					"node_modules",
+					"yarn.lock",
+					"schema.gql",
+				},
 			},
+
 			pickers = {
 				buffers = {
 					theme = "dropdown",
@@ -115,10 +124,10 @@ return {
 			},
 			extensions = {
 				fzf = {
-					fuzzy = true,              -- false will only do exact matching
+					fuzzy = true, -- false will only do exact matching
 					override_generic_sorter = true, -- override the generic sorter
 					override_file_sorter = true, -- override the file sorter
-					case_mode = "smart_case",  -- or "ignore_case" or "respect_case"
+					case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 				},
 			},
 		})
@@ -129,12 +138,11 @@ return {
 
 		-- grep
 		vim.keymap.set("n", "<leader><space>", builtin.find_files, opts)
-		vim.keymap.set("n", "<leader>fw", builtin.live_grep, opts)
+		vim.keymap.set("n", "<leader>fd", builtin.lsp_definitions, opts)
+		vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
 		vim.keymap.set("n", "<leader>fs", builtin.grep_string, opts)
 		vim.keymap.set("n", "<leader>fr", builtin.lsp_references, opts)
-		vim.keymap.set("n", "<leader>fi", builtin.lsp_implementations, opts)
-		-- vim.keymap.set("n", "<leader>fd", builtin.lsp_declarations, opts)
-		vim.keymap.set("n", "<leader>ft", builtin.lsp_type_definitions, opts)
+		vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
 
 		-- git
 		vim.keymap.set("n", "<leader>gf", builtin.git_files, opts)
@@ -142,8 +150,5 @@ return {
 		vim.keymap.set("n", "<leader>gc", builtin.git_commits, opts)
 		vim.keymap.set("n", "<leader>gs", builtin.git_status, opts)
 		vim.keymap.set("n", "<leader>gx", builtin.git_stash, opts)
-
-		-- buffer
-		vim.keymap.set("n", "<leader>bf", builtin.buffers, opts)
 	end,
 }

@@ -1,31 +1,37 @@
 local options = {
-	tabstop = 2,
-	softtabstop = 2,
-	shiftwidth = 2,
-	clipboard = "unnamedplus",
-
 	number = true,
 	numberwidth = 4,
-	incsearch = true,
+	relativenumber = true,
+
 	hlsearch = true,
+	incsearch = true,
+
+	clipboard = "unnamedplus",
+
+	tabstop = 2,
+	shiftwidth = 2,
+	softtabstop = 2,
+	expandtab = true,
+	autoindent = true,
+
 	ignorecase = true,
 	smartcase = true,
-	relativenumber = true,
 
 	splitbelow = true,
 	splitright = true,
 
-	termguicolors = true,
 	hidden = true,
-	signcolumn = "yes",
 	showmode = false,
-	wrap = false,
-	cursorline = true,
-	fileencoding = "utf-8",
+	signcolumn = "yes",
 
 	backup = false,
-	title = true,
-	undodir = os.getenv("HOME") .. "/.vim/undodir",
+	swapfile = false,
+
+	fileencoding = "utf-8",
+	wrap = false,
+
+	cursorline = true,
+	termguicolors = true,
 }
 
 for option, value in pairs(options) do
