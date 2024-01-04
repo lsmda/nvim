@@ -17,8 +17,8 @@ return {
 			api.config.mappings.default_on_attach(bufnr)
 
 			-- custom mappings
-			vim.keymap.set("n", "<c-w>", api.tree.toggle, opts("Toggle"))
-			vim.keymap.set("n", "<space>", api.node.open.preview, opts("Help"))
+			vim.keymap.set("n", "<c-w>", api.tree.toggle, opts())
+			vim.keymap.set("n", "<space>", api.node.open.preview, opts())
 			vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
 		end
 
@@ -44,9 +44,6 @@ return {
 			},
 			git = {
 				enable = true,
-				timeout = 400,
-				show_on_dirs = false,
-				cygwin_support = true,
 			},
 			diagnostics = {
 				enable = true,
@@ -59,5 +56,9 @@ return {
 				},
 			},
 		})
+
+		vim.keymap.set("n", "<c-w>", function()
+			require("nvim-tree.api").tree.toggle()
+		end)
 	end,
 }

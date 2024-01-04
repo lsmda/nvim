@@ -8,10 +8,6 @@ vim.g.loaded_netrwPlugin = 1
 
 local opts = { noremap = true, silent = true }
 
-vim.keymap.set("n", "<c-w>", function()
-	require("nvim-tree.api").tree.toggle()
-end)
-
 -- enter normal mode
 vim.keymap.set({ "i", "v" }, "<m-n>", "<esc>", opts)
 
