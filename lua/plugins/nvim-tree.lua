@@ -17,17 +17,21 @@ return {
 			api.config.mappings.default_on_attach(bufnr)
 
 			vim.keymap.set("n", "<c-w>", api.tree.toggle, opts("Toggle file explorer"))
-			vim.keymap.set("n", "<space>", api.node.open.preview, opts("Preview file"))
+			vim.keymap.set("n", "<space>", api.node.open.preview, opts("Open file preview"))
+			vim.keymap.set("n", "<TAB>", function()
+				api.node.open.edit()
+				api.tree.toggle({ focus = false })
+			end, opts("Focus file preview"))
 			vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
 		end
 
 		nvim_tree.setup({
 			on_attach = on_attach,
 			sort = {
-				sorter = "case_sensitive",
+				sorter = "name",
 			},
 			view = {
-				width = 35,
+				width = 38,
 			},
 			filters = {
 				custom = { "^.git$" },
