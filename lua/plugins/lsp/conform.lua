@@ -12,7 +12,7 @@ return {
 				typescriptreact = { "prettierd" },
 				html = { "eslint_d" },
 				css = { "eslint_d" },
-				json = { "eslint_d" },
+				json = { "prettierd" },
 				yaml = { "eslint_d" },
 				markdown = { "eslint_d" },
 				graphql = { "eslint_d" },

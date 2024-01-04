@@ -16,7 +16,7 @@ return {
 		},
 	},
 	config = function()
-		local cmp_kinds = {
+		local symbol_kinds = {
 			Text = "  ",
 			Method = "  ",
 			Function = "  ",
@@ -57,7 +57,7 @@ return {
 		cmp.setup({
 			formatting = {
 				format = function(_, vim_item)
-					vim_item.kind = (cmp_kinds[vim_item.kind] or "") .. vim_item.kind
+					vim_item.kind = (symbol_kinds[vim_item.kind] or "") .. vim_item.kind
 					return vim_item
 				end,
 			},

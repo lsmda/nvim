@@ -31,6 +31,7 @@ return {
 			ensure_installed = {
 				"lua-language-server",
 				"stylua",
+				"eslint",
 				"eslint_d",
 				"prettierd",
 			},
