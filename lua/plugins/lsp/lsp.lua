@@ -13,6 +13,7 @@ return {
 			},
 		})
 
+		-- ESLint setup with custom diagnostic handler
 		lspconfig.eslint.setup({})
 
 		vim.api.nvim_create_autocmd("LspAttach", {
