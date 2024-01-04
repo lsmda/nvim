@@ -6,14 +6,20 @@ vim.g.maplocalleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-local opts = { noremap = true, silent = true }
+local utils = require("core.utils")
+local opts = utils.opts
 
 -- enter normal mode
 vim.keymap.set({ "i", "v" }, "<m-n>", "<esc>", opts)
 
 -- select all
 vim.keymap.set("n", "<c-a>", "ggVG", opts)
-vim.keymap.set("n", "<c-s>", ":w<CR>", opts)
+
+-- write all buffers then format open buffer
+vim.keymap.set("n", "<c-s>", function()
+	vim.cmd("wa")
+	require("conform").format({})
+end, opts)
 
 vim.keymap.set("n", "<leader>q", ":q<CR>", opts)
 vim.keymap.set("n", "<leader>x", ":x<CR>", opts)
@@ -33,9 +39,6 @@ vim.keymap.set({ "n", "v" }, "<c-h>", ":tmuxnavigateleft<cr>", opts)
 vim.keymap.set({ "n", "v" }, "<c-l>", ":tmuxnavigateright<cr>", opts)
 vim.keymap.set({ "n", "v" }, "<c-j>", ":tmuxnavigatedown<cr>", opts)
 vim.keymap.set({ "n", "v" }, "<c-k>", ":tmuxnavigateup<cr>", opts)
-
--- paste clipboard content without storing changed content
-vim.keymap.set({ "n", "x" }, "p", '"0p', opts)
 
 -- clear search pattern
 vim.keymap.set("n", "<leader>cs", function()

@@ -14,6 +14,7 @@ return {
 		local builtin = require("telescope.builtin")
 
 		local icons = require("core.icons")
+		local utils = require("core.utils")
 
 		-- helper functions for custom path_display function
 		local function normalize_path(path)
@@ -134,7 +135,7 @@ return {
 
 		telescope.load_extension("fzf")
 
-		local opts = { noremap = true, silent = true }
+		local opts = utils.opts
 
 		-- grep
 		vim.keymap.set("n", "<leader><space>", builtin.find_files, opts)
