@@ -14,10 +14,10 @@ return {
 		config = function()
 			local legendary = require("legendary")
 			legendary.keymaps({
-				{ description = "Line: duplicate up", mode = { "n" }, "<s-m-k>", ":t .-1<cr>==" },
-				{ description = "Line: duplicate down", mode = { "n" }, "<s-m-j>", ":t .<cr>==" },
-				{ description = "Selection: duplicate up", mode = { "v" }, "<s-m-j>", ":VisualDuplicate +1<cr>" },
-				{ description = "Selection: duplicate down", mode = { "v" }, "<s-m-k>", ":VisualDuplicate -1<cr>" },
+				{ description = "Line: duplicate up", mode = { "n" }, "<S-M-k>", ":t .-1<CR>==" },
+				{ description = "Line: duplicate down", mode = { "n" }, "<S-M-j>", ":t .<CR>==" },
+				{ description = "Selection: duplicate up", mode = { "v" }, "<S-M-j>", ":VisualDuplicate +1<CR>" },
+				{ description = "Selection: duplicate down", mode = { "v" }, "<S-M-k>", ":VisualDuplicate -1<cr>" },
 			})
 		end,
 	},

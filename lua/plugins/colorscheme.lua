@@ -20,7 +20,6 @@ return {
 				},
 				telescope = {
 					enabled = true,
-					-- style = "nvchad",
 				},
 				native_lsp = {
 					enabled = true,

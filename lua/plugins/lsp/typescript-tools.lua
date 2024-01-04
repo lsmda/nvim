@@ -9,8 +9,8 @@ return {
 
 		typescript_tools.setup({})
 
-		vim.keymap.set("n", "<leader>m", "<cmd>TSToolsOrganizeImports<cr>")
-		vim.keymap.set("n", "<leader>a", "<cmd>TSToolsAddMissingImports<cr>")
+		vim.keymap.set("n", "<leader>m", "<CMD>TSToolsOrganizeImports<CR>")
+		vim.keymap.set("n", "<leader>a", "<CMD>TSToolsAddMissingImports<CR>")
 
 		local api = require("typescript-tools.api")
 		require("typescript-tools").setup({

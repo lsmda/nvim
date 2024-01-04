@@ -16,7 +16,7 @@ return {
 		local icons = require("core.icons")
 		local utils = require("core.utils")
 
-		-- helper functions for custom path_display function
+		-- Helper functions for custom path_display function
 		local function normalize_path(path)
 			return path:gsub("\\", "/")
 		end
@@ -43,7 +43,7 @@ return {
 			end
 		end
 
-		-- custom path rendering function for telescope
+		-- Custom path rendering function for telescope
 		local function path_display(_, path)
 			local stripped_path, filename = split_filepath(path)
 			if filename == stripped_path or stripped_path == "" then
@@ -85,7 +85,7 @@ return {
 				},
 				mappings = {
 					n = {
-						-- vim-illuminate removes ability to close picker with remap,
+						-- Vim-illuminate removes ability to close picker with remap,
 						-- so we explicitly define a mapping here to fix that behavior
 						["<M-n>"] = actions.close,
 					},
@@ -138,7 +138,7 @@ return {
 		local opts = utils.opts
 
 		-- grep
-		vim.keymap.set("n", "<leader><space>", builtin.find_files, opts)
+		vim.keymap.set("n", "<leader><Space>", builtin.find_files, opts)
 		vim.keymap.set("n", "<leader>fd", builtin.lsp_definitions, opts)
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
 		vim.keymap.set("n", "<leader>fs", builtin.grep_string, opts)
