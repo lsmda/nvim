@@ -16,9 +16,8 @@ return {
 			-- default mappings
 			api.config.mappings.default_on_attach(bufnr)
 
-			-- custom mappings
-			vim.keymap.set("n", "<c-w>", api.tree.toggle, opts())
-			vim.keymap.set("n", "<space>", api.node.open.preview, opts())
+			vim.keymap.set("n", "<c-w>", api.tree.toggle, opts("Toggle file explorer"))
+			vim.keymap.set("n", "<space>", api.node.open.preview, opts("Preview file"))
 			vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
 		end
 
