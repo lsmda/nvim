@@ -16,41 +16,21 @@ return {
 				mason = false,
 				mini = {
 					enabled = true,
-					indentscope_color = "lavender",
+					indentscope_color = "surface1",
 				},
-				telescope = {
-					enabled = true,
-				},
-				native_lsp = {
-					enabled = true,
-					virtual_text = {
-						errors = { "italic" },
-						hints = { "italic" },
-						warnings = { "italic" },
-						information = { "italic" },
-					},
-					underlines = {
-						errors = { "underline" },
-						hints = { "underline" },
-						warnings = { "underline" },
-						information = { "underline" },
-					},
-					inlay_hints = {
-						background = true,
-					},
-				},
+				telescope = { enabled = true },
+				native_lsp = { enabled = true },
 			},
-			color_overrides = {
-				all = {
-					-- text = "#F4CDE9",
-					surface0 = "#44313B",
-				},
-			},
+			custom_highlights = function(colors)
+				return {
+					Comment = { fg = colors.overlay0 },
+					TabLineSel = { bg = colors.pink },
+					CmpBorder = { fg = colors.surface2 },
+					GitSignsCurrentLineBlame = { fg = colors.overlay0 },
+				}
+			end,
 		})
 
 		vim.cmd.colorscheme("catppuccin")
-
-		-- Change git blame color
-		vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = "#967c8c" })
 	end,
 }
