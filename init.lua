@@ -1,6 +1,6 @@
-require("options")
-require("keymaps")
-require("autocommands")
+require("core.autocmd")
+require("core.keymaps")
+require("core.options")
 
 -- Plugins configuration
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -21,4 +21,11 @@ local plugins = {
 	{ import = "plugins.lsp" },
 }
 
-require("lazy").setup(plugins)
+local opts = {
+	change_detection = {
+		enabled = true,
+		notify = false,
+	},
+}
+
+require("lazy").setup(plugins, opts)

@@ -48,3 +48,14 @@ vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "InsertLeave" }, {
 		end
 	end,
 })
+
+vim.api.nvim_create_augroup("FloatingWindowSetup", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	group = "FloatingWindowSetup",
+	pattern = "*",
+	callback = function()
+		if vim.bo.buftype == "nofile" then
+			vim.wo.wrap = true
+		end
+	end,
+})

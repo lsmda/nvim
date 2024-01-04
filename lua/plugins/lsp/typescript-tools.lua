@@ -13,6 +13,7 @@ return {
 		vim.keymap.set("n", "<leader>a", "<CMD>TSToolsAddMissingImports<CR>")
 
 		local api = require("typescript-tools.api")
+
 		require("typescript-tools").setup({
 			handlers = {
 				["textDocument/publishDiagnostics"] = api.filter_diagnostics({ 6133 }),

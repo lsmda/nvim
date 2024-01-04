@@ -9,6 +9,11 @@ return {
 			ui = {
 				border = "rounded",
 			},
+			diagnostic = {
+				show_code_action = true,
+				max_height = 0.8,
+				max_show_width = 0.7,
+			},
 		})
 	end,
 }
