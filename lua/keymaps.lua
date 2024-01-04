@@ -1,46 +1,48 @@
--- set <space> as the leader key
+-- Set <Space> as the leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- disable netrw for nvim-tree
+-- Disable netrw for nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 local utils = require("core.utils")
 local opts = utils.opts
 
--- enter normal mode
-vim.keymap.set({ "i", "v" }, "<m-n>", "<esc>", opts)
+-- Enter normal mode
+vim.keymap.set({ "i", "v" }, "<m-n>", "<ESC>", opts)
 
--- select all
-vim.keymap.set("n", "<c-a>", "ggVG", opts)
+-- Select all
+vim.keymap.set("n", "<C-a>", "ggVG", opts)
 
--- write all buffers then format open buffer
-vim.keymap.set("n", "<c-s>", function()
+-- Add new line on <Enter> key press
+vim.keymap.set("n", "<CR>", "o<ESC>", opts)
+
+-- Write all buffers then format current open buffer
+vim.keymap.set("n", "<C-s>", function()
 	vim.cmd("wa")
-	require("conform").format({})
+	require("conform").format()
 end, opts)
 
-vim.keymap.set("n", "<leader>q", ":q<CR>", opts)
-vim.keymap.set("n", "<leader>x", ":x<CR>", opts)
+-- Write all open buffers then exit neovim
+vim.keymap.set("n", "<leader>q", ":wqa<CR>", opts)
 
--- custom motions
-vim.keymap.set({ "n", "x" }, "<m-e>", "$") -- move cursor to end of line
-vim.keymap.set({ "n", "x" }, "<m-q>", "0") -- move cursor to start of line
+vim.keymap.set({ "n", "x" }, "<M-e>", "$") -- Nove cursor to end of line
+vim.keymap.set({ "n", "x" }, "<M-q>", "0") -- Move cursor to start of line
 
--- move line up/down
-vim.keymap.set("n", "<m-k>", ":m .-2<cr>==", opts) -- move current line up
-vim.keymap.set("n", "<m-j>", ":m .+1<cr>==", opts) -- move current line down
-vim.keymap.set("v", "<m-k>", ":m '<-2<cr>gv=gv", opts) -- move current selection up
-vim.keymap.set("v", "<m-j>", ":m '>+1<cr>gv=gv", opts) -- move current selection down
+-- Move line up/down
+vim.keymap.set("n", "<M-k>", ":m .-2<CR>==", opts) -- Move current line up
+vim.keymap.set("n", "<M-j>", ":m .+1<CR>==", opts) -- Move current line down
+vim.keymap.set("v", "<M-k>", ":m '<-2<CR>gv=gv", opts) -- Move current selection up
+vim.keymap.set("v", "<M-j>", ":m '>+1<CR>gv=gv", opts) -- Move current selection down
 
--- pane navigation
-vim.keymap.set({ "n", "v" }, "<c-h>", ":tmuxnavigateleft<cr>", opts)
-vim.keymap.set({ "n", "v" }, "<c-l>", ":tmuxnavigateright<cr>", opts)
-vim.keymap.set({ "n", "v" }, "<c-j>", ":tmuxnavigatedown<cr>", opts)
-vim.keymap.set({ "n", "v" }, "<c-k>", ":tmuxnavigateup<cr>", opts)
+-- Pane navigation
+vim.keymap.set({ "n", "v" }, "<C-h>", ":TmuxNavigateLeft<CR>", opts)
+vim.keymap.set({ "n", "v" }, "<C-l>", ":TmuxNavigateRight<CR>", opts)
+vim.keymap.set({ "n", "v" }, "<C-j>", ":TmuxNavigateDown<CR>", opts)
+vim.keymap.set({ "n", "v" }, "<C-k>", ":TmuxNavigateUp<CR>", opts)
 
--- clear search pattern
+-- Clear search pattern
 vim.keymap.set("n", "<leader>cs", function()
 	vim.fn.setreg("/", "")
 end, opts)
