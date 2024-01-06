@@ -18,6 +18,9 @@ vim.keymap.set("n", "<C-a>", "ggVG", opts)
 -- Add new line on <Enter> key press
 vim.keymap.set("n", "<CR>", "o<ESC>", opts)
 
+vim.keymap.set("n", "<M-h>", "<C-o>", opts)
+vim.keymap.set("n", "<M-l>", "<C-i>", opts)
+
 -- Write all buffers then format current open buffer
 vim.keymap.set("n", "<C-s>", function()
 	vim.cmd("wa")

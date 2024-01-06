@@ -104,10 +104,6 @@ return {
 					initial_mode = "insert",
 				},
 
-				grep_string = {
-					initial_mode = "insert",
-				},
-
 				diagnostics = {
 					theme = "dropdown",
 				},
