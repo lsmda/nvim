@@ -1,6 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	tag = "0.1.4",
+	tag = "0.1.5",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
@@ -58,6 +58,7 @@ return {
 				selection_caret = icons.ui.Forward .. " ",
 				entry_prefix = "   ",
 				initial_mode = "normal",
+				preview = true,
 				selection_strategy = "reset",
 				path_display = path_display,
 				color_devicons = true,
@@ -83,17 +84,11 @@ return {
 					"--hidden",
 					"--glob=!.git/",
 				},
-				mappings = {
-					n = {
-						-- Vim-illuminate removes ability to close picker with remap,
-						-- so we explicitly define a mapping here to fix that behavior
-						["<M-n>"] = actions.close,
-					},
-				},
+				mappings = {},
 				file_ignore_patterns = {
-					"^.git$",
+					"^.git/",
 					"^pnpm-lock.*",
-					"^lazy-lock.*",
+					"^lazy-lock.json",
 					"^node_modules$",
 					"^yarn.lock",
 					"schema.gql",
@@ -101,6 +96,22 @@ return {
 			},
 
 			pickers = {
+				find_files = {
+					initial_mode = "insert",
+				},
+
+				live_grep = {
+					initial_mode = "insert",
+				},
+
+				grep_string = {
+					initial_mode = "insert",
+				},
+
+				diagnostics = {
+					theme = "dropdown",
+				},
+
 				buffers = {
 					theme = "dropdown",
 					previewer = false,
@@ -138,12 +149,14 @@ return {
 		local opts = utils.opts
 
 		-- grep
-		vim.keymap.set("n", "<leader><Space>", builtin.find_files, opts)
+		vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
 		vim.keymap.set("n", "<leader>fd", builtin.lsp_definitions, opts)
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
 		vim.keymap.set("n", "<leader>fs", builtin.grep_string, opts)
 		vim.keymap.set("n", "<leader>fr", builtin.lsp_references, opts)
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
+		vim.keymap.set("n", "<leader>fc", builtin.command_history, opts)
+		vim.keymap.set("n", "<leader>fe", builtin.diagnostics, opts)
 
 		-- git
 		vim.keymap.set("n", "<leader>gf", builtin.git_files, opts)

@@ -1,3 +1,8 @@
+local api = vim.api
+
+-- don't auto comment new line
+api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
+
 -- Highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
@@ -7,6 +12,18 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		})
 	end,
 })
+
+-- show cursor line only in active window
+local cursorGrp = api.nvim_create_augroup("CursorLine", { clear = true })
+api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
+	pattern = "*",
+	command = "set cursorline",
+	group = cursorGrp,
+})
+api.nvim_create_autocmd(
+	{ "InsertEnter", "WinLeave" },
+	{ pattern = "*", command = "set nocursorline", group = cursorGrp }
+)
 
 -- Function to save the current file
 local function save_file()
