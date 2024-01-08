@@ -11,7 +11,7 @@ return {
 			typescriptreact = { "prettierd" },
 			html = { "prettierd" },
 			css = { "prettierd" },
-			json = { "prettierd" },
+			json = { "eslint_d", "prettierd" },
 			yaml = { "prettierd" },
 			markdown = { "prettierd" },
 			graphql = { "prettierd" },
