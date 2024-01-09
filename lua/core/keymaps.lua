@@ -28,7 +28,7 @@ vim.keymap.set("n", "<C-s>", function()
 end, opts)
 
 -- Write all open buffers then exit neovim
-vim.keymap.set("n", "<leader>q", ":wqa<CR>", opts)
+vim.keymap.set("n", "<leader>q", "<cmd>wqa<CR>", opts)
 
 vim.keymap.set({ "n", "x" }, "<M-e>", "$") -- Nove cursor to end of line
 vim.keymap.set({ "n", "x" }, "<M-q>", "0") -- Move cursor to start of line
@@ -40,10 +40,10 @@ vim.keymap.set("v", "<M-k>", ":m '<-2<CR>gv=gv", opts) -- Move current selection
 vim.keymap.set("v", "<M-j>", ":m '>+1<CR>gv=gv", opts) -- Move current selection down
 
 -- Pane navigation
-vim.keymap.set({ "n", "v" }, "<C-h>", ":TmuxNavigateLeft<CR>", opts)
-vim.keymap.set({ "n", "v" }, "<C-l>", ":TmuxNavigateRight<CR>", opts)
-vim.keymap.set({ "n", "v" }, "<C-j>", ":TmuxNavigateDown<CR>", opts)
-vim.keymap.set({ "n", "v" }, "<C-k>", ":TmuxNavigateUp<CR>", opts)
+vim.keymap.set({ "n", "v" }, "<C-h>", "<cmd>TmuxNavigateLeft<CR>", opts)
+vim.keymap.set({ "n", "v" }, "<C-l>", "<cmd>TmuxNavigateRight<CR>", opts)
+vim.keymap.set({ "n", "v" }, "<C-j>", "<cmd>TmuxNavigateDown<CR>", opts)
+vim.keymap.set({ "n", "v" }, "<C-k>", "<cmd>TmuxNavigateUp<CR>", opts)
 
 -- Clear search pattern
 vim.keymap.set("n", "<leader>cs", function()

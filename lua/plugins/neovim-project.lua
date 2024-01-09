@@ -24,13 +24,13 @@ return {
 					description = "Show project list",
 					mode = { "n" },
 					"<leader>fp",
-					":Telescope neovim-project discover<cr>",
+					"<cmd>Telescope neovim-project discover<cr>",
 				},
 				{
 					description = "Show project list",
 					mode = { "n" },
 					"<leader>fh",
-					":Telescope neovim-project history<cr>",
+					"<cmd>Telescope neovim-project history<cr>",
 				},
 			})
 		end,
