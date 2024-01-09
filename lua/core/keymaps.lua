@@ -35,9 +35,6 @@ map("n", "<C-s>", function()
 	require("conform").format()
 end)
 
-map("n", "<leader>s", "<cmd>wqa<CR>") -- Write all open buffers, then exit neovim
-map("n", "<leader>q", "<cmd>qa!<CR>") -- Ignore all open buffers, then exit neovim
-
 map({ "n", "x" }, "<M-e>", "$") -- Nove cursor to end of line
 map({ "n", "x" }, "<M-q>", "0") -- Move cursor to start of line
 
@@ -65,3 +62,20 @@ map("i", '"', '""<left>')
 map("i", "(", "()<left>")
 map("i", "[", "[]<left>")
 map("i", "{", "{}<left>")
+
+local function confirm_quit(command)
+	local choice = vim.fn.input("Are you sure you want to quit? (y/N): ")
+	if choice:lower() == "y" then
+		vim.cmd(command)
+	end
+end
+
+-- Write all open buffers, then exit neovim
+map("n", "<leader>s", function()
+	confirm_quit("wqa")
+end)
+
+-- Ignore all open buffers, then exit neovim
+map("n", "<leader>q", function()
+	confirm_quit("qa!")
+end)
