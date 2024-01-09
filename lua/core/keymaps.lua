@@ -9,43 +9,59 @@ vim.g.loaded_netrwPlugin = 1
 local utils = require("core.utils")
 local opts = utils.opts
 
--- Enter normal mode
-vim.keymap.set({ "i", "v" }, "<m-n>", "<ESC>", opts)
+local function map(mode, shortcut, command, options)
+	if options then
+		opts = vim.tbl_extend("force", opts, options)
+	end
+	vim.keymap.set(mode, shortcut, command, opts)
+end
 
--- Select all
-vim.keymap.set("n", "<C-a>", "ggVG", opts)
+map({ "i", "v" }, "<M-n>", "<ESC>") -- Enter normal mode
 
--- Add new line on <Enter> key press
-vim.keymap.set("n", "<CR>", "o<ESC>", opts)
+map("n", "<C-a>", "ggVG") -- Select all in normal mode
+map("v", "<C-a>", "<ESC>ggVG") -- Select all in visual mode
 
-vim.keymap.set("n", "<M-h>", "<C-o>", opts)
-vim.keymap.set("n", "<M-l>", "<C-i>", opts)
+map("n", "<CR>", "o<ESC>") -- Add new line on <Enter> press
 
--- Write all buffers then format current open buffer
-vim.keymap.set("n", "<C-s>", function()
+map("n", "<M-h>", "<C-o>") -- Navigate to previous cursor position
+map("n", "<M-l>", "<C-i>") -- Navigate to forward cursor position
+
+map("n", "<C-d>", "<C-d>zz") -- Scroll down with cursor centered
+map("n", "<C-u>", "<C-u>zz") -- Scroll up with cursor centered
+
+-- Write all open buffers, then format current buffer
+map("n", "<C-s>", function()
 	vim.cmd("wa")
 	require("conform").format()
-end, opts)
+end)
 
--- Write all open buffers then exit neovim
-vim.keymap.set("n", "<leader>q", "<cmd>wqa<CR>", opts)
+map("n", "<leader>s", "<cmd>wqa<CR>") -- Write all open buffers, then exit neovim
+map("n", "<leader>q", "<cmd>qa!<CR>") -- Ignore all open buffers, then exit neovim
 
-vim.keymap.set({ "n", "x" }, "<M-e>", "$") -- Nove cursor to end of line
-vim.keymap.set({ "n", "x" }, "<M-q>", "0") -- Move cursor to start of line
+map({ "n", "x" }, "<M-e>", "$") -- Nove cursor to end of line
+map({ "n", "x" }, "<M-q>", "0") -- Move cursor to start of line
 
--- Move line up/down
-vim.keymap.set("n", "<M-k>", ":m .-2<CR>==", opts) -- Move current line up
-vim.keymap.set("n", "<M-j>", ":m .+1<CR>==", opts) -- Move current line down
-vim.keymap.set("v", "<M-k>", ":m '<-2<CR>gv=gv", opts) -- Move current selection up
-vim.keymap.set("v", "<M-j>", ":m '>+1<CR>gv=gv", opts) -- Move current selection down
+map("n", "<M-k>", ":m .-2<CR>==") -- Move current line up
+map("n", "<M-j>", ":m .+1<CR>==") -- Move current line down
+map("v", "<M-k>", ":m '<-2<CR>gv=gv") -- Move current selection up
+map("v", "<M-j>", ":m '>+1<CR>gv=gv") -- Move current selection down
 
 -- Pane navigation
-vim.keymap.set({ "n", "v" }, "<C-h>", "<cmd>TmuxNavigateLeft<CR>", opts)
-vim.keymap.set({ "n", "v" }, "<C-l>", "<cmd>TmuxNavigateRight<CR>", opts)
-vim.keymap.set({ "n", "v" }, "<C-j>", "<cmd>TmuxNavigateDown<CR>", opts)
-vim.keymap.set({ "n", "v" }, "<C-k>", "<cmd>TmuxNavigateUp<CR>", opts)
+map({ "n", "v" }, "<C-h>", "<cmd>TmuxNavigateLeft<CR>")
+map({ "n", "v" }, "<C-l>", "<cmd>TmuxNavigateRight<CR>")
+map({ "n", "v" }, "<C-j>", "<cmd>TmuxNavigateDown<CR>")
+map({ "n", "v" }, "<C-k>", "<cmd>TmuxNavigateUp<CR>")
 
 -- Clear search pattern
-vim.keymap.set("n", "<leader>cs", function()
+map("n", "<leader>cs", function()
 	vim.fn.setreg("/", "")
-end, opts)
+end)
+
+map("v", "<leader>r", '"hy:%s/<C-r>h//g<left><left>') -- Replace all instances of highlighted words
+
+-- Automatically close brackets, parethesis, and quotes
+map("i", "'", "''<left>")
+map("i", '"', '""<left>')
+map("i", "(", "()<left>")
+map("i", "[", "[]<left>")
+map("i", "{", "{}<left>")
