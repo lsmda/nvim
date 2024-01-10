@@ -1,3 +1,3 @@
 ## NeoVim Configuration
 
-![background](images/background.png)
+![background](images/screenshot.png)
