@@ -36,7 +36,7 @@ map("n", "<C-s>", function()
 end)
 
 map({ "n", "x" }, "<M-e>", "$") -- Nove cursor to end of line
-map({ "n", "x" }, "<M-q>", "0") -- Move cursor to start of line
+map({ "n", "x" }, "<M-q>", "^") -- Move cursor to start of line
 
 map("n", "<M-k>", ":m .-2<CR>==") -- Move current line up
 map("n", "<M-j>", ":m .+1<CR>==") -- Move current line down
