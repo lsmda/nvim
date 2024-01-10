@@ -1,3 +1,3 @@
-## NeoVim Configuration
+# Neovim Setup
 
 ![background](images/screenshot.png)
