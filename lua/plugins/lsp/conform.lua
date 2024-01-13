@@ -1,6 +1,5 @@
 return {
 	"stevearc/conform.nvim",
-	event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
 	opts = {
 		formatters_by_ft = {
@@ -11,7 +10,7 @@ return {
 			typescriptreact = { "prettierd" },
 			html = { "prettierd" },
 			css = { "prettierd" },
-			json = { "eslint_d", "prettierd" },
+			json = { "prettierd" },
 			yaml = { "prettierd" },
 			markdown = { "prettierd" },
 			graphql = { "prettierd" },

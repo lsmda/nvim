@@ -44,7 +44,7 @@ return {
 		end
 
 		-- Custom path rendering function for telescope
-		local function path_display(_, path)
+		function path_display(_, path)
 			local stripped_path, filename = split_filepath(path)
 			if filename == stripped_path or stripped_path == "" then
 				return filename
@@ -89,7 +89,7 @@ return {
 					"^.git/",
 					"^pnpm-lock.*",
 					"^lazy-lock.json",
-					"^node_modules$",
+					"node_modules/*",
 					"^yarn.lock",
 					"schema.gql",
 				},
@@ -119,11 +119,6 @@ return {
 							["<C-d>"] = actions.delete_buffer,
 						},
 					},
-				},
-
-				planets = {
-					show_pluto = true,
-					show_moon = true,
 				},
 
 				colorscheme = {

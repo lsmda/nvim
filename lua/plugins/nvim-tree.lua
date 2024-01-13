@@ -37,6 +37,7 @@ return {
 				width = 38,
 			},
 			filters = {
+				dotfiles = false,
 				custom = { "^.git$" },
 			},
 			actions = {
