@@ -28,7 +28,7 @@ return {
 
 				local opts = { buffer = ev.buf }
 
-				vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition", opts)
+				vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>", opts)
 				vim.keymap.set("n", "<leader>k", "<cmd>Lspsaga hover_doc<CR>", opts)
 				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
