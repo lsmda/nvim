@@ -34,11 +34,7 @@ return {
 				sorter = "name",
 			},
 			view = {
-				width = 38,
-			},
-			filters = {
-				dotfiles = false,
-				custom = { "^.git$" },
+				width = 36,
 			},
 			actions = {
 				open_file = {
@@ -48,6 +44,9 @@ return {
 			update_focused_file = {
 				enable = true,
 				update_cwd = true,
+			},
+			filters = {
+				exclude = { ".env" },
 			},
 			git = {
 				enable = true,

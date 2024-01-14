@@ -90,6 +90,8 @@ return {
 					"^pnpm-lock.*",
 					"^lazy-lock.json",
 					"node_modules/*",
+					"build/*",
+					".cache/*",
 					"^yarn.lock",
 					"schema.gql",
 				},
