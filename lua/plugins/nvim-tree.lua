@@ -34,7 +34,7 @@ return {
 				sorter = "name",
 			},
 			view = {
-				width = 36,
+				width = 35,
 			},
 			actions = {
 				open_file = {

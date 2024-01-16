@@ -84,7 +84,6 @@ return {
 					"--hidden",
 					"--glob=!.git/",
 				},
-				mappings = {},
 				file_ignore_patterns = {
 					"^.git/",
 					"^pnpm-lock.*",
