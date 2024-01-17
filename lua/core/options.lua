@@ -31,6 +31,7 @@ local options = {
 	wrap = false,
 
 	cursorline = true,
+	mouse = "",
 	termguicolors = true,
 }
 
