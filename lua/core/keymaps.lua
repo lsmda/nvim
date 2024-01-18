@@ -56,12 +56,19 @@ end)
 
 map("v", "<leader>r", '"hy:%s/<C-r>h//g<left><left>') -- Replace all instances of highlighted words
 
--- Automatically close brackets, parethesis, and quotes
+-- Automatically close character pair
 map("i", "'", "''<left>")
 map("i", '"', '""<left>')
 map("i", "(", "()<left>")
 map("i", "[", "[]<left>")
 map("i", "{", "{}<left>")
+
+-- enclose visual selection with character pair
+map("v", "'", "c''<Esc>P")
+map("v", '"', 'c""<Esc>P')
+map("v", "(", "c()<Esc>P")
+map("v", "[", "c[]<Esc>P")
+map("v", "{", "c{}<Esc>P")
 
 local function confirm_quit(command)
 	local choice = vim.fn.input("Are you sure you want to quit? (y/N): ")

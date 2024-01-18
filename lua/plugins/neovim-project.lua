@@ -26,12 +26,6 @@ return {
 					"<leader>fp",
 					"<cmd>Telescope neovim-project discover<cr>",
 				},
-				{
-					description = "Show project list",
-					mode = { "n" },
-					"<leader>fh",
-					"<cmd>Telescope neovim-project history<cr>",
-				},
 			})
 		end,
 	},

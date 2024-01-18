@@ -2,11 +2,11 @@ return {
 	"mfussenegger/nvim-lint",
 	config = function()
 		require("lint").linters_by_ft = {
-			css = { "eslint" },
-			javascript = { "eslint" },
-			typescript = { "eslint" },
-			javascriptreact = { "eslint" },
-			typescriptreact = { "eslint" },
+			css = { "eslint_d" },
+			javascript = { "eslint_d" },
+			typescript = { "eslint_d" },
+			javascriptreact = { "eslint_d" },
+			typescriptreact = { "eslint_d" },
 		}
 
 		vim.api.nvim_create_autocmd({ "BufWritePost" }, {

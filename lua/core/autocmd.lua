@@ -53,26 +53,12 @@ end
 -- Set up an auto-command group to prevent duplicate autocmds
 vim.api.nvim_create_augroup("autosave", {})
 
--- When text in any buffer is changed and it's not just opened for the first time, start a timer to save the file after a delay
 vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "InsertLeave" }, {
 	group = "autosave",
 	pattern = "*",
 	callback = function()
-		-- Defer the auto-save by the specified delay only if there's no popup menu visible
-
 		if vim.fn.pumvisible() == 0 then
-			vim.defer_fn(save_file, 450) -- Delay in milliseconds
-		end
-	end,
-})
-
-vim.api.nvim_create_augroup("FloatingWindowSetup", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-	group = "FloatingWindowSetup",
-	pattern = "*",
-	callback = function()
-		if vim.bo.buftype == "nofile" then
-			vim.wo.wrap = true
+			vim.defer_fn(save_file, 350) -- Delay in milliseconds
 		end
 	end,
 })

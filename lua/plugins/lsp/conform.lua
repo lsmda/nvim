@@ -22,6 +22,6 @@ return {
 		notify_on_error = true,
 	},
 	init = function()
-		require("conform").setup()
+		require("conform").setup({})
 	end,
 }
