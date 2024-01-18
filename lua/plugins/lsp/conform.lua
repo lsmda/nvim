@@ -14,6 +14,7 @@ return {
 			yaml = { "prettierd" },
 			markdown = { "prettierd" },
 			graphql = { "prettierd" },
+			astro = { "prettierd" },
 		},
 		-- format_on_save = {
 		-- 	lsp_fallback = true,

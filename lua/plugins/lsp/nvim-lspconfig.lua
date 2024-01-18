@@ -20,6 +20,7 @@ return {
 		lspconfig.eslint.setup({})
 		lspconfig.tailwindcss.setup({})
 		lspconfig.cssls.setup({})
+		lspconfig.astro.setup({})
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),

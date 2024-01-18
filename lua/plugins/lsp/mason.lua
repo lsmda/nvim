@@ -1,8 +1,8 @@
 return {
 	"williamboman/mason.nvim",
 	dependencies = {
-		"williamboman/mason-lspconfig.nvim",
 		"neovim/nvim-lspconfig",
+		"williamboman/mason-lspconfig.nvim",
 		"whoissethdaniel/mason-tool-installer.nvim",
 	},
 	config = function()
@@ -25,14 +25,13 @@ return {
 				"lua_ls",
 				"cssls",
 				"tailwindcss",
+				"astro",
 			},
 		})
 
 		mason_tool_installer.setup({
 			ensure_installed = {
-				"lua-language-server",
 				"stylua",
-				"eslint",
 				"eslint_d",
 				"prettier",
 				"prettierd",

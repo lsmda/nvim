@@ -2,6 +2,7 @@ return {
 	"mfussenegger/nvim-lint",
 	config = function()
 		require("lint").linters_by_ft = {
+			astro = { "eslint_d" },
 			css = { "eslint_d" },
 			javascript = { "eslint_d" },
 			typescript = { "eslint_d" },
