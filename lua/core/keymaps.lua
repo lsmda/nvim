@@ -16,12 +16,11 @@ local function map(mode, shortcut, command, options)
 	vim.keymap.set(mode, shortcut, command, opts)
 end
 
-map({ "i", "v" }, "<M-n>", "<ESC>") -- Enter normal mode
+map({ "i", "v" }, "<M-n>", "<Esc>") -- Enter normal mode
 
 map("n", "<C-a>", "ggVG") -- Select all in normal mode
-map("v", "<C-a>", "<ESC>ggVG") -- Select all in visual mode
 
-map("n", "<CR>", "o<ESC>") -- Add new line on <Enter> press
+map("n", "<CR>", "o<Esc>") -- Add new line on <Enter> press
 
 map("n", "<M-h>", "<C-o>") -- Navigate to previous cursor position
 map("n", "<M-l>", "<C-i>") -- Navigate to forward cursor position
@@ -31,8 +30,8 @@ map("n", "<C-u>", "<C-u>zz") -- Scroll up with cursor centered
 
 -- Write all open buffers, then format current buffer
 map("n", "<C-s>", function()
-	vim.cmd("wa")
 	require("conform").format()
+	vim.cmd("wa")
 end)
 
 map({ "n", "x" }, "<M-e>", "$") -- Nove cursor to end of line
@@ -54,8 +53,6 @@ map("n", "<leader>cs", function()
 	vim.fn.setreg("/", "")
 end)
 
-map("v", "<leader>r", '"hy:%s/<C-r>h//g<left><left>') -- Replace all instances of highlighted words
-
 -- Automatically close character pair
 map("i", "'", "''<left>")
 map("i", '"', '""<left>')
@@ -70,19 +67,27 @@ map("v", "(", "c()<Esc>P")
 map("v", "[", "c[]<Esc>P")
 map("v", "{", "c{}<Esc>P")
 
-local function confirm_quit(command)
-	local choice = vim.fn.input("Are you sure you want to quit? (y/N): ")
-	if choice:lower() == "y" then
+local function confirm_quit(command, input, default_choice)
+	default_choice = default_choice or false
+	input = input or "Are you sure you want to quit? (y/N): "
+
+	local choice = ""
+
+	if not default_choice then
+		choice = vim.fn.input(input)
+	end
+
+	if default_choice or choice:lower() == "y" then
 		vim.cmd(command)
 	end
 end
 
--- Write all open buffers, then exit neovim
+-- Write all open buffers, then exit neovim without prompting user
 map("n", "<leader>s", function()
-	confirm_quit("wqa")
+	confirm_quit("wqa", nil, true)
 end)
 
--- Ignore all open buffers, then exit neovim
+-- Ignore all open buffers, prompt user, then exit neovim
 map("n", "<leader>q", function()
-	confirm_quit("qa!")
+	confirm_quit("qa!", "Are you sure you want to quit? Unsaved changes will be lost (y/N): ")
 end)

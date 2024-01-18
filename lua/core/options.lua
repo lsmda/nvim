@@ -3,8 +3,7 @@ local options = {
 	numberwidth = 4,
 	relativenumber = true,
 
-	hlsearch = true,
-	incsearch = true,
+	hlsearch = false,
 
 	clipboard = "unnamedplus",
 
