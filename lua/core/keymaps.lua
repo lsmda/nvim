@@ -7,14 +7,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 local utils = require("core.utils")
-local opts = utils.opts
-
-local function map(mode, shortcut, command, options)
-	if options then
-		opts = vim.tbl_extend("force", opts, options)
-	end
-	vim.keymap.set(mode, shortcut, command, opts)
-end
+local map = utils.map
 
 map({ "i", "v" }, "<M-n>", "<Esc>") -- Enter normal mode
 
