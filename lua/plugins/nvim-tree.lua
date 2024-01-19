@@ -1,70 +1,70 @@
 return {
-  "nvim-tree/nvim-tree.lua",
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-  },
-  config = function()
-    local nvim_tree = require("nvim-tree")
+	"nvim-tree/nvim-tree.lua",
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+	},
+	config = function()
+		local nvim_tree = require("nvim-tree")
 
-    local function on_attach(bufnr)
-      local api = require("nvim-tree.api")
+		local function on_attach(bufnr)
+			local api = require("nvim-tree.api")
 
-      local function opts(desc)
-        return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-      end
+			local function opts(desc)
+				return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+			end
 
-      -- default mappings
-      api.config.mappings.default_on_attach(bufnr)
+			-- default mappings
+			api.config.mappings.default_on_attach(bufnr)
 
-      vim.keymap.set("n", "?", api.tree.toggle_help, opts("Open help"))
-      vim.keymap.set("n", "w", api.node.open.preview, opts("Open file preview"))
-      vim.keymap.set("n", "<C-w>", api.tree.toggle, opts("Toggle file explorer"))
-      vim.keymap.set("n", "<Tab>", function()
-        api.node.open.edit()
-        api.tree.toggle({ focus = false })
-        end, opts("Focus file preview"))
-      vim.keymap.set("n", "<leader>q", function()
-        vim.cmd("wqa")
-        end, opts("Exit neovim"))
-    end
+			vim.keymap.set("n", "?", api.tree.toggle_help, opts("Open help"))
+			vim.keymap.set("n", "w", api.node.open.preview, opts("Open file preview"))
+			vim.keymap.set("n", "<C-w>", api.tree.toggle, opts("Toggle file explorer"))
+			vim.keymap.set("n", "<Tab>", function()
+				api.node.open.edit()
+				api.tree.toggle({ focus = false })
+			end, opts("Focus file preview"))
+			vim.keymap.set("n", "<leader>q", function()
+				vim.cmd("wqa")
+			end, opts("Exit neovim"))
+		end
 
-    nvim_tree.setup({
-      on_attach = on_attach,
-      sort = {
-        sorter = "name",
-      },
-      view = {
-        width = 35,
-      },
-      actions = {
-        open_file = {
-          quit_on_open = true,
-        },
-      },
-      update_focused_file = {
-        enable = true,
-        update_cwd = true,
-      },
-      filters = {
-        exclude = { ".env" },
-      },
-      git = {
-        enable = true,
-      },
-      diagnostics = {
-        enable = true,
-        show_on_dirs = true,
-        icons = {
-          hint = "",
-          info = "",
-          warning = "",
-          error = "",
-        },
-      },
-    })
+		nvim_tree.setup({
+			on_attach = on_attach,
+			sort = {
+				sorter = "name",
+			},
+			view = {
+				width = 35,
+			},
+			actions = {
+				open_file = {
+					quit_on_open = true,
+				},
+			},
+			update_focused_file = {
+				enable = true,
+				update_cwd = true,
+			},
+			filters = {
+				exclude = { ".env" },
+			},
+			git = {
+				enable = true,
+			},
+			diagnostics = {
+				enable = true,
+				show_on_dirs = true,
+				icons = {
+					hint = "",
+					info = "",
+					warning = "",
+					error = "",
+				},
+			},
+		})
 
-    vim.keymap.set("n", "<C-w>", function()
-      require("nvim-tree.api").tree.toggle()
-    end)
-  end,
+		vim.keymap.set("n", "<C-w>", function()
+			require("nvim-tree.api").tree.toggle()
+		end)
+	end,
 }

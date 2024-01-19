@@ -1,3 +1,3 @@
 return {
-  opts = { noremap = true, silent = true },
+	opts = { noremap = true, silent = true },
 }
