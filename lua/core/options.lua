@@ -1,39 +1,41 @@
 local options = {
-	number = true,
-	numberwidth = 4,
-	relativenumber = true,
+  number = true,
+  numberwidth = 4,
+  relativenumber = true,
 
-	hlsearch = false,
+  hlsearch = false,
+  incsearch = true,
 
-	clipboard = "unnamedplus",
+  clipboard = "unnamedplus",
+  scrolloff = 999,
 
-	tabstop = 2,
-	shiftwidth = 2,
-	softtabstop = 2,
-	expandtab = true,
-	autoindent = true,
+  tabstop = 4,
+  shiftwidth = 4,
+  softtabstop = 4,
+  expandtab = true,
+  autoindent = true,
 
-	ignorecase = true,
-	smartcase = true,
+  ignorecase = true,
+  smartcase = true,
 
-	splitbelow = true,
-	splitright = true,
+  splitbelow = true,
+  splitright = true,
 
-	hidden = true,
-	showmode = false,
-	signcolumn = "yes",
+  hidden = true,
+  showmode = false,
+  signcolumn = "yes",
 
-	backup = false,
-	swapfile = false,
+  backup = false,
+  swapfile = false,
 
-	fileencoding = "utf-8",
-	wrap = false,
+  fileencoding = "utf-8",
+  wrap = false,
 
-	cursorline = true,
-	mouse = "",
-	termguicolors = true,
+  cursorline = true,
+  mouse = "",
+  termguicolors = true,
 }
 
-for option, value in pairs(options) do
-	vim.opt[option] = value
+for key, value in pairs(options) do
+  vim.opt[key] = value
 end
