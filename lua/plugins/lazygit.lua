@@ -4,8 +4,6 @@ return {
 		"nvim-lua/plenary.nvim",
 	},
 	config = function()
-		require("lazy").setup({})
-
 		local utils = require("core.utils")
 		local map = utils.map
 
