@@ -4,7 +4,7 @@ return {
 		dependencies = {
 			{
 				"mrjones2014/legendary.nvim",
-				version = "v2.1.0",
+				version = "v2.13.6",
 				priority = 10000,
 				lazy = false,
 			},
