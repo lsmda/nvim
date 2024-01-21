@@ -1,9 +1,10 @@
 return {
 	"stevearc/conform.nvim",
+	commit = "cbc5745bf7519acaf3a5cbaaa677fd556aa813d7",
 	cmd = { "ConformInfo" },
 	opts = {
 		formatters_by_ft = {
-			-- lua = { "stylua" },
+			lua = { "stylua" },
 			javascript = { "prettierd" },
 			typescript = { "prettierd" },
 			javascriptreact = { "prettierd" },

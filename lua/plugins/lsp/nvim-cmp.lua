@@ -1,16 +1,19 @@
 return {
 	"hrsh7th/nvim-cmp",
+	commit = "538e37ba87284942c1d76ed38dd497e54e65b891",
 	dependencies = {
-		"neovim/nvim-lspconfig",
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-path",
-		"hrsh7th/cmp-cmdline",
-		"saadparwaiz1/cmp_luasnip",
+		{ "neovim/nvim-lspconfig", commit = "fe1484034f47cf064c6bfd10ef1ff26665a08fd2" },
+		{ "hrsh7th/cmp-nvim-lsp", commit = "e6a5e755ff2c2841627700ba76d3032d73f7066b" },
+		{ "hrsh7th/cmp-buffer", commit = "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
+		{ "hrsh7th/cmp-path", commit = "91ff86cd9c29299a64f968ebb45846c485725f23" },
+		{ "hrsh7th/cmp-cmdline", commit = "8ee981b4a91f536f52add291594e89fb6645e451" },
+		{ "saadparwaiz1/cmp_luasnip", commit = "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
 		{
 			"L3MON4D3/LuaSnip",
+			commit = "8ae1dedd988eb56441b7858bd1e8554dfadaa46d",
 			dependencies = {
 				"rafamadriz/friendly-snippets",
+				commit = "69a2c1675b66e002799f5eef803b87a12f593049",
 			},
 		},
 	},

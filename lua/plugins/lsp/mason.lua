@@ -1,9 +1,10 @@
 return {
 	"williamboman/mason.nvim",
+	commit = "baf99d94c3380640d19af9c70c0541bd6e7cd0cb",
 	dependencies = {
-		"neovim/nvim-lspconfig",
-		"williamboman/mason-lspconfig.nvim",
-		"whoissethdaniel/mason-tool-installer.nvim",
+		{ "neovim/nvim-lspconfig", commit = "fe1484034f47cf064c6bfd10ef1ff26665a08fd2" },
+		{ "williamboman/mason-lspconfig.nvim", commit = "56e435e09f8729af2d41973e81a0db440f8fe9c9" },
+		{ "whoissethdaniel/mason-tool-installer.nvim", commit = "bf0f4f8062d3acbe0afcc61db01a4d19d96310e4" },
 	},
 	config = function()
 		local mason = require("mason")

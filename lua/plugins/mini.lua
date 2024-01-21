@@ -1,6 +1,6 @@
 return {
 	"echasnovski/mini.nvim",
-	version = "*",
+	commit = "b5645ac6eefce8e7af9d7dd4e5e296a81cba8a10",
 	config = function()
 		require("mini.ai").setup()
 		require("mini.comment").setup()

@@ -1,15 +1,15 @@
 return {
 	{
 		"hinell/duplicate.nvim",
+		commit = "ab057af7872c44e6fbd48df9b03983c8e67c50a7",
 		dependencies = {
 			{
 				"mrjones2014/legendary.nvim",
-				version = "v2.13.6",
+				commit = "05af6881168266d8120cb7c2d6837c13a7df7527",
 				priority = 10000,
 				lazy = false,
 			},
 		},
-		tag = "v1.1.0",
 		config = function()
 			local legendary = require("legendary")
 			legendary.keymaps({

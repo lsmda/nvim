@@ -1,5 +1,6 @@
 return {
 	"mfussenegger/nvim-lint",
+	commit = "2cf9ad095130755d7d87f1730bcf33c91ee822e4",
 	config = function()
 		require("lint").linters_by_ft = {
 			astro = { "eslint_d" },

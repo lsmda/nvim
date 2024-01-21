@@ -1,6 +1,7 @@
 return {
 	"catppuccin/nvim",
 	name = "catppuccin",
+	commit = "5e36ca599f4aa41bdd87fbf2c5aae4397ac55074",
 	priority = 1001,
 	config = function()
 		require("catppuccin").setup({

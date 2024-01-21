@@ -1,5 +1,6 @@
 return {
 	"neovim/nvim-lspconfig",
+	commit = "fe1484034f47cf064c6bfd10ef1ff26665a08fd2",
 	event = { "BufEnter" },
 	config = function()
 		local lspconfig = require("lspconfig")

@@ -1,5 +1,6 @@
 return {
 	"lewis6991/gitsigns.nvim",
+	commit = "6ef8c54fb526bf3a0bc4efb0b2fe8e6d9a7daed2",
 	event = "BufEnter",
 	cmd = "Gitsigns",
 	config = function()
