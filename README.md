@@ -10,11 +10,12 @@
 ├── lua
 │   │
 │   ├── core
-│   │   ├── autocmd.lua        # Autocommands
-│   │   ├── icons.lua          # Icons used in completion menus and other UIs
-│   │   ├── mappings.lua       # Custom keymaps
-│   │   ├── options.lua        # Custom neovim options
-│   │   └── utils.lua          # Module with reusable functions and tables
+│   │   ├── autocmd.lua     # Autocommands
+│   │   ├── icons.lua       # Icons used in completion menus and other UIs
+│   │   ├── init.lua        # Starting point for core module
+│   │   ├── mappings.lua    # Custom keymaps
+│   │   ├── options.lua     # Custom neovim options
+│   │   └── utils.lua       # Module with reusable functions and tables
 │   │
 │   ├── plugins
 │   │    │
