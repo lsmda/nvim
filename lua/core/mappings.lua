@@ -60,6 +60,12 @@ map("v", "(", "c()<Esc>P")
 map("v", "[", "c[]<Esc>P")
 map("v", "{", "c{}<Esc>P")
 
+-- Navigate within insert mode
+map("i", "<C-h>", "<Left>")
+map("i", "<C-l>", "<Right>")
+map("i", "<C-j>", "<Down>")
+map("i", "<C-k>", "<Up>")
+
 local function confirm_quit(command, input, default_choice)
 	default_choice = default_choice or false
 	input = input or "Are you sure you want to quit? (y/N): "
