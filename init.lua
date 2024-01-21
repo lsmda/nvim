@@ -1,5 +1,5 @@
 require("core.autocmd")
-require("core.keymaps")
+require("core.mappings")
 require("core.options")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
