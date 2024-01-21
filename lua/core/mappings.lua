@@ -1,3 +1,5 @@
+-- n, v, i, t = mode names
+
 local utils = require("core.utils")
 local confirm_quit = utils.confirm_quit
 
@@ -5,7 +7,6 @@ local M = {}
 
 M.general = {
 	n = {
-
 		["<CR>"] = { "o<Esc>", "Add line below cursor" },
 		["<C-a>"] = { "ggVG", "Select all" },
 
@@ -64,7 +65,6 @@ M.general = {
 	},
 
 	v = {
-
 		-- Enclose visual selection with character pair
 		["'"] = { "c''<Esc>P" },
 		['"'] = { 'c""<Esc>P' },
@@ -96,7 +96,7 @@ M.lazygit = {
 	plugin = true,
 
 	n = {
-		["<leader>gg"] = { "<cmd>LazyGit<CR>", "Open lazyGit window" },
+		["<leader>gg"] = { "<cmd>LazyGit<CR>", "Open LazyGit window" },
 	},
 }
 
