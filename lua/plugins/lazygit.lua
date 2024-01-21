@@ -4,10 +4,7 @@ return {
 	dependencies = {
 		{ "nvim-lua/plenary.nvim", commit = "55d9fe89e33efd26f532ef20223e5f9430c8b0c0" },
 	},
-	config = function()
-		local utils = require("core.utils")
-		local map = utils.map
-
-		map("n", "<leader>gg", "<cmd>LazyGit<CR>")
-	end,
+  init = function ()
+    require("core.utils").load_mappings("lazygit")
+  end,
 }

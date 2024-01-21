@@ -2,6 +2,9 @@ return {
 	"rmagatti/alternate-toggler",
 	commit = "fe798aa9e4af26c9e33ca1add9d255209d03b108",
 	event = { "BufReadPost" },
+  init = function ()
+    require("core.utils").load_mappings("alternate_toggler")
+  end,
 	config = function()
 		require("alternate-toggler").setup({
 			alternates = {
@@ -21,6 +24,5 @@ return {
 			},
 		})
 
-		vim.keymap.set("n", "<leader>tt", "<cmd>lua require('alternate-toggler').toggleAlternate()<CR>")
 	end,
 }

@@ -5,12 +5,10 @@ return {
 		{ "nvim-lua/plenary.nvim", commit = "55d9fe89e33efd26f532ef20223e5f9430c8b0c0" },
 		{ "neovim/nvim-lspconfig", commit = "fe1484034f47cf064c6bfd10ef1ff26665a08fd2" },
 	},
+	init = function()
+		require("core.utils").load_mappings("typescript_tools")
+	end,
 	config = function()
-		local typescript_tools = require("typescript-tools")
-
-		typescript_tools.setup({})
-
-		vim.keymap.set("n", "<leader>m", "<CMD>TSToolsOrganizeImports<CR>")
-		vim.keymap.set("n", "<leader>a", "<CMD>TSToolsAddMissingImports<CR>")
+		require("typescript-tools").setup({})
 	end,
 }

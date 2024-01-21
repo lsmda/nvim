@@ -1,92 +1,128 @@
--- Set <Space> as the leader key
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
--- Disable netrw for nvim-tree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 local utils = require("core.utils")
-local map = utils.map
+local confirm_quit = utils.confirm_quit
 
-map({ "i", "v" }, "<M-n>", "<Esc>") -- Enter normal mode
+local M = {}
 
-map("n", "<C-a>", "ggVG") -- Select all in normal mode
+M.general = {
+	n = {
 
-map("n", "<CR>", "o<Esc>") -- Add new line on <Enter> press
+		["<CR>"] = { "o<Esc>", "Add line below cursor" },
+		["<C-a>"] = { "ggVG", "Select all" },
 
-map("n", "<M-h>", "<C-o>") -- Navigate to previous cursor position
-map("n", "<M-l>", "<C-i>") -- Navigate to forward cursor position
+		["<M-h>"] = { "<C-o>", "Navigate to previous cursor position" },
+		["<M-l>"] = { "<C-i>", "Navigate to next cursor position" },
 
-map("n", "<C-d>", "<C-d>zz") -- Scroll down with cursor centered
-map("n", "<C-u>", "<C-u>zz") -- Scroll up with cursor centered
+		["<C-d>"] = { "<C-d>zz", "Scroll down" },
+		["<C-u>"] = { "<C-u>zz", "Scroll up" },
 
--- Write all open buffers, then format current buffer
-map("n", "<C-s>", function()
-	require("conform").format()
-	vim.cmd("wa")
-end)
+		["<M-k>"] = { ":m .-2<CR>==", "Move line up" },
+		["<M-j>"] = { ":m .+1<CR>==", "Move line down" },
 
-map({ "n", "x" }, "<M-e>", "$") -- Nove cursor to end of line
-map({ "n", "x" }, "<M-q>", "^") -- Move cursor to start of line
+		["<C-s>"] = {
+			function()
+				require("conform").format()
+				vim.cmd("wa")
+			end,
+			"Format current buffer and write all open buffers",
+		},
 
-map("n", "<M-k>", ":m .-2<CR>==") -- Move current line up
-map("n", "<M-j>", ":m .+1<CR>==") -- Move current line down
-map("v", "<M-k>", ":m '<-2<CR>gv=gv") -- Move current selection up
-map("v", "<M-j>", ":m '>+1<CR>gv=gv") -- Move current selection down
+		["<leader>s"] = {
+			function()
+				confirm_quit("wqa", nil, true)
+			end,
+			"Write all open buffers then exit neovim",
+		},
 
--- Pane navigation
-map({ "n", "v" }, "<C-h>", "<cmd>TmuxNavigateLeft<CR>")
-map({ "n", "v" }, "<C-l>", "<cmd>TmuxNavigateRight<CR>")
-map({ "n", "v" }, "<C-j>", "<cmd>TmuxNavigateDown<CR>")
-map({ "n", "v" }, "<C-k>", "<cmd>TmuxNavigateUp<CR>")
+		["<leader>q"] = {
+			function()
+				confirm_quit("qa!", "Are you sure you want to quit? Unsaved changes will be lost (y/N): ")
+			end,
+			"Ignore all open buffers then prompt user to exit neovim",
+		},
 
--- Clear search pattern
-map("n", "<leader>cs", function()
-	vim.fn.setreg("/", "")
-end)
+		["<leader>cs"] = {
+			function()
+				vim.fn.setreg("/", "")
+			end,
+			"Clear search pattern",
+		},
+	},
 
--- Automatically close character pair
-map("i", "'", "''<left>")
-map("i", '"', '""<left>')
-map("i", "(", "()<left>")
-map("i", "[", "[]<left>")
-map("i", "{", "{}<left>")
+	i = {
+		-- Navigate within insert mode
+		["<C-h>"] = { "<Left>", "Navigate left in insert mode" },
+		["<C-l>"] = { "<Right>", "Navigate right in insert mode" },
+		["<C-j>"] = { "<Down>", "Navigate down in insert mode" },
+		["<C-k>"] = { "<Up>", "Navigate up in insert mode" },
 
--- enclose visual selection with character pair
-map("v", "'", "c''<Esc>P")
-map("v", '"', 'c""<Esc>P')
-map("v", "(", "c()<Esc>P")
-map("v", "[", "c[]<Esc>P")
-map("v", "{", "c{}<Esc>P")
+		-- Close character pair and move cursor inside
+		["'"] = { "''<left>" },
+		['"'] = { '""<left>' },
+		["("] = { "()<left>" },
+		["["] = { "[]<left>" },
+		["{"] = { "{}<left>" },
+	},
 
--- Navigate within insert mode
-map("i", "<C-h>", "<Left>")
-map("i", "<C-l>", "<Right>")
-map("i", "<C-j>", "<Down>")
-map("i", "<C-k>", "<Up>")
+	v = {
 
-local function confirm_quit(command, input, default_choice)
-	default_choice = default_choice or false
-	input = input or "Are you sure you want to quit? (y/N): "
+		-- Enclose visual selection with character pair
+		["'"] = { "c''<Esc>P" },
+		['"'] = { 'c""<Esc>P' },
+		["("] = { "c()<Esc>P" },
+		["["] = { "c[]<Esc>P" },
+		["{"] = { "c{}<Esc>P" },
 
-	local choice = ""
+		["<M-k>"] = { ":m '<-2<CR>gv=gv", "Move visual selection up" },
+		["<M-j>"] = { ":m '>+1<CR>gv=gv", "Move visual selection down" },
+	},
 
-	if not default_choice then
-		choice = vim.fn.input(input)
-	end
+	[{ "i", "v" }] = {
+		["<M-n>"] = { "<Esc>", "Enter normal mode" },
+	},
 
-	if default_choice or choice:lower() == "y" then
-		vim.cmd(command)
-	end
-end
+	[{ "n", "v" }] = {
+		["<M-e>"] = { "$", "End of line" },
+		["<M-q>"] = { "^", "Beginning of line" },
 
--- Write all open buffers, then exit neovim without prompting user
-map("n", "<leader>s", function()
-	confirm_quit("wqa", nil, true)
-end)
+		-- Pane navigation
+		["<C-h>"] = { "<cmd>TmuxNavigateLeft<CR>", "Tmux navigate left command" },
+		["<C-l>"] = { "<cmd>TmuxNavigateRight<CR>", "Tmux navigate right command" },
+		["<C-j>"] = { "<cmd>TmuxNavigateDown<CR>", "Tmux navigate down command" },
+		["<C-k>"] = { "<cmd>TmuxNavigateUp<CR>", "Tmux navigate up command" },
+	},
+}
 
--- Ignore all open buffers, prompt user, then exit neovim
-map("n", "<leader>q", function()
-	confirm_quit("qa!", "Are you sure you want to quit? Unsaved changes will be lost (y/N): ")
-end)
+M.lazygit = {
+	plugin = true,
+
+	n = {
+		["<leader>gg"] = { "<cmd>LazyGit<CR>", "Open lazyGit window" },
+	},
+}
+
+M.typescript_tools = {
+	plugin = true,
+
+	n = {
+		["<leader>m"] = { "<cmd>TSToolsOrganizeImports<CR>", "Organize imports" },
+		["<leader>a"] = { "<cmd>TSToolsAddMissingImports<CR>", "Add missing imports" },
+	},
+}
+
+M.alternate_toggler = {
+	plugin = true,
+
+	n = {
+		["<leader>tt"] = { "<cmd>lua require('alternate-toggler').toggleAlternate()<CR>", "Toggle value" },
+	},
+}
+
+M.todo_comments = {
+	plugin = true,
+
+	n = {
+		["<leader>ft"] = { "<CMD>TodoTelescope<CR>", "Find todos" },
+	},
+}
+
+return M
