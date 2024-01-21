@@ -17,8 +17,8 @@ return {
 		local actions = require("telescope.actions")
 		local builtin = require("telescope.builtin")
 
-		local icons = require("core.icons")
 		local utils = require("core.utils")
+		local icons = utils.icons
 
 		-- Helper functions for custom path_display function
 		local function normalize_path(path)

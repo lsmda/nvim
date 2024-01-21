@@ -16,6 +16,8 @@ M.confirm_quit = function(command, input, default_choice)
 	end
 end
 
+M.icons = require("core.icons")
+
 M.load_mappings = function(section, mapping_opt)
 	vim.schedule(function()
 		local function set_section_map(section_values)

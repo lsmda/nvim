@@ -1,3 +1,17 @@
+local global_opts = {
+	-- Set <Space> as the leader key
+	mapleader = " ",
+	maplocalleader = " ",
+
+	-- Disable netrw for nvim-tree
+	loaded_netrw = 1,
+	loaded_netrwPlugin = 1,
+}
+
+for key, value in pairs(global_opts) do
+	vim.g[key] = value
+end
+
 local options = {
 	number = true,
 	relativenumber = true,

@@ -2,7 +2,7 @@ return {
 	"nvim-lualine/lualine.nvim",
 	commit = "566b7036f717f3d676362742630518a47f132fff",
 	config = function()
-		local icons = require("core.icons")
+		local icons = require("core.utils").icons
 
 		local diff = {
 			"diff",

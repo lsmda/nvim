@@ -18,7 +18,7 @@ return {
 		},
 	},
 	config = function()
-		local icons = require("core.icons")
+		local icons = require("core.utils").icons
 		local symbol_kinds = icons.symbol_kinds
 
 		local check_backspace = function()
