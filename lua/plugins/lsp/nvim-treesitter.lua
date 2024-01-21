@@ -8,6 +8,7 @@ return {
 
 		config.setup({
 			auto_install = true,
+			ensure_installed = { "lua" },
 			highlight = {
 				enable = true,
 			},
