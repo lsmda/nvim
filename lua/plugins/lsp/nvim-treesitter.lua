@@ -8,7 +8,7 @@ return {
 
 		config.setup({
 			auto_install = true,
-			ensure_installed = { "lua" },
+			ensure_installed = { "lua", "markdown", "markdown_inline" },
 			highlight = {
 				enable = true,
 			},
