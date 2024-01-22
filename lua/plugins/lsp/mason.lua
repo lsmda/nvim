@@ -24,9 +24,11 @@ return {
 		mason_lspconfig.setup({
 			ensure_installed = {
 				"lua_ls",
+        "tsserver",
 				"cssls",
 				"tailwindcss",
 				"astro",
+        "eslint",
 			},
 		})
 
