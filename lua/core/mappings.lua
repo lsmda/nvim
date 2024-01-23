@@ -2,6 +2,7 @@
 
 local utils = require("core.utils")
 local confirm_quit = utils.confirm_quit
+local nvim_tree_api = require("nvim-tree.api")
 
 local M = {}
 
@@ -18,6 +19,8 @@ M.general = {
 
 		["<M-k>"] = { ":m .-2<CR>==", "Move line up" },
 		["<M-j>"] = { ":m .+1<CR>==", "Move line down" },
+
+		["<C-w>"] = { nvim_tree_api.tree.toggle, "Toggle file explorer" },
 
 		["<C-s>"] = {
 			function()
@@ -122,6 +125,31 @@ M.todo_comments = {
 
 	n = {
 		["<leader>ft"] = { "<CMD>TodoTelescope<CR>", "Find todos" },
+	},
+}
+
+M.nvim_tree = {
+	plugin = true,
+
+	n = {
+		["?"] = { nvim_tree_api.tree.toggle_help, "Open help" },
+		["w"] = { nvim_tree_api.node.open.preview, "Open file preview" },
+		["<C-w>"] = { nvim_tree_api.tree.toggle, "Toggle file explorer" },
+
+		["<Tab>"] = {
+			function()
+				nvim_tree_api.node.open.edit()
+				nvim_tree_api.tree.toggle({ focus = false })
+			end,
+			"Focus file preview",
+		},
+
+		["<leader>q"] = {
+			function()
+				vim.cmd("wqa")
+			end,
+			"Exit neovim",
+		},
 	},
 }
 
