@@ -28,6 +28,7 @@ return {
 				update_cwd = true,
 			},
 			filters = {
+				dotfiles = false, -- Show dotfiles
 				exclude = { ".env" },
 			},
 			git = {
