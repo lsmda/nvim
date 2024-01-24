@@ -1,8 +1,9 @@
 -- n, v, i, t = mode names
 
+local nvim_tree_api = require("nvim-tree.api")
 local utils = require("core.utils")
 local confirm_quit = utils.confirm_quit
-local nvim_tree_api = require("nvim-tree.api")
+local get_float_opts = utils.get_float_opts
 
 local M = {}
 
@@ -95,23 +96,6 @@ M.general = {
 	},
 }
 
-M.lazygit = {
-	plugin = true,
-
-	n = {
-		["<leader>gg"] = { "<cmd>LazyGit<CR>", "Open LazyGit window" },
-	},
-}
-
-M.typescript_tools = {
-	plugin = true,
-
-	n = {
-		["<leader>m"] = { "<cmd>TSToolsOrganizeImports<CR>", "Organize imports" },
-		["<leader>a"] = { "<cmd>TSToolsAddMissingImports<CR>", "Add missing imports" },
-	},
-}
-
 M.alternate_toggler = {
 	plugin = true,
 
@@ -120,11 +104,42 @@ M.alternate_toggler = {
 	},
 }
 
-M.todo_comments = {
+M.lazygit = {
 	plugin = true,
 
 	n = {
-		["<leader>ft"] = { "<CMD>TodoTelescope<CR>", "Find todos" },
+		["<leader>gg"] = { "<cmd>LazyGit<CR>", "Open LazyGit window" },
+	},
+}
+
+M.lspconfig = {
+	plugin = true,
+
+	n = {
+		["<leader>gd"] = { "<cmd>Lspsaga goto_definition<CR>", "Go to definition" },
+		["<leader>k"] = { "<cmd>Lspsaga hover_doc<CR>", "Go to definition" },
+		["<leader>rn"] = { vim.lsp.buf.rename, "Rename buffer instances" },
+		["<leader>ca"] = { vim.lsp.buf.code_action, "Code actions" },
+		["<leader>pk"] = { "<cmd>Lspsaga peek_definition<CR>", "Peek definition" },
+
+		["<leader>dd"] = {
+			function()
+				vim.diagnostic.open_float(nil, get_float_opts())
+			end,
+			"Show diagnostics",
+		},
+		["<leader>nd"] = {
+			function()
+				vim.diagnostic.goto_next({ float = get_float_opts({ scope = "line" }) })
+			end,
+			"Next diagnostic",
+		},
+		["<leader>pd"] = {
+			function()
+				vim.diagnostic.goto_prev({ float = get_float_opts({ scope = "line" }) })
+			end,
+			"Previous diagnostic",
+		},
 	},
 }
 
@@ -150,6 +165,23 @@ M.nvim_tree = {
 			end,
 			"Exit neovim",
 		},
+	},
+}
+
+M.todo_comments = {
+	plugin = true,
+
+	n = {
+		["<leader>ft"] = { "<CMD>TodoTelescope<CR>", "Find todos" },
+	},
+}
+
+M.typescript_tools = {
+	plugin = true,
+
+	n = {
+		["<leader>m"] = { "<cmd>TSToolsOrganizeImports<CR>", "Organize imports" },
+		["<leader>a"] = { "<cmd>TSToolsAddMissingImports<CR>", "Add missing imports" },
 	},
 }
 
