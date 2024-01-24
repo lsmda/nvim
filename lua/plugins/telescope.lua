@@ -15,7 +15,6 @@ return {
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
-		local builtin = require("telescope.builtin")
 
 		local utils = require("core.utils")
 		local icons = utils.icons
@@ -142,22 +141,6 @@ return {
 
 		telescope.load_extension("fzf")
 
-		local opts = utils.opts
-
-		-- grep
-		vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
-		vim.keymap.set("n", "<leader>fd", builtin.lsp_definitions, opts)
-		vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
-		vim.keymap.set("n", "<leader>fs", builtin.grep_string, opts)
-		vim.keymap.set("n", "<leader>fr", builtin.lsp_references, opts)
-		vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
-		vim.keymap.set("n", "<leader>fc", builtin.command_history, opts)
-
-		-- git
-		vim.keymap.set("n", "<leader>gf", builtin.git_files, opts)
-		vim.keymap.set("n", "<leader>gb", builtin.git_branches, opts)
-		vim.keymap.set("n", "<leader>gc", builtin.git_commits, opts)
-		vim.keymap.set("n", "<leader>gs", builtin.git_status, opts)
-		vim.keymap.set("n", "<leader>gx", builtin.git_stash, opts)
+		require("core.utils").load_mappings("telescope")
 	end,
 }

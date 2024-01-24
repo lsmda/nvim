@@ -1,11 +1,9 @@
 -- n, v, i, t = mode names
 
-local nvim_tree_api = require("nvim-tree.api")
-local utils = require("core.utils")
-local confirm_quit = utils.confirm_quit
-local get_float_opts = utils.get_float_opts
-
 local M = {}
+
+local nvim_tree_api = require("nvim-tree.api")
+local confirm_quit = require("core.utils").confirm_quit
 
 M.general = {
 	n = {
@@ -112,6 +110,8 @@ M.lazygit = {
 	},
 }
 
+local get_float_opts = require("core.utils").get_float_opts
+
 M.lspconfig = {
 	plugin = true,
 
@@ -165,6 +165,27 @@ M.nvim_tree = {
 			end,
 			"Exit neovim",
 		},
+	},
+}
+
+local builtin = require("telescope.builtin")
+
+M.telescope = {
+	plugin = true,
+
+	n = {
+		["<leader>ff"] = { builtin.find_files, "Find files" },
+		["<leader>fg"] = { builtin.live_grep, "Find by grep string" },
+		["<leader>fs"] = { builtin.live_grep, "Find string under cursor" },
+		["<leader>fr"] = { builtin.lsp_references, "Find references" },
+		["<leader>fb"] = { builtin.buffers, "Find references" },
+		["<leader>fc"] = { builtin.command_history, "Find references" },
+
+		["<leader>gf"] = { builtin.git_files, "Git files" },
+		["<leader>gb"] = { builtin.git_branches, "Git branches" },
+		["<leader>gc"] = { builtin.git_commits, "Git commits" },
+		["<leader>gs"] = { builtin.git_status, "Git status" },
+		["<leader>gx"] = { builtin.git_stash, "Git stash" },
 	},
 }
 
