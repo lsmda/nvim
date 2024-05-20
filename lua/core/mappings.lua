@@ -19,7 +19,7 @@ M.general = {
 		["<M-k>"] = { ":m .-2<CR>==", "Move line up" },
 		["<M-j>"] = { ":m .+1<CR>==", "Move line down" },
 
-		["<C-w>"] = { nvim_tree_api.tree.toggle, "Toggle file explorer" },
+		["<C-e>"] = { nvim_tree_api.tree.toggle, "Toggle file explorer" },
 
 		["<C-s>"] = {
 			function()
@@ -149,7 +149,7 @@ M.nvim_tree = {
 	n = {
 		["?"] = { nvim_tree_api.tree.toggle_help, "Open help" },
 		["w"] = { nvim_tree_api.node.open.preview, "Open file preview" },
-		["<C-w>"] = { nvim_tree_api.tree.toggle, "Toggle file explorer" },
+		["<C-e>"] = { nvim_tree_api.tree.toggle, "Toggle file explorer" },
 
 		["<Tab>"] = {
 			function()
