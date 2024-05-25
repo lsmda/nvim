@@ -678,12 +678,7 @@ require("lazy").setup({
 				yaml = { "prettierd" },
 				markdown = { "prettierd" },
 				graphql = { "prettierd" },
-				astro = { "prettierd" },
 			},
-			-- format_on_save = {
-			-- 	lsp_fallback = true,
-			-- 	timeout_ms = 501,
-			-- },
 			notify_on_error = true,
 		},
 		init = function()
@@ -702,7 +697,6 @@ require("lazy").setup({
 			local mason = require("mason")
 			local mason_lspconfig = require("mason-lspconfig")
 			local mason_tool_installer = require("mason-tool-installer")
-			local get_float_opts = require("core.utils").get_float_opts
 
 			mason.setup({
 				ui = {
@@ -729,7 +723,7 @@ require("lazy").setup({
 				ensure_installed = {
 					"stylua",
 					"eslint_d",
-					"prettier",
+					"prettierd",
 				},
 			})
 		end,
@@ -895,7 +889,6 @@ require("lazy").setup({
 		},
 		config = function()
 			require("lint").linters_by_ft = {
-				astro = { "eslint_d" },
 				css = { "eslint_d" },
 				javascript = { "eslint_d" },
 				typescript = { "eslint_d" },
@@ -903,7 +896,10 @@ require("lazy").setup({
 				typescriptreact = { "eslint_d" },
 			}
 
-			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+
+			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+				group = lint_augroup,
 				callback = function()
 					require("lint").try_lint()
 				end,
@@ -938,7 +934,7 @@ require("lazy").setup({
 			lspconfig.tailwindcss.setup({})
 			lspconfig.cssls.setup({})
 
-			local get_float_opts = require("core.get_float_opts")
+			local get_float_opts = require("core.utils").get_float_opts
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
