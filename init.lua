@@ -730,7 +730,6 @@ require("lazy").setup({
 					"stylua",
 					"eslint_d",
 					"prettier",
-					"prettierd",
 				},
 			})
 		end,
@@ -938,7 +937,8 @@ require("lazy").setup({
 			lspconfig.eslint.setup({})
 			lspconfig.tailwindcss.setup({})
 			lspconfig.cssls.setup({})
-			lspconfig.astro.setup({})
+
+			local get_float_opts = require("core.get_float_opts")
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
