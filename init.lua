@@ -114,16 +114,14 @@ require("lazy").setup({
 
 		{
 			"ggandor/leap.nvim",
-			config = function()
-				require("leap").create_default_mappings()
-			end,
+			config = function() end,
 		},
 
 		{
 			"nvim-telescope/telescope.nvim",
 			dependencies = {
 				{ "nvim-lua/plenary.nvim" },
-				{ "nvim-tree/nvim-web-devicons", commit = "a55b801b7ef5719ca25692c3a0a5447fdfb692ed" },
+				{ "nvim-tree/nvim-web-devicons" },
 				{
 					"nvim-telescope/telescope-fzf-native.nvim",
 					build = "make",
@@ -279,8 +277,8 @@ require("lazy").setup({
 		{
 			"nvimdev/lspsaga.nvim",
 			dependencies = {
-				{ "nvim-treesitter/nvim-treesitter", commit = "64b3d5e5698d485a4f197ffbe85a4b6c29e16325" },
-				{ "nvim-tree/nvim-web-devicons", commit = "a55b801b7ef5719ca25692c3a0a5447fdfb692ed" },
+				{ "nvim-treesitter/nvim-treesitter" },
+				{ "nvim-tree/nvim-web-devicons" },
 			},
 			config = function()
 				require("lspsaga").setup({
@@ -333,7 +331,7 @@ require("lazy").setup({
 		{
 			"nvim-tree/nvim-tree.lua",
 			dependencies = {
-				{ "nvim-tree/nvim-web-devicons", commit = "a55b801b7ef5719ca25692c3a0a5447fdfb692ed" },
+				{ "nvim-tree/nvim-web-devicons" },
 			},
 			config = function()
 				local nvim_tree_api = require("nvim-tree.api")
@@ -378,6 +376,7 @@ require("lazy").setup({
 					},
 					view = {
 						width = 30,
+						cursorline = false,
 					},
 					actions = {
 						open_file = {
@@ -640,15 +639,11 @@ require("lazy").setup({
 			require("mini.ai").setup()
 			require("mini.comment").setup()
 			require("mini.cursorword").setup({
-				delay = 351,
+				delay = 250,
 			})
 			require("mini.indentscope").setup()
 
-			local statusline = require("mini.statusline")
-			statusline.setup()
-			statusline.section_location = function()
-				return "%2l:%-2v"
-			end
+			require("mini.statusline").setup()
 
 			require("mini.pairs").setup()
 			require("mini.splitjoin").setup({

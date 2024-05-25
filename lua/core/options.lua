@@ -1,55 +1,50 @@
-local global_opts = {
-	-- Set <Space> as the leader key
-	mapleader = " ",
-	maplocalleader = " ",
+local opt = vim.opt
+local o = vim.o
+local g = vim.g
 
-	-- Disable netrw for nvim-tree
-	loaded_netrw = 1,
-	loaded_netrwPlugin = 1,
-}
+------------------------------- globals -------------------------------
+g.mapleader = " "
+g.maplocalleader = " "
 
-for key, value in pairs(global_opts) do
-	vim.g[key] = value
-end
+-- Disable netrw for nvim-tree
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
 
-local options = {
-	number = true,
-	relativenumber = true,
-	numberwidth = 4,
+------------------------------- options -------------------------------
+o.number = true
+o.relativenumber = true
+o.numberwidth = 4
 
-	splitbelow = true,
-	splitright = true,
+o.splitbelow = true
+o.splitright = true
 
-	hlsearch = false,
-	incsearch = true,
+o.hlsearch = false
+o.incsearch = true
+o.cursorline = false
 
-	wrap = false,
-	fileencoding = "utf-8",
+o.wrap = false
+o.fileencoding = "utf-8"
 
-	clipboard = "unnamedplus",
-	scrolloff = 999,
+o.clipboard = "unnamedplus"
+o.scrolloff = 999
 
-	expandtab = true,
-	tabstop = 2,
-	shiftwidth = 2,
-	softtabstop = 2,
-	autoindent = true,
+o.expandtab = true
+o.tabstop = 2
+o.shiftwidth = 2
+o.softtabstop = 2
+o.autoindent = true
 
-	ignorecase = true,
-	smartcase = true,
+o.ignorecase = true
+o.smartcase = true
 
-	hidden = true,
-	showmode = false,
-	signcolumn = "yes",
+o.hidden = true
+o.showmode = false
+o.signcolumn = "yes"
 
-	backup = false,
-	swapfile = false,
+o.backup = false
+o.swapfile = false
 
-	cursorline = true,
-	mouse = "",
-	termguicolors = true,
-}
+o.mouse = ""
+o.termguicolors = true
 
-for key, value in pairs(options) do
-	vim.opt[key] = value
-end
+opt.fillchars = { eob = " " }
