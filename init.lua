@@ -41,16 +41,16 @@ vim.keymap.set("n", "<S-M-j>", "<cmd>t .<CR>==", { desc = "Duplicate line down" 
 
 vim.keymap.set("n", "<C-e>", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", { desc = "Toggle file explorer" })
 
-vim.keymap.set("n", "<C-s>", function()
-	require("conform").format()
-	vim.cmd("wa")
-end, { desc = "Format current buffer and write all open buffers" })
-
 local confirm_quit = require("core.utils").confirm_quit
 
 -- save file and quit
-vim.keymap.set("n", "<leader>w", ":update<CR>", { desc = "[w]rite current buffer" })
-vim.keymap.set("n", "<leader>q", ":quit<CR>", { desc = "[q]uit current buffer" })
+vim.keymap.set("n", "<leader>w", function()
+	require("conform").format()
+	vim.cmd("w")
+end, { desc = "[w]rite current buffer" })
+
+vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "[q]uit current buffer" })
+
 vim.keymap.set("n", "<leader>Q", function()
 	confirm_quit("qa!", "Are you sure you want to quit? Unsaved changes will be lost (y/N): ")
 end, { desc = "[Q]uit all open buffers" })
@@ -104,13 +104,16 @@ vim.keymap.set({ "n", "v" }, "<C-j>", "<cmd>TmuxNavigateDown<CR>", { desc = "Tmu
 vim.keymap.set({ "n", "v" }, "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "Tmux navigate up command" })
 
 require("lazy").setup({
+	-- colorscheme
 	{
 		"sainnhe/everforest",
 		lazy = false,
 		priority = 1000,
 		config = function()
 			vim.g.everforest_better_performance = 1
-      vim.g.everforest_transparent_background = 1
+			vim.g.everforest_transparent_background = 1
+			vim.g.everforest_ui_contrast = "high"
+			vim.g.everforest_float_style = "dim"
 			vim.cmd.colorscheme("everforest")
 		end,
 	},
@@ -146,11 +149,10 @@ require("lazy").setup({
 
 		{
 			"ggandor/leap.nvim",
-			config = function() end,
 		},
 
 		{
-			"nvim-telescope/telescope.nvim",
+		"nvim-telescope/telescope.nvim",
 			dependencies = {
 				{ "nvim-lua/plenary.nvim" },
 				{ "nvim-tree/nvim-web-devicons" },

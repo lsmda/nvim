@@ -11,7 +11,6 @@ vim.opt.relativenumber = true
 vim.opt.numberwidth = 4
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.cmdheight = 0
 vim.opt.laststatus = 0
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
