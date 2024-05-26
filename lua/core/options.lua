@@ -10,6 +10,8 @@ g.maplocalleader = " "
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
+g.have_nerd_font = true
+
 ------------------------------- options -------------------------------
 o.number = true
 o.relativenumber = true
@@ -18,15 +20,15 @@ o.numberwidth = 4
 o.splitbelow = true
 o.splitright = true
 
-o.hlsearch = false
+o.hlsearch = true
 o.incsearch = true
-o.cursorline = false
+g.nocursorline = true
 
 o.wrap = false
 o.fileencoding = "utf-8"
 
 o.clipboard = "unnamedplus"
-o.scrolloff = 999
+o.scrolloff = 100
 
 o.expandtab = true
 o.tabstop = 2
@@ -48,3 +50,9 @@ o.mouse = ""
 o.termguicolors = true
 
 opt.fillchars = { eob = " " }
+opt.termguicolors = true
+opt.undofile = true
+opt.breakindent = true
+opt.updatetime = 250
+opt.inccommand = "split"
+opt.cursorline = false

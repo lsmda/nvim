@@ -5,12 +5,11 @@ local utils = require("core.utils")
 api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
 
 -- Highlight yanked text
-api.nvim_create_autocmd("TextYankPost", {
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
 	callback = function()
-		vim.highlight.on_yank({
-			higroup = "IncSearch",
-			timeout = 200,
-		})
+		vim.highlight.on_yank()
 	end,
 })
 

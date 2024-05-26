@@ -13,11 +13,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local opts = {
 
+local opts = {
 	change_detection = {
 		enabled = true,
 		notify = false,
+
 	},
 }
 
@@ -83,6 +84,14 @@ vim.keymap.set({ "n", "v" }, "<C-j>", "<cmd>TmuxNavigateDown<CR>", { desc = "Tmu
 vim.keymap.set({ "n", "v" }, "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "Tmux navigate up command" })
 
 require("lazy").setup({
+	{
+		"nyoom-engineering/oxocarbon.nvim",
+		priority = 1000,
+		config = function()
+			vim.cmd.colorscheme("oxocarbon")
+		end,
+	},
+
 	{
 		"windwp/nvim-ts-autotag",
 	},
