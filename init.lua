@@ -13,14 +13,17 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-
 local opts = {
 	change_detection = {
 		enabled = true,
 		notify = false,
-
 	},
 }
+
+vim.keymap.set("n", "x", '"_x')
+
+vim.keymap.set("n", "ss", ":split<CR>", { desc = "[s]plit [s]creen horizontally" })
+vim.keymap.set("n", "sv", ":vsplit<CR>", { desc = "[s]plit screen [v]ertically" })
 
 vim.keymap.set("n", "<CR>", "o<Esc>", { desc = "Add line below cursor" })
 vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select all" })
@@ -33,6 +36,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up" })
 
 vim.keymap.set("n", "<M-k>", ":m .-2<CR>==", { desc = "Move line up" })
 vim.keymap.set("n", "<M-j>", ":m .+1<CR>==", { desc = "Move line down" })
+vim.keymap.set("n", "<S-M-k>", "<cmd>t .-1<cr>==", { desc = "Duplicate line up" })
+vim.keymap.set("n", "<S-M-j>", "<cmd>t .<CR>==", { desc = "Duplicate line down" })
 
 vim.keymap.set("n", "<C-e>", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", { desc = "Toggle file explorer" })
 
@@ -43,18 +48,31 @@ end, { desc = "Format current buffer and write all open buffers" })
 
 local confirm_quit = require("core.utils").confirm_quit
 
-vim.keymap.set("n", "<leader>s", function()
-	confirm_quit("wqa", nil, true)
-end, { desc = "Write all open buffers then exit neovim" })
-
-vim.keymap.set("n", "<leader>q", function()
+-- save file and quit
+vim.keymap.set("n", "<leader>w", ":update<CR>", { desc = "[w]rite current buffer" })
+vim.keymap.set("n", "<leader>q", ":quit<CR>", { desc = "[q]uit current buffer" })
+vim.keymap.set("n", "<leader>Q", function()
 	confirm_quit("qa!", "Are you sure you want to quit? Unsaved changes will be lost (y/N): ")
-end, { desc = "Ignore all open buffers then prompt user to exit neovim" })
+end, { desc = "[Q]uit all open buffers" })
 
+-- move window
+vim.keymap.set("n", "sh", "<C-w>h")
+vim.keymap.set("n", "sk", "<C-w>k")
+vim.keymap.set("n", "sj", "<C-w>j")
+vim.keymap.set("n", "sl", "<C-w>l")
+
+-- resize window
+vim.keymap.set("n", "<C-S-h>", "<C-w><")
+vim.keymap.set("n", "<C-S-l>", "<C-w>>")
+vim.keymap.set("n", "<C-S-k>", "<C-w>+")
+vim.keymap.set("n", "<C-S-j>", "<C-w>-")
+
+-- clear search pattern
 vim.keymap.set("n", "<leader>cs", function()
 	vim.fn.setreg("/", "")
-end, { desc = "Clear search pattern" })
+end, { desc = "[c]lear [s]earch pattern" })
 
+-- insert mode navigation
 vim.keymap.set("i", "<C-h>", "<Left>", { desc = "Navigate left in insert mode" })
 vim.keymap.set("i", "<C-l>", "<Right>", { desc = "Navigate right in insert mode" })
 vim.keymap.set("i", "<C-j>", "<Down>", { desc = "Navigate down in insert mode" })
@@ -66,6 +84,8 @@ vim.keymap.set("i", "(", "()<left>")
 vim.keymap.set("i", "[", "[]<left>")
 vim.keymap.set("i", "{", "{}<left>")
 
+vim.keymap.set({ "i", "v" }, "<M-n>", "<Esc>", { desc = "Enter normal mode" })
+
 vim.keymap.set("v", "'", "c''<Esc>P")
 vim.keymap.set("v", '"', 'c""<Esc>P')
 vim.keymap.set("v", "(", "c()<Esc>P")
@@ -73,8 +93,8 @@ vim.keymap.set("v", "[", "c[]<Esc>P")
 vim.keymap.set("v", "{", "c{}<Esc>P")
 vim.keymap.set("v", "<M-k>", ":m '<-2<CR>gv=gv", { desc = "Move visual selection up" })
 vim.keymap.set("v", "<M-j>", ":m '>+1<CR>gv=gv", { desc = "Move visual selection down" })
-
-vim.keymap.set({ "i", "v" }, "<M-n>", "<Esc>", { desc = "Enter normal mode" })
+vim.keymap.set("v", "<S-M-k>", "<cmd>VisualDuplicate -1<CR>", { desc = "selection: duplicate up" })
+vim.keymap.set("v", "<S-M-j>", "<cmd>VisualDuplicate +1<CR>", { desc = "selection: duplicate down" })
 
 vim.keymap.set({ "n", "v" }, "<M-e>", "$", { desc = "End of line" })
 vim.keymap.set({ "n", "v" }, "<M-q>", "^", { desc = "Beginning of line" })
@@ -85,10 +105,13 @@ vim.keymap.set({ "n", "v" }, "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "Tmux 
 
 require("lazy").setup({
 	{
-		"nyoom-engineering/oxocarbon.nvim",
+		"sainnhe/everforest",
+		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.cmd.colorscheme("oxocarbon")
+			vim.g.everforest_better_performance = 1
+      vim.g.everforest_transparent_background = 1
+			vim.cmd.colorscheme("everforest")
 		end,
 	},
 
@@ -737,21 +760,19 @@ require("lazy").setup({
 		"hrsh7th/nvim-cmp",
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
-			{ "neovim/nvim-lspconfig", commit = "fe1484034f47cf064c6bfd10ef1ff26665a08fd2" },
-			{ "hrsh7th/cmp-nvim-lsp", commit = "e6a5e755ff2c2841627700ba76d3032d73f7066b" },
-			{ "hrsh7th/cmp-buffer", commit = "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
-			{ "hrsh7th/cmp-path", commit = "91ff86cd9c29299a64f968ebb45846c485725f23" },
-			{ "hrsh7th/cmp-cmdline", commit = "8ee981b4a91f536f52add291594e89fb6645e451" },
-			{ "saadparwaiz1/cmp_luasnip", commit = "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
+			{ "neovim/nvim-lspconfig" },
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/cmp-path" },
+			{ "hrsh7th/cmp-cmdline" },
+			{ "saadparwaiz1/cmp_luasnip" },
 			{ "onsails/lspkind.nvim" },
 			{ "windwp/nvim-autopairs" },
 			{ "windwp/nvim-ts-autotag" },
 			{
 				"L3MON4D3/LuaSnip",
-				commit = "8ae1dedd988eb56441b7858bd1e8554dfadaa46d",
 				dependencies = {
 					"rafamadriz/friendly-snippets",
-					commit = "69a2c1675b66e002799f5eef803b87a12f593049",
 				},
 			},
 		},
@@ -844,7 +865,7 @@ require("lazy").setup({
 					}),
 				},
 				experimental = {
-					ghost_text = true,
+					ghost_text = false,
 				},
 			})
 

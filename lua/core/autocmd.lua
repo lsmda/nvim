@@ -1,10 +1,10 @@
 local api = vim.api
 local utils = require("core.utils")
 
--- Don't auto comment new line
+-- don't auto comment new line
 api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
 
--- Highlight yanked text
+-- highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
 	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
@@ -13,29 +13,19 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- Show cursor line in active window
-local cursorGrp = api.nvim_create_augroup("CursorLine", { clear = true })
-api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, { pattern = "*", command = "set cursorline", group = cursorGrp })
-api.nvim_create_autocmd(
-	{ "InsertEnter", "WinLeave" },
-	{ pattern = "*", command = "set nocursorline", group = cursorGrp }
-)
-
--- Auto-save file on change
-local save_file = utils.save_file
-
+-- auto-save file on change
 api.nvim_create_augroup("autosave", {})
 api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "InsertLeave" }, {
 	group = "autosave",
 	pattern = "*",
 	callback = function()
 		if vim.fn.pumvisible() == 0 then
-			vim.defer_fn(save_file, 350) -- Delay in milliseconds
+			vim.defer_fn(utils.save_file, 250)
 		end
 	end,
 })
 
--- Hide the (real) cursor when leaping, and restore it afterwards.
+-- hide cursor when leaping, and restore it afterwards.
 api.nvim_create_autocmd("User", {
 	pattern = "LeapEnter",
 	callback = function()
