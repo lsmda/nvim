@@ -47,7 +47,7 @@ return {
 			end
 
 			-- custom path rendering function for telescope
-			function path_display(_, path)
+			local path_display = function(_, path)
 				local stripped_path, filename = split_filepath(path)
 				if filename == stripped_path or stripped_path == "" then
 					return filename
