@@ -138,7 +138,14 @@ return {
 			require("mini.cursorword").setup({
 				delay = 250,
 			})
-			require("mini.indentscope").setup()
+
+			require("mini.indentscope").setup({
+          draw = {
+            delay = 50,
+
+
+          },
+      })
 
 			require("mini.statusline").setup()
 
