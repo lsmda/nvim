@@ -44,4 +44,4 @@ vim.opt.cursorline = false
 vim.opt.splitkeep = "cursor"
 vim.opt.backspace = { "start", "eol", "indent" }
 vim.opt.path:append({ "**" })
-vim.opt.wildignore:append({ "*/node_modules/*" })
+vim.opt.wildignore:append({ "*/node_modules/*", "*/.coverage/*" })
