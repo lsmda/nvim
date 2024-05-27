@@ -32,7 +32,7 @@ M.save_file = function()
 		and vim.bo.buftype == ""
 		and not is_floating_window_open
 	then
-		vim.cmd("silent write")
+		vim.cmd("write")
 	end
 end
 

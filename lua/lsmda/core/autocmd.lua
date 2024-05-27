@@ -1,5 +1,5 @@
 local api = vim.api
-local utils = require("utils")
+local utils = require("lsmda.core.utils")
 
 -- don't auto comment new line
 api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
