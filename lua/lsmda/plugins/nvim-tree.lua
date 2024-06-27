@@ -17,7 +17,7 @@ return {
 
 			vim.keymap.set(
 				"n",
-				"w",
+				"e",
 				nvim_tree_api.node.open.preview,
 				{ desc = "Open file preview", buffer = bufnr, nowait = true }
 			)

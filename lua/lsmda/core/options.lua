@@ -54,5 +54,4 @@ vim.opt.fillchars = { eob = " " }
 vim.opt.undofile = true
 vim.opt.updatetime = 250
 vim.opt.inccommand = "split"
--- vim.opt.cursorline = false
 vim.opt.splitkeep = "cursor"

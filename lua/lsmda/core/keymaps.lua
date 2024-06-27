@@ -17,7 +17,7 @@ vim.keymap.set("n", "<M-j>", ":m .+1<CR>==", { desc = "Move line down" })
 vim.keymap.set("n", "<S-M-k>", "<cmd>t .-1<cr>==", { desc = "Duplicate line up" })
 vim.keymap.set("n", "<S-M-j>", "<cmd>t .<CR>==", { desc = "Duplicate line down" })
 
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle explorer" })
+vim.keymap.set("n", "<C-e>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle explorer" })
 vim.keymap.set("n", "<leader>wd", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Open explorer on active buffer" })
 
 vim.keymap.set("n", "<leader>w", function()
