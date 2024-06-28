@@ -221,7 +221,6 @@ return {
 					{ name = "buffer", max_item_count = 5 }, -- text within current buffer
 					{ name = "path", max_item_count = 3 }, -- file system paths
 				}),
-				---@diagnostic disable-next-line: missing-fields
 				formatting = {
 					expandable_indicator = true,
 					format = lspkind.cmp_format({
@@ -264,17 +263,18 @@ return {
 		cmd = { "ConformInfo" },
 		opts = {
 			formatters_by_ft = {
-				lua = { "stylua" },
-				javascript = { "prettierd" },
-				typescript = { "prettierd" },
-				javascriptreact = { "prettierd" },
-				typescriptreact = { "prettierd" },
-				html = { "prettierd" },
-				css = { "prettierd" },
-				json = { "prettierd" },
-				yaml = { "prettierd" },
-				markdown = { "prettierd" },
-				graphql = { "prettierd" },
+        css = { "prettierd" },
+        graphql = { "prettierd" },
+        html = { "prettierd" },
+        javascript = { "prettierd" },
+        javascriptreact = { "prettierd" },
+        json = { "prettierd" },
+        lua = { "stylua" },
+        markdown = { "prettierd" },
+        nix = { "nixpkgs-fmt" },
+        typescript = { "prettierd" },
+        typescriptreact = { "prettierd" },
+        yaml = { "prettierd" },
 			},
 			notify_on_error = true,
 		},
