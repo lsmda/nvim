@@ -134,20 +134,22 @@ return {
 		"echasnovski/mini.nvim",
 		config = function()
 			require("mini.ai").setup()
+			require("mini.pairs").setup()
 			require("mini.comment").setup()
-			require("mini.cursorword").setup({
-				delay = 250,
-			})
-
-			require("mini.indentscope").setup({
-				draw = {
-					delay = 50,
-				},
-			})
-
 			require("mini.statusline").setup()
 
-			require("mini.pairs").setup()
+			require("mini.indentscope").setup({
+				draw = { delay = 50 },
+			})
+
+			require("mini.cursorword").setup({
+				delay = 350,
+			})
+
+			local highlightColor = "#363f47"
+			vim.api.nvim_set_hl(0, "MiniCursorword", { bg = highlightColor })
+			vim.api.nvim_set_hl(0, "MiniCursorwordCurrent", { bg = highlightColor })
+
 			require("mini.splitjoin").setup({
 				mappings = {
 					toggle = "<leader>j",
