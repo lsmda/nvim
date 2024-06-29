@@ -140,12 +140,10 @@ return {
 			})
 
 			require("mini.indentscope").setup({
-          draw = {
-            delay = 50,
-
-
-          },
-      })
+				draw = {
+					delay = 50,
+				},
+			})
 
 			require("mini.statusline").setup()
 
