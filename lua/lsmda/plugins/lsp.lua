@@ -222,6 +222,7 @@ return {
 					{ name = "path", max_item_count = 3 }, -- file system paths
 				}),
 				formatting = {
+					fields = {},
 					expandable_indicator = true,
 					format = lspkind.cmp_format({
 						mode = "symbol_text",
