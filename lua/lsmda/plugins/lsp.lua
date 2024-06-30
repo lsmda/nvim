@@ -222,7 +222,11 @@ return {
 					{ name = "path", max_item_count = 3 }, -- file system paths
 				}),
 				formatting = {
-					fields = {},
+					fields = {
+						"abbr",
+						"kind",
+						"menu",
+					},
 					expandable_indicator = true,
 					format = lspkind.cmp_format({
 						mode = "symbol_text",
@@ -367,20 +371,6 @@ return {
 					"graphql",
 				},
 			})
-		end,
-	},
-
-	{
-		"pmizio/typescript-tools.nvim",
-		dependencies = {
-			{ "nvim-lua/plenary.nvim" },
-			{ "neovim/nvim-lspconfig" },
-		},
-		config = function()
-			require("typescript-tools").setup({})
-
-			vim.keymap.set("n", "<leader>m", "<cmd>TSToolsOrganizeImports<CR>", { desc = "Organize imports" })
-			vim.keymap.set("n", "<leader>a", "<cmd>TSToolsAddMissingImports<CR>", { desc = "Add missing imports" })
 		end,
 	},
 
