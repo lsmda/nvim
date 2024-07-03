@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- auto-save file on change
 api.nvim_create_augroup("autosave", {})
-api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "InsertLeave" }, {
+api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, {
 	group = "autosave",
 	pattern = "*",
 	callback = function()
