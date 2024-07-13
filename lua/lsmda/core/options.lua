@@ -55,3 +55,4 @@ vim.opt.undofile = true
 vim.opt.updatetime = 250
 vim.opt.inccommand = "split"
 vim.opt.splitkeep = "cursor"
+vim.opt.guicursor = "n-v-i-c:block-Cursor"
