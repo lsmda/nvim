@@ -1,14 +1,10 @@
 return {
-	"sainnhe/everforest",
+	"tinted-theming/base16-vim",
 	lazy = false,
 	priority = 1000,
 	config = function()
-		vim.g.everforest_better_performance = 1
-		vim.g.everforest_background = "soft"
-		vim.g.everforest_transparent_background = 2
-		vim.g.everforest_disable_terminal_colors = 1
-		vim.g.everforest_ui_contrast = "high"
-		vim.g.everforest_float_style = "dim"
-		vim.cmd.colorscheme("everforest")
+		vim.g.base16_colorspace = 256
+		vim.g.base16_background_transparent = 1
+		vim.cmd.colorscheme("bubblegum")
 	end,
 }

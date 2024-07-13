@@ -42,7 +42,6 @@ return {
 		"hinell/duplicate.nvim",
 		dependencies = {
 			"mrjones2014/legendary.nvim",
-
 			priority = 1000,
 			lazy = false,
 		},
@@ -146,7 +145,7 @@ return {
 				delay = 350,
 			})
 
-			local highlightColor = "#363f47"
+			local highlightColor = "#3F3F3F"
 			vim.api.nvim_set_hl(0, "MiniCursorword", { bg = highlightColor })
 			vim.api.nvim_set_hl(0, "MiniCursorwordCurrent", { bg = highlightColor })
 
