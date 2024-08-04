@@ -275,6 +275,7 @@ return {
 				javascript = { "prettierd" },
 				javascriptreact = { "prettierd" },
 				json = { "prettierd" },
+				jsonc = { "prettierd" },
 				lua = { "stylua" },
 				markdown = { "prettierd" },
 				nix = { "alejandra" },
