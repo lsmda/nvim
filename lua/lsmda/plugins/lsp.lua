@@ -34,6 +34,7 @@ return {
 					"pyright",
 					"eslint",
 					"nil_ls",
+					"gopls",
 				},
 			})
 
@@ -42,6 +43,7 @@ return {
 					"stylua",
 					"eslint_d",
 					"prettierd",
+					"crlgmt",
 				},
 			})
 		end,
@@ -282,6 +284,7 @@ return {
 				typescript = { "prettierd" },
 				typescriptreact = { "prettierd" },
 				yaml = { "prettierd" },
+				go = { "crlfmt" },
 			},
 			notify_on_error = true,
 		},
