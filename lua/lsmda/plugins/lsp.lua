@@ -43,7 +43,7 @@ return {
 					"stylua",
 					"eslint_d",
 					"prettierd",
-					"crlgmt",
+					"crlfmt",
 				},
 			})
 		end,
