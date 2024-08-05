@@ -24,7 +24,7 @@ vim.opt.wrap = false
 -- search settings
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.hlsearch = true
+vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.path:append({ "**" })
 vim.opt.wildignore:append({ "*/node_modules/*", "*/.coverage/*", "*/build/*", "*/dist/*" })

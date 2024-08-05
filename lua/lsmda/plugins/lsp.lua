@@ -3,6 +3,7 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			-- Automatically install LSPs and related tools to stdpath for Neovim
+
 			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -130,8 +131,8 @@ return {
 				typescript = { "prettierd" },
 				typescriptreact = { "prettierd" },
 				yaml = { "prettierd" },
-				go = { "go" },
-				gomod = { "go" },
+				go = { "crlfmt" },
+				gomod = { "crlfmt" },
 				-- You can use 'stop_after_first' to run the first available formatter from the list
 				python = { "isort", "black", stop_after_first = true },
 			},
@@ -169,6 +170,7 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"onsails/lspkind.nvim",
 			"windwp/nvim-autopairs",
+			{ "hrsh7th/cmp-cmdline" },
 			-- Adds other completion capabilities.
 			--  nvim-cmp does not ship with all sources by default. They are split
 			--  into multiple repos for maintenance purposes.
@@ -188,6 +190,9 @@ return {
 			-- Integrate nvim-autopairs with cmp
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
+			-- Load snippets
+			require("luasnip.loaders.from_vscode").lazy_load()
+
 			luasnip.config.setup()
 
 			local check_backspace = function()
@@ -202,7 +207,7 @@ return {
 					end,
 				},
 				completion = {
-					completeopt = "menu,menuone,noinsert",
+					completeopt = "menu,menuone,preview,noselect",
 				},
 				window = {
 					completion = cmp.config.window.bordered(),
