@@ -1,147 +1,179 @@
 return {
-	{
-		"williamboman/mason.nvim",
-		lazy = false,
-		priority = 1000,
-		dependencies = {
-			{ "williamboman/mason-lspconfig.nvim" },
-			{ "whoissethdaniel/mason-tool-installer.nvim" },
-		},
-		config = function()
-			local mason = require("mason")
-			local mason_lspconfig = require("mason-lspconfig")
-			local mason_tool_installer = require("mason-tool-installer")
-
-			mason.setup({
-				ui = {
-					icons = {
-						package_installed = "✓",
-						package_pending = "➜",
-						package_uninstalled = "✗",
-					},
-				},
-			})
-
-			mason_lspconfig.setup({
-				ensure_installed = {
-					"lua_ls",
-					"tsserver",
-					"cssls",
-					"tailwindcss",
-					"astro",
-					"graphql",
-					"html",
-					"pyright",
-					"eslint",
-					"nil_ls",
-					"gopls",
-				},
-			})
-
-			mason_tool_installer.setup({
-				ensure_installed = {
-					"stylua",
-					"eslint_d",
-					"prettierd",
-					"crlfmt",
-				},
-			})
-		end,
-	},
-
-	{
+	{ -- LSP
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			{ "j-hui/fidget.nvim", tag = "legacy" },
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "antosha417/nvim-lsp-file-operations", config = true },
-			{ "folke/neodev.nvim", opts = {} },
+			-- Automatically install LSPs and related tools to stdpath for Neovim
+			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
+			"williamboman/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
+
+			-- Useful status updates for LSP.
+			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+			{ "j-hui/fidget.nvim", opts = {} },
+
+			-- Allows extra capabilities provided by nvim-cmp
+			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
-			local lspconfig = require("lspconfig")
-			local mason_lspconfig = require("mason-lspconfig")
-			local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
 			local get_float_opts = require("lsmda.core.utils").get_float_opts
 
 			vim.api.nvim_create_autocmd("LspAttach", {
-				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-				callback = function(ev)
-					local opts = { buffer = ev.buf, silent = true }
+				group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
+				callback = function(event)
+					local map = function(keys, func, desc)
+						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc, silent = true })
+					end
 
-					opts.desc = "Display documentation"
-					vim.keymap.set("n", "<leader>k", "<cmd>Lspsaga hover_doc<CR>", opts)
+					local builtin = require("telescope.builtin")
 
-					opts.desc = "Rename buffer instances"
-					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+					map("<leader>gd", builtin.lsp_definitions, "Go to definition")
+					map("<leader>gr", builtin.lsp_references, "Go to references")
+					map("<leader>gi", builtin.lsp_implementations, "Go to implementation")
+					map("<leader>D", builtin.lsp_type_definitions, "Type definition")
+					map("<leader>ds", builtin.lsp_document_symbols, "Document symbols")
+					map("<leader>rn", vim.lsp.buf.rename, "Rename")
+					map("<leader>ca", vim.lsp.buf.code_action, "Code action")
+					map("<leader>K", "<cmd>Lspsaga hover_doc<CR>", "Display documentation")
+					map("<leader>pk", "<cmd>Lspsaga peek_definition<CR>", "Peek definition")
 
-					opts.desc = "Code actions"
-					vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-
-					opts.desc = "Peek definition"
-					vim.keymap.set("n", "<leader>pk", "<cmd>Lspsaga peek_definition<CR>", opts)
-
-					opts.desc = "Show diagnostics"
-					vim.keymap.set("n", "<leader>dd", function()
+					map("<leader>dd", function()
 						vim.diagnostic.open_float(nil, get_float_opts())
-					end, opts)
+					end, "Display diagnostics")
 
-					opts.desc = "Next diagnostic"
-					vim.keymap.set("n", "<leader>nd", function()
+					map("<leader>nd", function()
 						vim.diagnostic.goto_next({ float = get_float_opts({ scope = "line" }) })
-					end, opts)
+					end, "Next diagnostic")
 
-					opts.desc = "Previous diagnostic"
-					vim.keymap.set("n", "<leader>pd", function()
+					map("<leader>pd", function()
 						vim.diagnostic.goto_prev({ float = get_float_opts({ scope = "line" }) })
-					end, opts)
+					end, "Previous diagnostic")
 				end,
 			})
 
-			local capabilities = cmp_nvim_lsp.default_capabilities()
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-			mason_lspconfig.setup_handlers({
-				function(server_name)
-					lspconfig[server_name].setup({
-						capabilities = capabilities,
-					})
-				end,
-				["lua_ls"] = function()
-					lspconfig["lua_ls"].setup({
-						capabilities = capabilities,
-						settings = {
-							Lua = {
-								completion = {
-									callSnippet = "Replace",
-								},
-								diagnostics = {
-									globals = { "vim" },
-								},
+			local servers = {
+				tsserver = {},
+				cssls = {},
+				tailwindcss = {},
+				astro = {},
+				graphql = {},
+				html = {},
+				pyright = {},
+				eslint = {},
+				nil_ls = {},
+				gopls = {},
+
+				lua_ls = {
+					settings = {
+						Lua = {
+							completion = {
+								callSnippet = "Replace",
+							},
+							diagnostics = {
+								globals = { "vim" },
+								disable = { "missing-fields" },
 							},
 						},
-					})
-				end,
+					},
+				},
+			}
+
+			require("mason").setup()
+
+			-- You can add other tools here that you want Mason to install
+			-- for you, so that they are available from within Neovim.
+			local ensure_installed = vim.tbl_keys(servers or {})
+
+			vim.list_extend(ensure_installed, {
+				"stylua",
+				"eslint_d",
+				"prettierd",
+				"crlfmt",
+			})
+
+			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+
+			require("mason-lspconfig").setup({
+				handlers = {
+					function(server_name)
+						local server = servers[server_name] or {}
+						-- This handles overriding only values explicitly passed
+						-- by the server configuration above. Useful when disabling
+						-- certain features of an LSP (for example, turning off formatting for tsserver)
+						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+						require("lspconfig")[server_name].setup(server)
+					end,
+				},
 			})
 		end,
 	},
 
-	{
+	{ -- Autoformat
+		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		opts = {
+			notify_on_error = false,
+			formatters_by_ft = {
+				css = { "prettierd" },
+				graphql = { "prettierd" },
+				html = { "prettierd" },
+				javascript = { "prettierd" },
+				javascriptreact = { "prettierd" },
+				json = { "prettierd" },
+				jsonc = { "prettierd" },
+				lua = { "stylua" },
+				markdown = { "prettierd" },
+				nix = { "alejandra" },
+				typescript = { "prettierd" },
+				typescriptreact = { "prettierd" },
+				yaml = { "prettierd" },
+				go = { "go" },
+				gomod = { "go" },
+				-- You can use 'stop_after_first' to run the first available formatter from the list
+				python = { "isort", "black", stop_after_first = true },
+			},
+		},
+	},
+
+	{ -- Autocompletion
 		"hrsh7th/nvim-cmp",
-		event = { "BufReadPost", "BufNewFile" },
+		event = { "InsertEnter" },
 		dependencies = {
-			{ "hrsh7th/cmp-buffer" },
-			{ "hrsh7th/cmp-path" },
-			{ "saadparwaiz1/cmp_luasnip" },
-			{ "onsails/lspkind.nvim" },
-			{ "hrsh7th/cmp-cmdline" },
-			{ "windwp/nvim-autopairs" },
+			-- Snippet Engine & its associated nvim-cmp source
 			{
 				"L3MON4D3/LuaSnip",
+				build = (function()
+					-- Build Step is needed for regex support in snippets.
+					-- This step is not supported in many windows environments.
+					-- Remove the below condition to re-enable on windows.
+					if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
+						return
+					end
+					return "make install_jsregexp"
+				end)(),
 				dependencies = {
-					"rafamadriz/friendly-snippets",
+					-- `friendly-snippets` contains a variety of premade snippets.
+					--    See the README about individual language/framework/plugin snippets:
+					--    https://github.com/rafamadriz/friendly-snippets
+					{
+						"rafamadriz/friendly-snippets",
+						config = function()
+							require("luasnip.loaders.from_vscode").lazy_load()
+						end,
+					},
 				},
 			},
+			"saadparwaiz1/cmp_luasnip",
+			"onsails/lspkind.nvim",
+			"windwp/nvim-autopairs",
+			-- Adds other completion capabilities.
+			--  nvim-cmp does not ship with all sources by default. They are split
+			--  into multiple repos for maintenance purposes.
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-path",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -156,8 +188,7 @@ return {
 			-- Integrate nvim-autopairs with cmp
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
-			-- Load snippets
-			require("luasnip.loaders.from_vscode").lazy_load()
+			luasnip.config.setup()
 
 			local check_backspace = function()
 				local col = vim.fn.col(".") - 1
@@ -165,13 +196,13 @@ return {
 			end
 
 			cmp.setup({
-				completion = {
-					completeopt = "menu,menuone,preview,noselect",
-				},
 				snippet = {
 					expand = function(args)
 						luasnip.lsp_expand(args.body)
 					end,
+				},
+				completion = {
+					completeopt = "menu,menuone,noinsert",
 				},
 				window = {
 					completion = cmp.config.window.bordered(),
@@ -263,33 +294,6 @@ return {
 					{ name = "cmdline" },
 				}),
 			})
-		end,
-	},
-
-	{
-		"stevearc/conform.nvim",
-		cmd = { "ConformInfo" },
-		opts = {
-			formatters_by_ft = {
-				css = { "prettierd" },
-				graphql = { "prettierd" },
-				html = { "prettierd" },
-				javascript = { "prettierd" },
-				javascriptreact = { "prettierd" },
-				json = { "prettierd" },
-				jsonc = { "prettierd" },
-				lua = { "stylua" },
-				markdown = { "prettierd" },
-				nix = { "alejandra" },
-				typescript = { "prettierd" },
-				typescriptreact = { "prettierd" },
-				yaml = { "prettierd" },
-				go = { "crlfmt" },
-			},
-			notify_on_error = true,
-		},
-		init = function()
-			require("conform").setup({})
 		end,
 	},
 

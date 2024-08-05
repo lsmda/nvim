@@ -14,15 +14,27 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- auto-save file on change
-api.nvim_create_augroup("autosave", {})
+
+local general_autosave = vim.api.nvim_create_augroup("autosave", {})
 api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, {
-	group = "autosave",
 	pattern = "*",
 	callback = function()
 		if vim.fn.pumvisible() == 0 then
 			vim.defer_fn(utils.save_file, 250)
 		end
 	end,
+	group = general_autosave,
+})
+
+-- Run gofmt + goimports on save
+
+local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*.go",
+	callback = function()
+		require("go.format").gofmt()
+	end,
+	group = format_sync_grp,
 })
 
 -- hide cursor when leaping, and restore it afterwards.

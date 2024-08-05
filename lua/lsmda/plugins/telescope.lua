@@ -144,11 +144,9 @@ return {
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find by grep string" })
 			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find word" })
-			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "Find references" })
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
 			vim.keymap.set("n", "<leader>fc", builtin.command_history, { desc = "Find commands" })
 
-			vim.keymap.set("n", "<leader>gd", builtin.lsp_definitions, { desc = "Go to definition" })
 			vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Git files" })
 			vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Git branches" })
 			vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Git commits" })

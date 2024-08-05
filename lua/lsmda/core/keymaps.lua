@@ -20,7 +20,7 @@ vim.keymap.set("n", "<S-M-j>", "<cmd>t .<CR>==", { desc = "Duplicate line down" 
 vim.keymap.set("n", "<C-e>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle explorer" })
 
 vim.keymap.set("n", "<leader>w", function()
-	require("conform").format()
+	require("conform").format({ async = true, lsp_fallback = true })
 	vim.cmd("w")
 end, { desc = "Format and write current buffer" })
 
