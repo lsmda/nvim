@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, {
 	pattern = "*",
 	callback = function()
 		if vim.fn.pumvisible() == 0 then
-			vim.defer_fn(utils.save_file, 250)
+			vim.defer_fn(utils.save_file, 10)
 		end
 	end,
 	group = general_autosave,

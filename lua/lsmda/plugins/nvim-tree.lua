@@ -29,11 +29,6 @@ return {
 				{ desc = "Toggle file explorer", buffer = bufnr, nowait = true }
 			)
 
-			vim.keymap.set("n", "<Tab>", function()
-				nvim_tree_api.node.open.edit()
-				nvim_tree_api.tree.toggle({ focus = false })
-			end, { desc = "Focus file preview", buffer = bufnr, nowait = true })
-
 			vim.keymap.set("n", "<leader>q", function()
 				vim.cmd("wqa")
 			end, { desc = "Exit neovim", buffer = bufnr, nowait = true })
