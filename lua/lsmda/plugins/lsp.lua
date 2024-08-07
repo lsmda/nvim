@@ -55,7 +55,6 @@ return {
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 			local servers = {
-				tsserver = {},
 				cssls = {},
 				tailwindcss = {},
 				astro = {},
@@ -109,6 +108,12 @@ return {
 				},
 			})
 		end,
+	},
+
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		opts = {},
 	},
 
 	{ -- Autoformat
