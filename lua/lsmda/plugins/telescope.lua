@@ -76,6 +76,7 @@ return {
 					},
 					vimgrep_arguments = {
 						"rg",
+						"--hidden",
 						"--color=never",
 						"--no-heading",
 						"--with-filename",
@@ -83,7 +84,6 @@ return {
 						"--column",
 					},
 					file_ignore_patterns = {
-						"--hidden",
 						"--follow",
 						"--no-ignore",
 						"node_modules",
