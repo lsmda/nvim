@@ -20,13 +20,6 @@ return {
 					finder = require("telescope.finders").new_table({
 						results = file_paths,
 					}),
-					previewer = false,
-					layout_config = {
-						horizontal = {
-							width = 0.5,
-							height = 0.5,
-						},
-					},
 				})
 				:find()
 		end

@@ -9,10 +9,17 @@ return {
 	-- 	vim.g.everforest_float_style = "dim"
 	-- 	vim.cmd.colorscheme("everforest")
 	-- end,
-
-	-- Using lazy.nvim
-	"mellow-theme/mellow.nvim",
-	config = function()
-		vim.cmd("colorscheme mellow")
-	end,
+	{
+		"cdmill/neomodern.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("neomodern").setup({
+				style = "roseprime",
+				transparent = true, -- don't set background
+				term_colors = true, -- if true enable the terminal
+			})
+			require("neomodern").load()
+		end,
+	},
 }
