@@ -90,6 +90,7 @@ return {
 				"eslint_d",
 				"prettierd",
 				"crlfmt",
+				"black",
 			})
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
@@ -137,8 +138,7 @@ return {
 				yaml = { "prettierd" },
 				go = { "crlfmt" },
 				gomod = { "crlfmt" },
-				-- You can use 'stop_after_first' to run the first available formatter from the list
-				python = { "isort", "black", stop_after_first = true },
+				python = { "black" },
 			},
 		},
 	},
