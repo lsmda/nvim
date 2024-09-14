@@ -32,6 +32,10 @@ return {
 			vim.keymap.set("n", "<leader>q", function()
 				vim.cmd("wqa")
 			end, { desc = "Exit neovim", buffer = bufnr, nowait = true })
+
+			vim.keymap.set("n", "<leader>w", function()
+				return {}
+			end, { desc = "Ignore writing on file explorer", buffer = bufnr, nowait = true })
 		end
 
 		require("nvim-tree").setup({
