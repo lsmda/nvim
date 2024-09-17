@@ -1,4 +1,5 @@
 return {
+
 	-- "sainnhe/everforest",
 	-- lazy = false,
 	-- priority = 1000,
@@ -9,17 +10,19 @@ return {
 	-- 	vim.g.everforest_float_style = "dim"
 	-- 	vim.cmd.colorscheme("everforest")
 	-- end,
+
 	{
-		"cdmill/neomodern.nvim",
+		"projekt0n/github-nvim-theme",
 		lazy = false,
 		priority = 1000,
 		config = function()
-			require("neomodern").setup({
-				style = "roseprime",
-				transparent = true, -- don't set background
-				term_colors = true, -- if true enable the terminal
+			require("github-theme").setup({
+				options = {
+					transparent = true,
+				},
 			})
-			require("neomodern").load()
+
+			vim.cmd("colorscheme github_dark_tritanopia")
 		end,
 	},
 }

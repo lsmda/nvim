@@ -132,7 +132,7 @@ return {
 				jsonc = { "prettierd" },
 				lua = { "stylua" },
 				markdown = { "prettierd" },
-				nix = { "alejandra" },
+				nix = { "nixfmt" },
 				typescript = { "prettierd" },
 				typescriptreact = { "prettierd" },
 				yaml = { "prettierd" },
