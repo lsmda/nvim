@@ -134,7 +134,23 @@ return {
 		config = function()
 			require("mini.ai").setup()
 			require("mini.pairs").setup()
-			require("mini.comment").setup()
+
+			require("mini.comment").setup({
+				options = {
+					custom_commentstring = function()
+						return vim.bo.commentstring
+					end,
+				},
+			})
+
+			-- Set commentstring for Nix files
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "nix",
+				callback = function()
+					vim.bo.commentstring = "# %s"
+				end,
+			})
+
 			require("mini.statusline").setup()
 
 			require("mini.indentscope").setup({
