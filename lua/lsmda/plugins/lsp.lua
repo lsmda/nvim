@@ -214,8 +214,20 @@ return {
 					completeopt = "menu,menuone,preview,noselect",
 				},
 				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
+					completion = cmp.config.window.bordered({
+						border = "single", -- can be "single", "double", "rounded", "solid", "shadow"
+						winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None",
+						scrollbar = true,
+						col_offset = 0,
+						side_padding = 1,
+					}),
+					documentation = cmp.config.window.bordered({
+						border = "single", -- can be "single", "double", "rounded", "solid", "shadow"
+						winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None",
+						scrollbar = true,
+						col_offset = 0,
+						side_padding = 1,
+					}),
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
