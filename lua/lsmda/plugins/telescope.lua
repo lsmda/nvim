@@ -59,6 +59,7 @@ return {
 					entry_prefix = "   ",
 					initial_mode = "normal",
 					preview = true,
+					border = true,
 					selection_strategy = "reset",
 					path_display = path_display,
 					color_devicons = true,

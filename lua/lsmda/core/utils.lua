@@ -39,7 +39,7 @@ end
 M.get_float_opts = function(options)
 	options = options or {}
 	return {
-		border = options.border or "rounded",
+		border = options.border or "single",
 		prefix = options.prefix or " ",
 		severity_sort = options.severity_sort or true,
 		scope = options.scope or "buffer",
