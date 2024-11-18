@@ -20,19 +20,19 @@ vim.keymap.set("n", "<S-M-j>", "<cmd>t .<CR>==", { desc = "Duplicate line down" 
 vim.keymap.set("n", "<C-e>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle explorer" })
 
 vim.keymap.set("n", "<leader>w", function()
-	require("conform").format({ async = true, lsp_fallback = true })
-	vim.cmd("w")
+  require("conform").format { async = true, lsp_fallback = true }
+  vim.cmd "w"
 end, { desc = "Format and write current buffer" })
 
 vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit current buffer" })
 
 vim.keymap.set("n", "<leader>Q", function()
-	local confirm_quit = require("lsmda.core.utils").confirm_quit
-	confirm_quit("qa!", "Are you sure you want to quit? Unsaved changes will be lost (y/N): ")
+  local confirm_quit = require("utils").confirm_quit
+  confirm_quit("qa!", "Are you sure you want to quit? Unsaved changes will be lost (y/N): ")
 end, { desc = "Quit all open buffers" })
 
 vim.keymap.set("n", "<leader>cs", function()
-	vim.fn.setreg("/", "")
+  vim.fn.setreg("/", "")
 end, { desc = "Clear search pattern" })
 
 vim.keymap.set("n", "<leader>'", [[:s/\<<C-r><C-w>\>/'<C-r><C-w>\'/ <CR>]], { desc = "Surround word with '" })

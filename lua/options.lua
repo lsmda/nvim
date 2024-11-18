@@ -26,8 +26,8 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
-vim.opt.path:append({ "**" })
-vim.opt.wildignore:append({ "*/node_modules/*", "*/.coverage/*", "*/build/*", "*/dist/*" })
+vim.opt.path:append { "**" }
+vim.opt.wildignore:append { "*/node_modules/*", "*/.coverage/*", "*/build/*", "*/dist/*" }
 
 vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
@@ -35,7 +35,7 @@ vim.opt.background = "dark"
 
 vim.opt.backspace = { "start", "eol", "indent" }
 
-vim.opt.clipboard:append("unnamedplus")
+vim.opt.clipboard:append "unnamedplus"
 
 -- split windows
 vim.opt.splitbelow = true
