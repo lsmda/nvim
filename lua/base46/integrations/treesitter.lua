@@ -62,7 +62,6 @@ return function(colors)
     ["@scope"] = { bold = true },
     ["@property"] = { fg = colors.base08 },
 
-    -- markup
     ["@markup.heading"] = { fg = colors.base0D },
     ["@markup.raw"] = { fg = colors.base09 },
     ["@markup.link"] = { fg = colors.base08 },
@@ -75,7 +74,7 @@ return function(colors)
     ["@markup.strikethrough"] = { strikethrough = true },
     ["@markup.quote"] = { bg = colors.black2 },
 
-    ["@comment"] = { fg = colors.grey_fg },
+    ["@comment"] = { fg = colors.light_grey },
     ["@comment.todo"] = { fg = colors.grey, bg = colors.white },
     ["@comment.warning"] = { fg = colors.black2, bg = colors.base09 },
     ["@comment.note"] = { fg = colors.black, bg = colors.blue },

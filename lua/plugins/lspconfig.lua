@@ -32,8 +32,6 @@ return {
           map("<leader>ds", builtin.lsp_document_symbols, "Document symbols")
           map("<leader>rn", vim.lsp.buf.rename, "Rename")
           map("<leader>ca", vim.lsp.buf.code_action, "Code action")
-          map("<leader>K", "<cmd>Lspsaga hover_doc<CR>", "Display documentation")
-          map("<leader>pk", "<cmd>Lspsaga peek_definition<CR>", "Peek definition")
 
           map("<leader>dd", function()
             vim.diagnostic.open_float(nil, get_float_opts())

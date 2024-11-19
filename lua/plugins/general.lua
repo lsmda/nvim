@@ -62,27 +62,6 @@ return {
   },
 
   {
-    "nvimdev/lspsaga.nvim",
-    lazy = true,
-    dependencies = {
-      { "nvim-treesitter/nvim-treesitter" },
-      { "nvim-tree/nvim-web-devicons" },
-    },
-    config = function()
-      require("lspsaga").setup {
-        ui = {
-          border = "rounded",
-        },
-        diagnostic = {
-          show_code_action = true,
-          max_height = 0.8,
-          max_show_width = 0.7,
-        },
-      }
-    end,
-  },
-
-  {
     "folke/todo-comments.nvim",
     lazy = true,
     dependencies = {

@@ -9,7 +9,6 @@ return {
   "glassy",
   "gps",
   "lsp",
-  "lspsaga",
   "mail",
   "mason",
   "neogit",
