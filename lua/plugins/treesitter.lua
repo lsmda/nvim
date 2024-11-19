@@ -1,22 +1,18 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  event = { "BufReadPre", "BufNewFile" },
+  lazy = false,
+  cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
   dependencies = {
     "windwp/nvim-ts-autotag",
   },
   config = function()
     local config = require "nvim-treesitter.configs"
 
-    ---@diagnostic disable-next-line: missing-fields
     config.setup {
       auto_install = true,
-      highlight = {
-        enable = true,
-      },
-      indent = {
-        enable = true,
-      },
+      highlight = { enable = true },
+      indent = { enable = true },
       incremental_selection = {
         enable = true,
         keymaps = {

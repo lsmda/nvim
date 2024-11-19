@@ -1,10 +1,8 @@
 ---@diagnostic disable: undefined-field
-local cmp_ui = require("nvimrc").ui.cmp
-local cmp_style = cmp_ui.style
 local format_kk = require "plugins.cmp.format"
 
-local atom_styled = cmp_style == "atom" or cmp_style == "atom_colored"
-local fields = (atom_styled or cmp_ui.icons_left) and { "kind", "abbr", "menu" } or { "abbr", "kind", "menu" }
+local atom_styled = false
+local fields = { "abbr", "kind", "menu" }
 
 local cmp = require "cmp"
 local luasnip = require "luasnip"
@@ -17,20 +15,15 @@ end
 local M = {
   formatting = {
     format = function(entry, item)
-      local icons = require "icons.lspkind"
+      local icons = require("config.utils").icons.lspkind
 
       item.abbr = item.abbr .. " "
-      item.menu = cmp_ui.lspkind_text and item.kind or ""
+      item.menu = item.kind or ""
       item.menu_hl_group = atom_styled and "LineNr" or "CmpItemKind" .. (item.kind or "")
       item.kind = (icons[item.kind] or "") .. " "
+      item.kind = " " .. item.kind
 
-      if not cmp_ui.icons_left then
-        item.kind = " " .. item.kind
-      end
-
-      if cmp_ui.format_colors.tailwind then
-        format_kk.tailwind(entry, item)
-      end
+      format_kk.tailwind(entry, item)
 
       return item
     end,

@@ -14,7 +14,7 @@ return {
       local actions = require "telescope.actions"
       local builtin = require "telescope.builtin"
 
-      local utils = require "core.utils"
+      local utils = require "config.utils"
       local icons = utils.icons
 
       -- helper functions for custom path_display function
@@ -50,7 +50,7 @@ return {
         if filename == stripped_path or stripped_path == "" then
           return filename
         end
-        return string.format("%s ~ %s", filename, stripped_path)
+        return string.format("%s @ %s", filename, stripped_path)
       end
 
       telescope.setup {
@@ -100,7 +100,6 @@ return {
             "automatic_backups/",
             "autoload/",
             ".idea/",
-            ".git",
             ".DS_Store",
             '"*.pyc"',
             '"*.compiled"',
@@ -137,10 +136,6 @@ return {
                 ["<C-d>"] = actions.delete_buffer,
               },
             },
-          },
-
-          colorscheme = {
-            enable_preview = true,
           },
         },
         extensions = {

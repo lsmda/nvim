@@ -17,6 +17,7 @@ return {
       pattern = "nix",
       callback = function()
         vim.bo.commentstring = "# %s"
+        return vim.bo.commentstring
       end,
     })
 
@@ -38,7 +39,7 @@ return {
       },
     }
 
-    local highlightColor = "#3F3F3F"
+    local highlightColor = "#333333"
     vim.api.nvim_set_hl(0, "MiniCursorword", { bg = highlightColor })
     vim.api.nvim_set_hl(0, "MiniCursorwordCurrent", { bg = highlightColor })
   end,

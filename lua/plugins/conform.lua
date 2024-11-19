@@ -1,0 +1,27 @@
+return {
+  "stevearc/conform.nvim",
+  veryLazy = true,
+  event = { "BufWritePre" },
+  cmd = { "ConformInfo" },
+  opts = {
+    notify_on_error = false,
+    formatters_by_ft = {
+      css = { "prettierd" },
+      graphql = { "prettierd" },
+      html = { "prettierd" },
+      javascript = { "prettierd" },
+      javascriptreact = { "prettierd" },
+      json = { "prettierd" },
+      jsonc = { "prettierd" },
+      lua = { "stylua" },
+      markdown = { "prettierd" },
+      nix = { "nixfmt" },
+      typescript = { "prettierd" },
+      typescriptreact = { "prettierd" },
+      yaml = { "prettierd" },
+      go = { "crlfmt" },
+      gomod = { "crlfmt" },
+      python = { "black" },
+    },
+  },
+}

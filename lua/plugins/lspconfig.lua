@@ -14,7 +14,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      local get_float_opts = require("core.utils").get_float_opts
+      local get_float_opts = require("config.utils").get_float_opts
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
@@ -100,48 +100,6 @@ return {
             server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
             require("lspconfig")[server_name].setup(server)
           end,
-        },
-      }
-    end,
-  },
-
-  -- Autoformat
-  {
-    "stevearc/conform.nvim",
-    event = { "BufWritePre" },
-    cmd = { "ConformInfo" },
-    opts = {
-      notify_on_error = false,
-      formatters_by_ft = {
-        css = { "prettierd" },
-        graphql = { "prettierd" },
-        html = { "prettierd" },
-        javascript = { "prettierd" },
-        javascriptreact = { "prettierd" },
-        json = { "prettierd" },
-        jsonc = { "prettierd" },
-        lua = { "stylua" },
-        markdown = { "prettierd" },
-        nix = { "nixfmt" },
-        typescript = { "prettierd" },
-        typescriptreact = { "prettierd" },
-        yaml = { "prettierd" },
-        go = { "crlfmt" },
-        gomod = { "crlfmt" },
-        python = { "black" },
-      },
-    },
-  },
-
-  {
-    "j-hui/fidget.nvim",
-    tag = "legacy",
-    event = { "BufEnter" },
-    config = function()
-      -- turn on lsp, formatting, and linting status and progress information
-      require("fidget").setup {
-        text = {
-          spinner = "dots_negative",
         },
       }
     end,

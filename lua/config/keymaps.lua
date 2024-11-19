@@ -29,7 +29,7 @@ end, { desc = "Format and write current buffer" })
 map("n", "<leader>q", ":q<CR>", { desc = "Quit current buffer" })
 
 map("n", "<leader>Q", function()
-  local confirm_quit = require("core.utils").confirm_quit
+  local confirm_quit = require("config.utils").confirm_quit
   confirm_quit("qa!", "Are you sure you want to quit? Unsaved changes will be lost (y/N): ")
 end, { desc = "Quit all open buffers" })
 

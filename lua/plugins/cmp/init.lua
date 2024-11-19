@@ -29,7 +29,6 @@ return {
     },
     "saadparwaiz1/cmp_luasnip",
     "onsails/lspkind.nvim",
-    "windwp/nvim-autopairs",
     "hrsh7th/cmp-cmdline",
     -- adds other completion capabilities.
     --  nvim-cmp does not ship with all sources by default. they are split
@@ -40,18 +39,11 @@ return {
   config = function()
     local cmp = require "cmp"
     local luasnip = require "luasnip"
-    local cmp_autopairs = require "nvim-autopairs.completion.cmp"
 
     luasnip.config.setup()
 
-    -- load snippets
+    -- load vscode snippets
     require("luasnip.loaders.from_vscode").lazy_load()
-
-    -- enable typescript integration
-    require("nvim-autopairs").setup { check_ts = true }
-
-    -- integrate nvim-autopairs with cmp
-    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
     local cmp_formatting = require("plugins.cmp.options").formatting
     local cmp_mappings = require("plugins.cmp.options").mappings

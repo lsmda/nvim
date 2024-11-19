@@ -129,15 +129,4 @@ function M.load_theme(user_opts)
   end
 end
 
--- function M.get_theme_tb(type)
---   local name = opts.theme
---   local present1, default_theme = pcall(require, "base46.themes." .. name)
---
---   if present1 then
---     return default_theme[type]
---   else
---     error "No such theme!"
---   end
--- end
-
 return M

@@ -1,12 +1,13 @@
 ---@diagnostic disable: undefined-field
 return {
   "sindrets/diffview.nvim",
-  config = function()
-    local diffView = require "diffview"
+  opts = {},
+  keys = {
+    { "<leader>df", '<CMD>DiffviewOpen"<CR>', desc = "Open git diff view" },
+    { "<leader>dh", "<CMD>DiffviewFileHistory<CR>", desc = "Open git diff history" },
+  },
+  init = function()
     local actions = require "diffview.actions"
-
-    vim.keymap.set("n", "<leader>df", diffView.open, { desc = "Open diff view" })
-    vim.keymap.set("n", "<leader>dh", diffView.file_history, { desc = "Open diff history" })
 
     local close = { "n", "<leader>q", "<cmd>tabclose<CR>", { desc = "Close diff view" } }
     local select = { "n", "e", actions.select_entry, { desc = "Open diff for the selected entry" } }

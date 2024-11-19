@@ -17,6 +17,7 @@ end
 
 M.save_file = function()
   local is_floating_window_open = false
+
   for _, win in pairs(vim.api.nvim_list_wins()) do
     local config = vim.api.nvim_win_get_config(win)
     if config.relative ~= "" then
@@ -38,6 +39,7 @@ end
 
 M.get_float_opts = function(options)
   options = options or {}
+
   return {
     border = options.border or "single",
     prefix = options.prefix or " ",
@@ -48,41 +50,56 @@ M.get_float_opts = function(options)
 end
 
 M.icons = {
-  kind = {
-    Array = " ",
-    Boolean = " ",
-    Class = " ",
-    Color = " ",
-    Constant = " ",
-    Constructor = " ",
-    Enum = " ",
-    EnumMember = " ",
-    Event = " ",
-    Field = " ",
-    File = " ",
-    Folder = "󰉋 ",
-    Function = " ",
-    Interface = " ",
-    Key = " ",
-    Keyword = " ",
-    Method = " ",
-    Module = " ",
-    Namespace = " ",
-    Null = "󰟢 ",
-    Number = " ",
-    Object = " ",
-    Operator = " ",
-    Package = " ",
-    Property = " ",
-    Reference = " ",
-    Snippet = " ",
-    String = " ",
-    Struct = " ",
-    Text = " ",
-    TypeParameter = " ",
-    Unit = " ",
-    Value = " ",
-    Variable = " ",
+  devicons = {
+    default_icon = { icon = "󰈚", name = "Default" },
+    js = { icon = "󰌞", name = "js" },
+    ts = { icon = "󰛦", name = "ts" },
+    lock = { icon = "󰌾", name = "lock" },
+    ["robots.txt"] = { icon = "󰚩", name = "robots" },
+  },
+  lspkind = {
+    Namespace = "󰌗",
+    Text = "󰉿",
+    Method = "󰆧",
+    Function = "󰆧",
+    Constructor = "",
+    Field = "󰜢",
+    Variable = "󰀫",
+    Class = "󰠱",
+    Interface = "",
+    Module = "",
+    Property = "󰜢",
+    Unit = "󰑭",
+    Value = "󰎠",
+    Enum = "",
+    Keyword = "󰌋",
+    Snippet = "",
+    Color = "󰏘",
+    File = "󰈚",
+    Reference = "󰈇",
+    Folder = "󰉋",
+    EnumMember = "",
+    Constant = "󰏿",
+    Struct = "󰙅",
+    Event = "",
+    Operator = "󰆕",
+    TypeParameter = "󰊄",
+    Table = "",
+    Object = "󰅩",
+    Tag = "",
+    Array = "[]",
+    Boolean = "",
+    Number = "",
+    Null = "󰟢",
+    Supermaven = "",
+    String = "󰉿",
+    Calendar = "",
+    Watch = "󰥔",
+    Package = "",
+    Copilot = "",
+    Codeium = "",
+    TabNine = "",
+    BladeNav = "",
   },
   git = {
     LineAdded = " ",

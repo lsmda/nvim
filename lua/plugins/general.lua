@@ -1,39 +1,44 @@
 ---@diagnostic disable: undefined-field
 return {
   {
+    -- automatically add closing tags for html and jsx
+    "windwp/nvim-ts-autotag",
+    lazy = true,
+    opts = {},
+  },
+
+  {
     "christoomey/vim-tmux-navigator",
     lazy = false,
   },
 
   {
     "stevearc/dressing.nvim",
-    event = "VeryLazy",
+    lazy = true,
   },
 
   {
     "mg979/vim-visual-multi",
+    lazy = true,
   },
 
   {
     "vigoux/notifier.nvim",
-    config = function()
-      require("notifier").setup {}
-    end,
+    opts = {},
   },
 
   {
     "ggandor/leap.nvim",
-    config = function()
-      vim.keymap.set({ "n" }, "s", "<Plug>(leap-forward-to)")
-      vim.keymap.set({ "n" }, "S", "<Plug>(leap-backward-to)")
-    end,
+    keys = {
+      { "s", "<Plug>(leap-forward-to)" },
+      { "S", "<Plug>(leap-backward-to)}" },
+    },
   },
 
   {
     "axelvc/template-string.nvim",
-    config = function()
-      require("template-string").setup {}
-    end,
+    lazy = true,
+    opts = {},
   },
 
   {
@@ -47,16 +52,18 @@ return {
 
   {
     "kdheepak/lazygit.nvim",
+    lazy = true,
     dependencies = {
       { "nvim-lua/plenary.nvim" },
     },
-    init = function()
-      vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit" })
-    end,
+    keys = {
+      { "<leader>gg", "<cmd>LazyGit<CR>", desc = "Open LazyGit" },
+    },
   },
 
   {
     "nvimdev/lspsaga.nvim",
+    lazy = true,
     dependencies = {
       { "nvim-treesitter/nvim-treesitter" },
       { "nvim-tree/nvim-web-devicons" },
@@ -77,18 +84,27 @@ return {
 
   {
     "folke/todo-comments.nvim",
+    lazy = true,
     dependencies = {
       { "nvim-lua/plenary.nvim" },
     },
-    config = function()
-      require("todo-comments").setup()
-      vim.keymap.set("n", "<leader>ft", "<CMD>TodoTelescope<CR>", { desc = "Find todos" })
-    end,
+    keys = {
+      { "<leader>ft", "<CMD>TodoTelescope<CR>", desc = "Find todos" },
+    },
   },
 
   {
     "rmagatti/alternate-toggler",
     event = { "BufReadPost" },
+    lazy = true,
+    keys = {
+      {
+        "<leader>tt",
+        "<cmd>lua require('alternate-toggler').toggleAlternate()<CR>",
+        desc = "Toggle value",
+        silent = true,
+      },
+    },
     config = function()
       require("alternate-toggler").setup {
         alternates = {
@@ -107,13 +123,6 @@ return {
           ["YES"] = "NO",
         },
       }
-
-      vim.keymap.set(
-        "n",
-        "<leader>tt",
-        "<cmd>lua require('alternate-toggler').toggleAlternate()<CR>",
-        { desc = "Toggle value", silent = true }
-      )
     end,
   },
 
@@ -122,7 +131,7 @@ return {
     tag = "legacy",
     event = { "BufEnter" },
     config = function()
-      -- Turn on LSP, formatting, and linting status and progress information
+      -- turn on lsp, formatting, and linting status and progress information
       require("fidget").setup {
         text = {
           spinner = "dots_negative",
