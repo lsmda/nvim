@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 return {
   {
     "christoomey/vim-tmux-navigator",

@@ -117,7 +117,6 @@ function M.load_theme(user_opts)
   -- get hls
   local hls = require("base46.base46_hls").get_hls(colors, opts.transparency)
 
-  -- actually highlight stuff
   for hl, col in pairs(hls) do
     vim.api.nvim_set_hl(0, hl, col)
   end

@@ -3,7 +3,7 @@ return {
   event = "BufEnter",
   cmd = "Gitsigns",
   config = function()
-    local icons = require("utils").icons
+    local icons = require("core.utils").icons
 
     require("gitsigns").setup {
       signs = {

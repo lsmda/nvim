@@ -81,5 +81,54 @@ return function(colors)
     NvDashAscii = { fg = colors.blue },
     NvDashButtons = { fg = colors.light_grey },
     NvDashFooter = { fg = colors.red },
+
+    Bold = { bold = true },
+    Italic = { italic = true },
+    UnderLined = { fg = colors.base0B },
+
+    TabLine = {
+      bg = colors.darker_black,
+      fg = colors.light_grey,
+    },
+
+    TabLineFill = {
+      bg = colors.darker_black,
+      fg = colors.light_grey,
+    },
+
+    TabLineSel = {
+      bg = colors.black2,
+      fg = colors.white,
+    },
+
+    StatusLine = {
+      bg = "none",
+      sp = "none",
+    },
+
+    StatusLineNC = {
+      fg = colors.black2,
+    },
+
+    -- spelling
+    SpellBad = {
+      undercurl = true,
+      sp = colors.base08,
+    },
+
+    SpellLocal = {
+      undercurl = true,
+      sp = colors.base0C,
+    },
+
+    SpellCap = {
+      undercurl = true,
+      sp = colors.base0D,
+    },
+
+    SpellRare = {
+      undercurl = true,
+      sp = colors.base0E,
+    },
   }
 end

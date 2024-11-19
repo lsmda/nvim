@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -13,7 +14,7 @@ return {
       local actions = require "telescope.actions"
       local builtin = require "telescope.builtin"
 
-      local utils = require "utils"
+      local utils = require "core.utils"
       local icons = utils.icons
 
       -- helper functions for custom path_display function

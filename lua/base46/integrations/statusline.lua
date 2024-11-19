@@ -24,6 +24,18 @@ return function(colors)
     St_lspWarning = { fg = colors.yellow, bg = statusline_bg },
     St_LspHints = { fg = colors.purple, bg = statusline_bg },
     St_LspInfo = { fg = colors.green, bg = statusline_bg },
+
+    -- mini statusline
+    MiniStatuslineModeNormal = { fg = colors.black, bg = colors.nord_blue },
+    MiniStatuslineModeInsert = { fg = colors.black, bg = colors.green },
+    MiniStatuslineModeVisual = { fg = colors.black, bg = colors.purple },
+    MiniStatuslineModeReplace = { fg = colors.black, bg = colors.red },
+    MiniStatuslineModeCommand = { fg = colors.black, bg = colors.yellow },
+    MiniStatuslineModeOther = { fg = colors.white, bg = colors.grey },
+    MiniStatuslineDevinfo = { fg = colors.white, bg = colors.one_bg2 },
+    MiniStatuslineFilename = { fg = colors.white, bg = statusline_bg },
+    MiniStatuslineFileinfo = { fg = colors.white, bg = statusline_bg },
+    MiniStatuslineInactive = { fg = colors.grey_fg, bg = statusline_bg },
   }
 
   local function genModes_hl(modename, col)

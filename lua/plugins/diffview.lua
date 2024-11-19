@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 return {
   "sindrets/diffview.nvim",
   config = function()

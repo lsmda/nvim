@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 return {
   {
     "neovim/nvim-lspconfig",
@@ -13,7 +14,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      local get_float_opts = require("utils").get_float_opts
+      local get_float_opts = require("core.utils").get_float_opts
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
