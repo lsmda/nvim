@@ -1,5 +1,5 @@
 return {
-  "jayden-chan/base46.nvim",
+  dir = "~/.config/nvim/lua/base46",
   lazy = false,
   priority = 1000,
   config = function()
