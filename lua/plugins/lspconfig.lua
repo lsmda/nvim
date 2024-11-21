@@ -56,7 +56,6 @@ return {
         astro = {},
         graphql = {},
         html = {},
-        pyright = {},
         eslint = {},
         nil_ls = {},
         gopls = {},
@@ -71,6 +70,17 @@ return {
               diagnostics = {
                 globals = { "vim" },
                 disable = { "missing-fields" },
+              },
+            },
+          },
+        },
+
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                autoSearchPaths = true,
+                typeCheckingMode = "basic",
               },
             },
           },
