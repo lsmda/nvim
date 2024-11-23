@@ -1,6 +1,35 @@
 ---@diagnostic disable: undefined-field
+local api = vim.api
+
+local M = {}
+local fields = { "abbr", "kind", "menu" }
+
+-- show tailwind color icon on completion menu
+M.tailwind = function(entry, item)
+  local entryItem = entry:get_completion_item()
+  local color = entryItem.documentation
+
+  if color and type(color) == "string" and color:match "^#%x%x%x%x%x%x$" then
+    local hl = "hex-" .. color:sub(2)
+
+    if #api.nvim_get_hl(0, { name = hl }) == 0 then
+      api.nvim_set_hl(0, hl, { fg = color })
+    end
+
+    item.kind = " " .. "󱓻" .. " "
+    item.kind_hl_group = hl
+    item.menu_hl_group = hl
+  end
+end
+
+M.check_backspace = function()
+  local col = vim.fn.col "." - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+end
+
 return {
   "hrsh7th/nvim-cmp",
+  lazy = true,
   event = { "InsertEnter" },
   dependencies = {
     -- snippet engine & its associated nvim-cmp source
@@ -53,10 +82,6 @@ return {
     -- enable typescript integration
     require("nvim-autopairs").setup { check_ts = true }
 
-    local cmp_formatting = require("plugins.cmp.options").formatting
-    local cmp_mappings = require("plugins.cmp.options").mappings
-    local cmp_window = require("plugins.cmp.options").window
-
     cmp.setup {
       snippet = {
         expand = function(args)
@@ -66,9 +91,61 @@ return {
       completion = {
         completeopt = "menu,menuone,preview,noselect",
       },
-      formatting = cmp_formatting,
-      window = cmp_window,
-      mapping = cmp_mappings,
+      formatting = {
+        format = function(entry, item)
+          local icons = require("config.utils").icons.lspkind
+
+          item.abbr = item.abbr .. " "
+          item.menu = item.kind or ""
+          item.menu_hl_group = "CmpItemKind" .. (item.kind or "")
+          item.kind = (icons[item.kind] or "") .. " "
+          item.kind = " " .. item.kind
+
+          M.tailwind(entry, item)
+
+          return item
+        end,
+        fields = fields,
+      },
+      window = {
+        completion = {
+          scrollbar = false,
+          side_padding = 1,
+          winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None,FloatBorder:CmpBorder",
+          border = "single",
+        },
+        documentation = {
+          border = "single",
+          winhighlight = "Normal:CmpDoc,FloatBorder:CmpDocBorder",
+        },
+      },
+      mapping = {
+        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+        ["<C-e>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
+        ["<CR>"] = cmp.mapping.confirm { select = true },
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expandable() then
+            luasnip.expand()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif M.check_backspace() then
+            fallback()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+      },
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,
