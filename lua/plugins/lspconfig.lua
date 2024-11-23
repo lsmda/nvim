@@ -96,7 +96,7 @@ return {
         "eslint_d",
         "prettierd",
         "crlfmt",
-        "black",
+        "ruff",
       })
 
       require("mason-tool-installer").setup { ensure_installed = ensure_installed }

@@ -21,7 +21,7 @@ return {
       yaml = { "prettierd" },
       go = { "crlfmt" },
       gomod = { "crlfmt" },
-      python = { "black" },
+      python = { "ruff" },
     },
   },
 }
