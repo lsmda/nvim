@@ -9,7 +9,7 @@ return {
   init = function()
     local actions = require "diffview.actions"
 
-    local close = { "n", "<leader>q", "<cmd>tabclose<CR>", { desc = "Close diff view" } }
+    local close = { "n", "<leader>q", "<CMD>tabclose<CR>", { desc = "Close diff view" } }
     local select = { "n", "e", actions.select_entry, { desc = "Open diff for the selected entry" } }
     local toggle = { "n", "<C-e>", actions.toggle_files, { desc = "Toggle file panel" } }
 

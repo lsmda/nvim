@@ -22,18 +22,6 @@ function M.get_colors(base, theme_name)
   return theme.base_16
 end
 
-function M.get_polish(theme_name)
-  local path = "base46.themes." .. theme_name
-  local present, theme = pcall(require, path)
-
-  if not present then
-    error("`" .. theme_name .. "`" .. " is not an available theme", 2)
-    return
-  end
-
-  return theme.polish_hl
-end
-
 function M.get_lualine_theme(base, theme_name)
   if not base == "base46" then
     error "must use base46 for lualine theme"
@@ -119,13 +107,6 @@ function M.load_theme(user_opts)
 
   for hl, col in pairs(hls) do
     vim.api.nvim_set_hl(0, hl, col)
-  end
-
-  local polish = M.get_polish(opts.theme)
-  if polish ~= nil then
-    for hl, col in pairs(polish) do
-      vim.api.nvim_set_hl(0, hl, col)
-    end
   end
 end
 

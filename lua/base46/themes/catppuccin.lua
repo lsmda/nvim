@@ -53,20 +53,6 @@ M.base_16 = {
   base0F = "#F38BA8",
 }
 
-M.polish_hl = {
-  ["@variable"] = {
-    fg = M.base_30.lavender,
-  },
-
-  ["@property"] = {
-    fg = M.base_30.teal,
-  },
-
-  ["@variable.builtin"] = {
-    fg = M.base_30.red,
-  },
-}
-
 M.type = "dark"
 
 return M

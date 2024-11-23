@@ -19,7 +19,7 @@ map("n", "<M-j>", ":m .+1<CR>==", { desc = "Move line down" })
 map("n", "<S-M-k>", "<cmd>t .-1<cr>==", { desc = "Duplicate line up" })
 map("n", "<S-M-j>", "<cmd>t .<CR>==", { desc = "Duplicate line down" })
 
-map("n", "<C-e>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle explorer" })
+map("n", "<C-e>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
 
 map("n", "<leader>w", function()
   require("conform").format { async = true, lsp_fallback = true }

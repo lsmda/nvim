@@ -73,7 +73,7 @@ return function(colors)
     LspSignatureActiveParameter = { fg = colors.black, bg = colors.green },
 
     LspInlayHint = {
-      bg = colorize(colors.black2, vim.o.bg == "dark" and 0 or 3),
+      bg = colorize(colors.black2, 3),
       fg = colors.light_grey,
     },
   }
