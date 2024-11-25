@@ -16,15 +16,8 @@ map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up" })
 map("n", "<M-k>", ":m .-2<CR>==", { desc = "Move line up" })
 map("n", "<M-j>", ":m .+1<CR>==", { desc = "Move line down" })
 
-map("n", "<S-M-k>", "<cmd>t .-1<cr>==", { desc = "Duplicate line up" })
-map("n", "<S-M-j>", "<cmd>t .<CR>==", { desc = "Duplicate line down" })
-
-map("n", "<C-e>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
-
-map("n", "<leader>w", function()
-  require("conform").format { async = true, lsp_fallback = true }
-  vim.cmd "w"
-end, { desc = "Format and write current buffer" })
+map("n", "<S-M-k>", "<CMD>t .-1<cr>==", { desc = "Duplicate line up" })
+map("n", "<S-M-j>", "<CMD>t .<CR>==", { desc = "Duplicate line down" })
 
 map("n", "<leader>q", ":q<CR>", { desc = "Quit current buffer" })
 
@@ -44,6 +37,8 @@ map("n", "<leader>(", [[:s/\<<C-r><C-w>\>/(<C-r><C-w>\)/ <CR>]], { desc = "Surro
 map("n", "<leader>[", [[:s/\<<C-r><C-w>\>/[<C-r><C-w>\]/ <CR>]], { desc = "Surround word with [" })
 map("n", "<leader>{", [[:s/\<<C-r><C-w>\>/{<C-r><C-w>\}/ <CR>]], { desc = "Surround word with {" })
 
+map({ "n" }, "<leader>rr", "<CMD>source %<CR>", { desc = "Source configuration" })
+
 -- insert mode
 map("i", "<C-h>", "<Left>", { desc = "Move cursor to the left" })
 map("i", "<C-l>", "<Right>", { desc = "Move cursor to the right" })
@@ -61,11 +56,7 @@ map("x", "{", "c{}<Esc>P", { desc = "Surround selection with {" })
 map("x", "<M-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 map("x", "<M-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 
-map("x", "<S-M-k>", "<cmd>VisualDuplicate -1<CR>", { desc = "Duplicate selection up" })
-map("x", "<S-M-j>", "<cmd>VisualDuplicate +1<CR>", { desc = "Duplicate selection down" })
-
 -- mixed modes
 map({ "i", "x" }, "<M-n>", "<Esc>", { desc = "Enter normal mode" })
 map({ "n", "x" }, "<M-e>", "$", { desc = "Move cursor to end of line" })
 map({ "n", "x" }, "<M-q>", "^", { desc = "Move cursor to beginning of line" })
-map({ "n", "x" }, "<leader>rr", "<cmd>source %<CR>", { desc = "Resource configuration" })
