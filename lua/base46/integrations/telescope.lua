@@ -1,10 +1,13 @@
+local lighten = require("base46.colors").change_hex_lightness
+
 return function(colors)
   return {
     TelescopeNormal = { bg = colors.darker_black },
 
     TelescopeSelection = {
       fg = colors.white,
-      bg = colors.black2,
+      bg = lighten(colors.light_grey, -30),
+      bold = true,
     },
 
     TelescopeBorder = {

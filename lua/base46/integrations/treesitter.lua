@@ -7,7 +7,6 @@ return function(colors)
     ["@variable.member.key"] = { fg = colors.base08 },
 
     ["@module"] = { fg = colors.base08 },
-    -- ["@module.builtin"] = { fg = colors.base08 },
 
     ["@constant"] = { fg = colors.base08 },
     ["@constant.builtin"] = { fg = colors.base09 },
@@ -17,7 +16,6 @@ return function(colors)
     ["@string.regex"] = { fg = colors.base0C },
     ["@string.escape"] = { fg = colors.base0C },
     ["@character"] = { fg = colors.base08 },
-    -- ["@character.special"] = { fg = colors.base08 },
     ["@number"] = { fg = colors.base09 },
     ["@number.float"] = { fg = colors.base09 },
 

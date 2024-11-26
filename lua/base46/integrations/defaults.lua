@@ -1,5 +1,3 @@
-local lighten = require("base46.colors").change_hex_lightness
-
 return function(colors)
   return {
     Added = { fg = colors.green },
@@ -19,7 +17,7 @@ return function(colors)
     NormalFloat = { bg = colors.darker_black },
     NvimInternalError = { fg = colors.red },
     WinSeparator = { fg = colors.line },
-    Normal = { fg = colors.base05, bg = colors.base00 },
+    Normal = { fg = colors.base05 },
     DevIconDefault = { fg = colors.red },
     Debug = { fg = colors.base08 },
     Directory = { fg = colors.base0D },
@@ -44,7 +42,7 @@ return function(colors)
     Title = { fg = colors.base0D },
     Conceal = { bg = "NONE" },
     Cursor = { fg = colors.base00, bg = colors.base05 },
-    NonText = { fg = colors.base03 },
+    NonText = { fg = colors.light_grey }, -- git blame string
     SignColumn = { fg = colors.base03 },
     ColorColumn = { bg = colors.black2 },
     CursorColumn = { bg = colors.base01 },
@@ -53,34 +51,6 @@ return function(colors)
     healthSuccess = { bg = colors.green, fg = colors.black },
     WinBar = { bg = "NONE" },
     WinBarNC = { bg = "NONE" },
-
-    -- lazy.nvim
-    LazyH1 = { bg = colors.green, fg = colors.black },
-    LazyButton = { bg = colors.one_bg, fg = lighten(colors.light_grey, vim.o.bg == "dark" and 10 or -20) },
-    LazyH2 = { fg = colors.red, bold = true, underline = true },
-    LazyReasonPlugin = { fg = colors.red },
-    LazyValue = { fg = colors.teal },
-    LazyDir = { fg = colors.base05 },
-    LazyUrl = { fg = colors.base05 },
-    LazyCommit = { fg = colors.green },
-    LazyNoCond = { fg = colors.red },
-    LazySpecial = { fg = colors.blue },
-    LazyReasonFt = { fg = colors.purple },
-    LazyOperator = { fg = colors.white },
-    LazyReasonKeys = { fg = colors.teal },
-    LazyTaskOutput = { fg = colors.white },
-    LazyCommitIssue = { fg = colors.pink },
-    LazyReasonEvent = { fg = colors.yellow },
-    LazyReasonStart = { fg = colors.white },
-    LazyReasonRuntime = { fg = colors.nord_blue },
-    LazyReasonCmd = { fg = colors.sun },
-    LazyReasonSource = { fg = colors.cyan },
-    LazyReasonImport = { fg = colors.white },
-    LazyProgressDone = { fg = colors.green },
-
-    NvDashAscii = { fg = colors.blue },
-    NvDashButtons = { fg = colors.light_grey },
-    NvDashFooter = { fg = colors.red },
 
     Bold = { bold = true },
     Italic = { italic = true },

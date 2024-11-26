@@ -343,6 +343,11 @@ return {
   },
 
   {
+    "brenoprata10/nvim-highlight-colors",
+    opts = {},
+  },
+
+  {
     "ggandor/leap.nvim",
     lazy = true,
     keys = {

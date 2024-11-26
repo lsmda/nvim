@@ -4,9 +4,9 @@ return function(colors)
     CmpBorder = { fg = colors.grey_fg },
     CmpItemAbbr = { fg = colors.white },
     CmpItemAbbrMatch = { fg = colors.blue, bold = true },
-    CmpDoc = { bg = colors.black },
+    CmpDoc = { bg = "NONE" },
     CmpDocBorder = { fg = colors.grey_fg },
-    CmpPmenu = { bg = colors.black },
+    CmpPmenu = { bg = "NONE" },
     CmpSel = { link = "PmenuSel", bold = true },
 
     -- cmp item kinds
