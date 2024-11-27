@@ -8,7 +8,6 @@ return {
   ------------------------------------------------------------------
   {
     dir = "~/.config/nvim/lua/base46",
-    lazy = false,
     priority = 1000,
     config = function()
       local base46 = require "base46"
@@ -44,12 +43,6 @@ return {
   },
 
   {
-    "windwp/nvim-ts-autotag", -- auto add closing tags for html and jsx
-    lazy = true,
-    opts = {},
-  },
-
-  {
     "hinell/duplicate.nvim",
     keys = {
       { "<S-M-k>", "<CMD>VisualDuplicate -1<CR>", desc = "Duplicate selection up", mode = "x" },
@@ -58,7 +51,6 @@ return {
     dependencies = {
       "mrjones2014/legendary.nvim",
       priority = 1000,
-      lazy = false,
     },
   },
 
@@ -194,8 +186,7 @@ return {
             '"*.pyc"',
             '"*.compiled"',
             '"*.scss"',
-            "^pnpm-lock.*",
-            "^lazy-lock.json",
+            "^-lock.*",
             "build",
             "^yarn.lock",
             "schema.gql",
@@ -300,6 +291,121 @@ return {
     end,
   },
 
+  { -- lsp
+    "neovim/nvim-lspconfig",
+    -- lazy = true,
+    dependencies = {
+      { "williamboman/mason.nvim", config = true },
+      "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+
+      -- useful status updates for lsp.
+      { "j-hui/fidget.nvim", opts = {} },
+
+      -- allows extra capabilities provided by nvim-cmp
+      "hrsh7th/cmp-nvim-lsp",
+    },
+    config = function()
+      local get_float_opts = require("config.utils").get_float_opts
+
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
+
+        callback = function(event)
+          local tl_map = function(keys, func, desc)
+            map("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc, silent = true })
+          end
+
+          local builtin = require "telescope.builtin"
+
+          tl_map("<leader>gd", builtin.lsp_definitions, "Go to definition")
+          tl_map("<leader>gr", builtin.lsp_references, "Go to references")
+          tl_map("<leader>gi", builtin.lsp_implementations, "Go to implementation")
+          tl_map("<leader>D", builtin.lsp_type_definitions, "Type definition")
+          tl_map("<leader>ds", builtin.lsp_document_symbols, "Document symbols")
+          tl_map("<leader>rn", vim.lsp.buf.rename, "Rename")
+          tl_map("<leader>ca", vim.lsp.buf.code_action, "Code action")
+
+          tl_map("<leader>dd", function()
+            vim.diagnostic.open_float(nil, get_float_opts())
+          end, "Display diagnostics")
+
+          tl_map("<leader>nd", function()
+            vim.diagnostic.goto_next { float = get_float_opts { scope = "line" } }
+          end, "Next diagnostic")
+
+          tl_map("<leader>pd", function()
+            vim.diagnostic.goto_prev { float = get_float_opts { scope = "line" } }
+          end, "Previous diagnostic")
+        end,
+      })
+
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+
+      local servers = {
+        cssls = {},
+        tailwindcss = {},
+        astro = {},
+        graphql = {},
+        html = {},
+        eslint = {},
+        nil_ls = {},
+        gopls = {},
+        tsserver = {},
+
+        lua_ls = {
+          settings = {
+            Lua = {
+              completion = {
+                callSnippet = "Replace",
+              },
+              diagnostics = {
+                globals = { "vim" },
+                disable = { "missing-fields" },
+              },
+            },
+          },
+        },
+
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                autoSearchPaths = true,
+                typeCheckingMode = "basic",
+              },
+            },
+          },
+        },
+      }
+
+      require("mason").setup()
+
+      local ensure_installed = vim.tbl_keys(servers or {})
+
+      vim.list_extend(ensure_installed, {
+        "stylua",
+        "eslint_d",
+        "prettierd",
+        "crlfmt",
+        "ruff",
+      })
+
+      require("mason-tool-installer").setup { ensure_installed = ensure_installed }
+
+      require("mason-lspconfig").setup {
+        handlers = {
+          function(server_name)
+            local server = servers[server_name] or {}
+            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+            require("lspconfig")[server_name].setup(server)
+          end,
+        },
+      }
+    end,
+  },
+
   ------------------------------------------------------------------
   -- lazy ----------------------------------------------------------
   ------------------------------------------------------------------
@@ -310,6 +416,12 @@ return {
 
   {
     "axelvc/template-string.nvim",
+    lazy = true,
+    opts = {},
+  },
+
+  {
+    "windwp/nvim-ts-autotag", -- auto add closing tags for html and jsx
     lazy = true,
     opts = {},
   },
@@ -603,121 +715,6 @@ return {
         },
         autotag = {
           enable = true,
-        },
-      }
-    end,
-  },
-
-  { -- lsp
-    "neovim/nvim-lspconfig",
-    lazy = true,
-    dependencies = {
-      { "williamboman/mason.nvim", config = true },
-      "williamboman/mason-lspconfig.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
-
-      -- useful status updates for lsp.
-      { "j-hui/fidget.nvim", opts = {} },
-
-      -- allows extra capabilities provided by nvim-cmp
-      "hrsh7th/cmp-nvim-lsp",
-    },
-    config = function()
-      local get_float_opts = require("config.utils").get_float_opts
-
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
-
-        callback = function(event)
-          local tl_map = function(keys, func, desc)
-            map("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc, silent = true })
-          end
-
-          local builtin = require "telescope.builtin"
-
-          tl_map("<leader>gd", builtin.lsp_definitions, "Go to definition")
-          tl_map("<leader>gr", builtin.lsp_references, "Go to references")
-          tl_map("<leader>gi", builtin.lsp_implementations, "Go to implementation")
-          tl_map("<leader>D", builtin.lsp_type_definitions, "Type definition")
-          tl_map("<leader>ds", builtin.lsp_document_symbols, "Document symbols")
-          tl_map("<leader>rn", vim.lsp.buf.rename, "Rename")
-          tl_map("<leader>ca", vim.lsp.buf.code_action, "Code action")
-
-          tl_map("<leader>dd", function()
-            vim.diagnostic.open_float(nil, get_float_opts())
-          end, "Display diagnostics")
-
-          tl_map("<leader>nd", function()
-            vim.diagnostic.goto_next { float = get_float_opts { scope = "line" } }
-          end, "Next diagnostic")
-
-          tl_map("<leader>pd", function()
-            vim.diagnostic.goto_prev { float = get_float_opts { scope = "line" } }
-          end, "Previous diagnostic")
-        end,
-      })
-
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-      local servers = {
-        cssls = {},
-        tailwindcss = {},
-        astro = {},
-        graphql = {},
-        html = {},
-        eslint = {},
-        nil_ls = {},
-        gopls = {},
-        tsserver = {},
-
-        lua_ls = {
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = "Replace",
-              },
-              diagnostics = {
-                globals = { "vim" },
-                disable = { "missing-fields" },
-              },
-            },
-          },
-        },
-
-        pyright = {
-          settings = {
-            python = {
-              analysis = {
-                autoSearchPaths = true,
-                typeCheckingMode = "basic",
-              },
-            },
-          },
-        },
-      }
-
-      require("mason").setup()
-
-      local ensure_installed = vim.tbl_keys(servers or {})
-
-      vim.list_extend(ensure_installed, {
-        "stylua",
-        "eslint_d",
-        "prettierd",
-        "crlfmt",
-        "ruff",
-      })
-
-      require("mason-tool-installer").setup { ensure_installed = ensure_installed }
-
-      require("mason-lspconfig").setup {
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-            require("lspconfig")[server_name].setup(server)
-          end,
         },
       }
     end,
