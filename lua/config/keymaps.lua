@@ -4,6 +4,9 @@ local map = vim.keymap.set
 map("n", "<C-a>", "ggVG", { desc = "Select all" })
 map("n", "<CR>", "o<Esc>", { desc = "Add line below cursor" })
 
+map("n", "p", '"0p', { desc = "Paste last yanked text" })
+map("n", "P", '"0P', { desc = "Paste last yanked text above" })
+
 map("n", "<leader>sj", ":split<CR>", { desc = "Split screen below" })
 map("n", "<leader>sl", ":vsplit<CR>", { desc = "Split screen to the side" })
 
