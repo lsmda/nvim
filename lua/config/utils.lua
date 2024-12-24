@@ -1,5 +1,7 @@
 local M = {}
 
+M.map = vim.keymap.set
+
 M.confirm_quit = function(command, input, default_choice)
   default_choice = default_choice or false
   input = input or "Are you sure you want to quit? (y/N): "

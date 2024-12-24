@@ -60,6 +60,6 @@ map("x", "<M-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 map("x", "<M-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 
 -- mixed modes
-map({ "i", "x" }, "<M-n>", "<Esc>", { desc = "Enter normal mode" })
+map({ "i", "x", "t" }, "<M-n>", "<Esc>", { desc = "Enter normal mode" })
 map({ "n", "x" }, "<M-e>", "$", { desc = "Move cursor to end of line" })
 map({ "n", "x" }, "<M-q>", "^", { desc = "Move cursor to beginning of line" })
