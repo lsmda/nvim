@@ -1,13 +1,7 @@
 return {
-  ------------------------------------------------------------------
-  -- required on load ----------------------------------------------
-  ------------------------------------------------------------------
-  {
-    "christoomey/vim-tmux-navigator",
-  },
-
   {
     "vigoux/notifier.nvim",
+    lazy = true,
     opts = {},
   },
 
@@ -28,14 +22,6 @@ return {
     },
   },
 
-  ------------------------------------------------------------------
-  -- lazy ----------------------------------------------------------
-  ------------------------------------------------------------------
-  {
-    "mg979/vim-visual-multi",
-    lazy = true,
-  },
-
   {
     "axelvc/template-string.nvim",
     lazy = true,
@@ -54,17 +40,6 @@ return {
     keys = {
       { "s", "<Plug>(leap-forward-to)" },
       { "S", "<Plug>(leap-backward-to)}" },
-    },
-  },
-
-  {
-    "folke/todo-comments.nvim",
-    lazy = true,
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-    },
-    keys = {
-      { "<leader>ft", "<CMD>TodoTelescope<CR>", desc = "Find todos" },
     },
   },
 }

@@ -1,14 +1,11 @@
----@diagnostic disable: undefined-doc-name
-
 return {
   "saghen/blink.cmp",
+  lazy = true,
   dependencies = {
     "rafamadriz/friendly-snippets",
     "echasnovski/mini.icons",
   },
   version = "*",
-  ---@module 'blink.cmp'
-  ---@type blink.cmp.Config
   opts = {
     completion = {
       menu = { border = "single" },

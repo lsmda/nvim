@@ -1,7 +1,4 @@
 return {
-  ------------------------------------------------------------------
-  -- colorscheme - should have highest priority! -------------------
-  ------------------------------------------------------------------
   dir = "~/.config/nvim/lua/base46",
   priority = 1000,
   config = function()

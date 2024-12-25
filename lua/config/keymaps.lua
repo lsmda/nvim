@@ -1,4 +1,4 @@
-local map = vim.keymap.set
+local map = require("config.utils").map
 
 -- normal mode
 map("n", "<C-a>", "ggVG", { desc = "Select all" })
@@ -32,6 +32,12 @@ end, { desc = "Quit all open buffers" })
 map("n", "<leader>cs", function()
   vim.fn.setreg("/", "")
 end, { desc = "Clear search pattern" })
+
+-- window navigation
+map("n", "<C-h>", "<C-w>h", { desc = "Navigate to left window" })
+map("n", "<C-l>", "<C-w>l", { desc = "Navigate to right window" })
+map("n", "<C-j>", "<C-w>j", { desc = "Navigate to bottom window" })
+map("n", "<C-k>", "<C-w>k", { desc = "Navigate to top window" })
 
 map("n", "<leader>'", [[:s/\<<C-r><C-w>\>/'<C-r><C-w>\'/ <CR>]], { desc = "Surround word with '" })
 map("n", '<leader>"', [[:s/\<<C-r><C-w>\>/"<C-r><C-w>\"/ <CR>]], { desc = 'Surround word with "' })

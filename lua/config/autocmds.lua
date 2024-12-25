@@ -1,5 +1,4 @@
----@diagnostic disable: undefined-field
-local utils = require "config.utils"
+local save_file = require("config.utils").save_file
 
 local function augroup(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
@@ -22,7 +21,7 @@ vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave" }, {
   pattern = "*",
   callback = function()
     if vim.fn.pumvisible() == 0 then
-      vim.defer_fn(utils.save_file, 10)
+      vim.defer_fn(save_file, 10)
     end
   end,
 })

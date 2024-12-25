@@ -2,7 +2,8 @@
 
 local map = require("config.utils").map
 
-return { -- lsp
+-- lsp
+return {
   "neovim/nvim-lspconfig",
   dependencies = {
     { "williamboman/mason.nvim", config = true },
