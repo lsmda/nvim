@@ -6,7 +6,7 @@ return {
 
     base46.load_theme {
       base = "base46",
-      theme = "aquarium",
+      theme = "catppuccin",
       transparency = true,
     }
   end,
