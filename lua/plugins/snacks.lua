@@ -13,7 +13,6 @@ return {
     lazygit = { enabled = true },
     words = { enabled = true },
   },
-
   keys = {
     {
       "<leader>gg",
@@ -49,13 +48,6 @@ return {
         Snacks.git.blame_line()
       end,
       desc = "Git Blame Line",
-    },
-    {
-      "<c-_>",
-      function()
-        Snacks.terminal()
-      end,
-      desc = "which_key_ignore",
     },
     {
       "]]",
