@@ -1,3 +1,5 @@
+-- https://github.com/jayden-chan/base46.nvim
+
 local M = {}
 local fnamemodify = vim.fn.fnamemodify
 

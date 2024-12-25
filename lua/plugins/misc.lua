@@ -6,6 +6,11 @@ return {
   },
 
   {
+    "stevearc/dressing.nvim",
+    opts = {},
+  },
+
+  {
     "brenoprata10/nvim-highlight-colors",
     opts = {},
   },
