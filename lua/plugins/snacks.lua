@@ -29,18 +29,11 @@ return {
       desc = "Lazygit Log (cwd)",
     },
     {
-      "<leader>gt",
+      "<leader>sh",
       function()
         Snacks.terminal()
       end,
-      desc = "Toggle Terminal",
-    },
-    {
-      "<leader>gl",
-      function()
-        Snacks.lazygit.log_file()
-      end,
-      desc = "Lazygit Current File History",
+      desc = "Toggle Terminal (shell)",
     },
     {
       "<leader>gb",
