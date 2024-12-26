@@ -8,12 +8,24 @@ return {
   version = "*",
   opts = {
     completion = {
-      menu = { border = "single" },
+      menu = {
+        border = "single",
+        draw = {
+          columns = {
+            { "label", "label_description", gap = 2 },
+            { "kind_icon", "kind", gap = 1 },
+          },
+        },
+      },
       documentation = {
-        window = { border = "single" },
+        auto_show = true,
+        window = {
+          border = "single",
+        },
       },
     },
     signature = {
+      enabled = true,
       window = { border = "single" },
     },
     keymap = {
@@ -26,7 +38,8 @@ return {
       nerd_font_variant = "mono",
     },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = { "lsp", "snippets", "buffer", "path" },
+      cmdline = {},
     },
   },
   opts_extend = { "sources.default" },
