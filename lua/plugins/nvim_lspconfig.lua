@@ -71,7 +71,11 @@ return {
             },
             diagnostics = {
               globals = { "vim" },
-              disable = { "missing-fields" },
+              disable = {
+                "lowercase-global",
+                "missing-fields",
+                "param-type-mismatch",
+              },
             },
           },
         },

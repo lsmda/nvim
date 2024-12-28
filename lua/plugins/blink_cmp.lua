@@ -24,10 +24,6 @@ return {
         },
       },
     },
-    signature = {
-      enabled = true,
-      window = { border = "single" },
-    },
     keymap = {
       preset = "enter",
       ["<S-Tab>"] = { "select_prev", "fallback" },
