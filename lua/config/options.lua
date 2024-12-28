@@ -24,6 +24,7 @@ vim.opt.smartindent = true
 vim.opt.breakindent = true
 
 vim.opt.wrap = false
+vim.opt.laststatus = 3
 
 -- search settings
 vim.opt.ignorecase = true
